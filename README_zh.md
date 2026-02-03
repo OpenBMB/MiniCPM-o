@@ -1,87 +1,54 @@
 <div align="center">
 
-<img src="./assets/minicpm_v_and_minicpm_o_title.png" width="500em" ></img> 
+<img src="./assets/minicpm_v_and_minicpm_o_title.png" width="500em" ></img>
+
+**端侧可用的 Gemini 2.5 Flash 级视觉、语音、全双工多模态实时流式大模型**
 
 
-**端侧可用的 GPT-4o 级视觉、语音、多模态实时流式大模型**
-
-  <strong>中文 |
-  [English](./README.md)</strong>
-
-
-
- <span style="display: inline-flex; align-items: center; margin-right: 2px;">
-   <a href="docs/wechat.md" target="_blank"> 微信社区</a> &nbsp;|
- </span>
-  <span style="display: inline-flex; align-items: center; margin-left: 2px;">
-   <a href="https://github.com/OpenSQZ/MiniCPM-V-CookBook" target="_blank">&nbsp;🍳 使用指南</a >&nbsp;
- </span>
-
-  <br>
-  <p align="center">
-  MiniCPM-V 4.5 <a href="https://huggingface.co/openbmb/MiniCPM-V-4_5">🤗</a>  <a href="http://101.126.42.235:30910/"> 🤖</a> | MiniCPM-o 2.6 <a href="https://huggingface.co/openbmb/MiniCPM-o-2_6">🤗</a> <a href="https://minicpm-omni-webdemo-us.modelbest.cn/"> 🤖</a> | 
-    <a href="https://huggingface.co/papers/2509.18154">📄 技术报告</a>
+<!-- <br> -->
+<p align="center">
+   MiniCPM-o 4.5 <a href="https://huggingface.co/openbmb/MiniCPM-o-4_5">🤗</a> <a href="https://minicpm-omni.openbmb.cn/">🤖</a> | MiniCPM-V 4.0 <a href="https://huggingface.co/openbmb/MiniCPM-V-4">🤗</a>  | <a href="https://github.com/OpenSQZ/MiniCPM-V-Cookbook">🍳 使用指南</a> | 
+  <a href="https://huggingface.co/papers/2509.18154">📄 MiniCPM-V 4.5 技术报告 </a>
 </p>
 
 </div>
 
+**MiniCPM-o** 是从 **MiniCPM-V** 升级而来的最新一代端侧多模态大模型（MLLM）系列。该系列模型现已支持图像、视频、文本及音频输入，并能够以端到端的方式提供高质量的文本与语音输出。MiniCPM-o 旨在实现卓越的性能与高效的部署。目前该系列中最受关注的模型包括：
 
-**MiniCPM-V** 端侧多模态大模型系列可以以端到端方式，接受图像、视频、文本、音频作为输入，并生成高质量文本和语音输出。**MiniCPM-o** 进一步支持端到端的语音输入输出。自2024年2月以来，我们以实现高性能和高效部署为目标，发布了7个版本的模型。目前系列中最值得关注的模型包括：
-
-- **MiniCPM-V 4.5**：🔥🔥🔥 MiniCPM-V 系列中最新、最强大的模型。总参数量 8B，在**视觉能力上超越了 GPT-4o-latest、Gemini-2.0 Pro 以及 Qwen2.5-VL 72B**，成为开源社区中性能最强的端侧多模态模型。本版本带来了全新特性，**包括高效的高帧率与长视频理解（视频 token 压缩率最高可达 96 倍）、可控的快思考/深思考模式、出色的手写体 OCR 与复杂表格/文档解析能力**。同时，它进一步强化了 MiniCPM-V 系列广受欢迎的特性，如可靠性、多语言支持与端侧可部署性。
-
-- **MiniCPM-o 2.6**: ⭐️⭐️⭐️  MiniCPM-o 系列中性能最佳模型。总参数量 8B，**视觉、语音和多模态流式能力达到了 GPT-4o-202405 级别**，是开源社区中模态支持最丰富、性能最佳的模型之一。在新的语音模式中，MiniCPM-o 2.6 **支持可配置声音的中英双语语音对话，还具备情感/语速/风格控制、端到端声音克隆、角色扮演等进阶能力**。模型也进一步提升了 MiniCPM-V 2.6 的 **OCR、可信行为、多语言支持和视频理解等视觉能力**。基于其领先的视觉 token 密度，MiniCPM-V 2.6 成为了**首个支持在 iPad 等端侧设备上进行多模态实时流式交互**的多模态大模型。
-
+- **MiniCPM-o 4.5**: 🔥🔥🔥 该系列最新、最强大的模型。总参数量 9B，在视觉、语音及全双工多模态实时流式交互方面的表现**接近 Gemini 2.5 Flash**，是目前开源社区中功能最全面、性能最强的模型之一。全新的全双工多模态实时流能力意味着输出流（语音和文本）与实时输入流（视频和音频）互不阻塞。这使得 MiniCPM-o 4.5 能够**在实时全模态对话中实现“边看、边听、边说”**，并能**进行如“主动提醒”等主动交互**。优化后的语音模式支持更自然、更具表现力且更稳定的中英双语实时交互，并支持声音克隆。此外，它还进一步增强了 MiniCPM-V 原有的视觉能力，包括出色的 OCR 能力、低幻觉率、以及多语言支持等。为了让这种全双工多模态实时流体验在 PC 等端侧设备上普及，我们还同步推出了**高性能的 llama.cpp-omni 推理框架以及 WebRTC Demo**。
+- **MiniCPM-V 4.0**: ⭐️⭐️⭐️ MiniCPM-V 系列中的一款高效模型。该模型拥有 4B 参数，在 OpenCompass 图像理解榜单中超越了 GPT-4.1-mini-20250414。得益于其轻量级的参数规模和高效的架构设计，MiniCPM-V 4.0 是手机端侧部署的理想选择。
 
 ## 更新日志 <!-- omit in toc -->
 
 #### 📌 置顶
 
+* [2026.02.03] 🔥🔥🔥 我们开源了 MiniCPM-o 4.5，该模型视觉和语音能力达到了 Gemini 2.5 Flash 水平，同时支持全双工多模态流式交互。欢迎试用！
 * [2025.09.18] 📢📢📢 MiniCPM-V 4.5 技术报告已发布! 欢迎点击[这里](./docs/MiniCPM_V_4_5_Technical_Report.pdf)查看.
-
-* [2025.09.01] ⭐️⭐️⭐️ MiniCPM-V 4.5 已被 [llama.cpp](https://github.com/ggml-org/llama.cpp/pull/15575)、[vLLM](https://github.com/vllm-project/vllm/pull/23586) 和 [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory/pull/9022) 等框架官方支持，欢迎从官方入口直接使用！更多框架如 [Ollama](https://github.com/ollama/ollama/pull/12078) 和 [SGLang](https://github.com/sgl-project/sglang/pull/9610) 的官方支持正在持续适配中！
-
 * [2025.08.26] 🔥🔥🔥 我们开源了 MiniCPM-V 4.5，其视觉性能超越了 GPT-4o-latest、Gemini-2.0 Pro 和 Qwen2.5-VL 72B。它不仅延续并强化了 MiniCPM-V 的热门能力，还带来了诸多实用的新功能。欢迎试用！
-
-
-* [2025.08.05] 🚀🚀🚀 我们开源了 MiniCPM-V 4.0，该模型在图像理解能力上超越了 GPT-4.1-mini-20250414。该模型不仅继承了 MiniCPM-V 2.6 的众多实用特性，还大幅提升了推理效率。我们还同步开源了适用于 iPhone 和 iPad 的 iOS 应用，欢迎试用！
-
-
 * [2025.08.01] 🔥🔥🔥 我们开源了 [MiniCPM-V & o Cookbook](https://github.com/OpenSQZ/MiniCPM-V-CookBook)，提供针对不同人群的全场景使用指南，配合最新的[文档网站](https://minicpm-o.readthedocs.io/en/latest/index.html)上手更轻松！
-
-* [2025.06.20] ⭐️⭐️⭐️ MiniCPM-o 的 Ollama [官方仓库](https://ollama.com/openbmb)正式支持 MiniCPM-o 2.6 等模型啦，欢迎[一键使用](https://ollama.com/openbmb/minicpm-o2.6)！
-
 * [2025.03.01] 🚀🚀🚀 MiniCPM-o 系列的对齐技术 RLAIF-V 被 CVPR 2025 接收了！其[代码](https://github.com/RLHF-V/RLAIF-V)、[数据](https://huggingface.co/datasets/openbmb/RLAIF-V-Dataset)、[论文](https://arxiv.org/abs/2405.17220)均已开源。
-
 * [2025.01.24] 📢📢📢 MiniCPM-o 2.6 技术报告已发布! 欢迎点击[这里](https://openbmb.notion.site/MiniCPM-o-2-6-A-GPT-4o-Level-MLLM-for-Vision-Speech-and-Multimodal-Live-Streaming-on-Your-Phone-185ede1b7a558042b5d5e45e6b237da9)查看.
-
-* [2025.01.23] 💡💡💡 MiniCPM-o 2.6 现在已被北大团队开发的 [Align-Anything](https://github.com/PKU-Alignment/align-anything)，一个用于对齐全模态大模型的框架集成，支持 DPO 和 SFT 在视觉和音频模态上的微调。欢迎试用！
-
-* [2025.01.19] 📢 **注意!** 我们正在努力将 MiniCPM-o 2.6 的支持合并到 llama.cpp、Ollama、vLLM 的官方仓库，但还未完成。请大家暂时先使用我们提供的 fork 来进行部署：[llama.cpp](https://github.com/OpenBMB/llama.cpp/blob/minicpm-omni/examples/llava/README-minicpmo2.6.md)、[Ollama](https://github.com/OpenBMB/ollama/blob/minicpm-v2.6/examples/minicpm-v2.6/README.md)、[vllm](https://github.com/OpenBMB/MiniCPM-o?tab=readme-ov-file#efficient-inference-with-llamacpp-ollama-vllm)。 **合并完成前，使用官方仓库可能会导致不可预期的问题**。
-
 * [2025.01.19] ⭐️⭐️⭐️ MiniCPM-o 在 GitHub Trending 上登顶， Hugging Face Trending 上也达到了第二！
-
-* [2025.01.17] 我们更新了 MiniCPM-o 2.6 int4 量化版本的使用方式，解决了模型初始化的问题，欢迎点击[这里](https://huggingface.co/openbmb/MiniCPM-o-2_6-int4)试用！
-
-* [2025.01.13] 🔥🔥🔥 我们开源了 MiniCPM-o 2.6，该模型视觉、语音和多模态流式能力达到了 GPT-4o-202405 级别，进一步优化了 MiniCPM-V 2.6 的众多亮点能力，还支持了很多有趣的新功能。欢迎试用！
-
-* [2024.08.17] 🚀🚀🚀 llama.cpp [官方仓库](https://github.com/ggerganov/llama.cpp)正式支持 MiniCPM-V 2.6 啦！点击[这里](https://huggingface.co/openbmb/MiniCPM-V-2_6-gguf)查看各种大小的 GGUF 版本。
-
-* [2024.08.06] 🔥🔥🔥 我们开源了 MiniCPM-V 2.6，该模型在单图、多图和视频理解方面取得了优于 GPT-4V 的表现。我们还进一步提升了 MiniCPM-Llama3-V 2.5 的多项亮点能力，并首次支持了 iPad 上的实时视频理解。欢迎试用！
-
-* [2024.08.03] MiniCPM-Llama3-V 2.5 技术报告已发布！欢迎点击[这里](https://arxiv.org/abs/2408.01800)查看。
-
 * [2024.05.23] 🔥🔥🔥 MiniCPM-V 在 GitHub Trending 和 Hugging Face Trending 上登顶！MiniCPM-Llama3-V 2.5 Demo 被 Hugging Face 的 Gradio 官方账户推荐，欢迎点击[这里](https://huggingface.co/spaces/openbmb/MiniCPM-Llama3-V-2_5)体验！
-
 
 <br>
 
 <details> 
 <summary>点击查看完整更新日志。</summary>
 
+* [2025.09.01] ⭐️⭐️⭐️ MiniCPM-V 4.5 已被 [llama.cpp](https://github.com/ggml-org/llama.cpp/pull/15575)、[vLLM](https://github.com/vllm-project/vllm/pull/23586) 和 [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory/pull/9022) 等框架官方支持，欢迎从官方入口直接使用！更多框架如 [Ollama](https://github.com/ollama/ollama/pull/12078) 和 [SGLang](https://github.com/sgl-project/sglang/pull/9610) 的官方支持正在持续适配中！
+* [2025.08.05] 🚀🚀🚀 我们开源了 MiniCPM-V 4.0，该模型在图像理解能力上超越了 GPT-4.1-mini-20250414。该模型不仅继承了 MiniCPM-V 2.6 的众多实用特性，还大幅提升了推理效率。我们还同步开源了适用于 iPhone 和 iPad 的 iOS 应用，欢迎试用！
+* [2025.06.20] ⭐️⭐️⭐️ MiniCPM-o 的 Ollama [官方仓库](https://ollama.com/openbmb)正式支持 MiniCPM-o 2.6 等模型啦，欢迎[一键使用](https://ollama.com/openbmb/minicpm-o2.6)！
+* [2025.01.23] 💡💡💡 MiniCPM-o 2.6 现在已被北大团队开发的 [Align-Anything](https://github.com/PKU-Alignment/align-anything)，一个用于对齐全模态大模型的框架集成，支持 DPO 和 SFT 在视觉和音频模态上的微调。欢迎试用！
+* [2025.01.19] 📢 **注意!** 我们正在努力将 MiniCPM-o 2.6 的支持合并到 llama.cpp、Ollama、vLLM 的官方仓库，但还未完成。请大家暂时先使用我们提供的 fork 来进行部署：[llama.cpp](https://github.com/OpenBMB/llama.cpp/blob/minicpm-omni/examples/llava/README-minicpmo2.6.md)、[Ollama](https://github.com/OpenBMB/ollama/blob/minicpm-v2.6/examples/minicpm-v2.6/README.md)、[vllm](https://github.com/OpenBMB/MiniCPM-o?tab=readme-ov-file#efficient-inference-with-llamacpp-ollama-vllm)。 **合并完成前，使用官方仓库可能会导致不可预期的问题**。
+* [2025.01.17] 我们更新了 MiniCPM-o 2.6 int4 量化版本的使用方式，解决了模型初始化的问题，欢迎点击[这里](https://huggingface.co/openbmb/MiniCPM-o-2_6-int4)试用！
+* [2025.01.13] 🔥🔥🔥 我们开源了 MiniCPM-o 2.6，该模型视觉、语音和多模态流式能力达到了 GPT-4o-202405 级别，进一步优化了 MiniCPM-V 2.6 的众多亮点能力，还支持了很多有趣的新功能。欢迎试用！
+* [2024.08.17] 🚀🚀🚀 llama.cpp [官方仓库](https://github.com/ggerganov/llama.cpp)正式支持 MiniCPM-V 2.6 啦！点击[这里](https://huggingface.co/openbmb/MiniCPM-V-2_6-gguf)查看各种大小的 GGUF 版本。
 * [2024.08.15] MiniCPM-V 2.6 现在支持多图像 SFT。有关更多详细信息，请参阅[微调文档](https://github.com/OpenBMB/MiniCPM-V/tree/main/finetune)
 * [2024.08.14] MiniCPM-V 2.6 现在可以通过 SWIFT 框架 [微调](https://github.com/modelscope/ms-swift/issues/1613) 了！
 * [2024.08.10] 🚀🚀🚀 llama.cpp [官方仓库](https://github.com/ggerganov/llama.cpp)正式支持 MiniCPM-Llama3-V 2.5 啦！点击[这里](https://huggingface.co/openbmb/MiniCPM-Llama3-V-2_5-gguf/tree/main)查看各种大小的 GGUF 版本。
+* [2024.08.06] 🔥🔥🔥 我们开源了 MiniCPM-V 2.6，该模型在单图、多图和视频理解方面取得了优于 GPT-4V 的表现。我们还进一步提升了 MiniCPM-Llama3-V 2.5 的多项亮点能力，并首次支持了 iPad 上的实时视频理解。欢迎试用！
+* [2024.08.03] MiniCPM-Llama3-V 2.5 技术报告已发布！欢迎点击[这里](https://arxiv.org/abs/2408.01800)查看。
 * [2024.07.19] MiniCPM-Llama3-V 2.5 现已支持[vLLM](#vllm-部署-) ！
 * [2024.06.03] 现在，你可以利用多张低显存显卡（12G/16G）进行GPU串行推理。详情请参见该[文档](https://github.com/OpenBMB/MiniCPM-V/blob/main/docs/inference_on_multiple_gpus.md)配置。
 * [2024.05.28] 💫 我们现在支持 MiniCPM-Llama3-V 2.5 的 LoRA 微调，更多内存使用统计信息可以在[这里](https://github.com/OpenBMB/MiniCPM-V/tree/main/finetune#model-fine-tuning-memory-usage-statistics)找到。
@@ -94,1826 +61,1658 @@
 * [2024.04.18] 我们在 HuggingFace Space 新增了 MiniCPM-V 2.0 的 [demo](https://huggingface.co/spaces/openbmb/MiniCPM-V-2)，欢迎体验！
 * [2024.04.17] MiniCPM-V 2.0 现在支持用户部署本地 [WebUI Demo](#本地webui-demo部署) 了，欢迎试用!
 * [2024.04.15] MiniCPM-V 2.0 现在可以通过 SWIFT 框架 [微调](https://github.com/modelscope/swift/blob/main/docs/source/Multi-Modal/minicpm-v-2最佳实践.md) 了，支持流式输出!
-* [2024.04.12] 我们开源了 MiniCPM-V 2.0，该模型刷新了 OCRBench 开源模型最佳成绩，在场景文字识别能力上比肩 Gemini Pro，同时还在综合了 11 个主流多模态大模型评测基准的 <a href="https://rank.opencompass.org.cn/leaderboard-multimodal">OpenCompass</a> 榜单上超过了 Qwen-VL-Chat 10B、CogVLM-Chat 17B 和 Yi-VL 34B 等更大参数规模的模型！点击<a href="https://openbmb.vercel.app/minicpm-v-2">这里</a>查看 MiniCPM-V 2.0 技术博客。
+* [2024.04.12] 我们开源了 MiniCPM-V 2.0，该模型刷新了 OCRBench 开源模型最佳成绩，在场景文字识别能力上比肩 Gemini Pro，同时还在综合了 11 个主流多模态大模型评测基准的 <a href="https://rank.opencompass.org.cn/leaderboard-multimodal">OpenCompass</a> 榜单上超过了 Qwen-VL-Chat 10B、CogVLM-Chat 17B 和 Yi-VL 34B 等更大参数规模的模型！点击 <a href="https://openbmb.vercel.app/minicpm-v-2">这里</a> 查看 MiniCPM-V 2.0 技术博客。
 * [2024.03.14] MiniCPM-V 现在支持 SWIFT 框架下的[微调](https://github.com/modelscope/swift/blob/main/docs/source/Multi-Modal/minicpm-v最佳实践.md)了，感谢 [Jintao](https://github.com/Jintao-Huang) 的贡献！
 * [2024.03.01] MiniCPM-V 现在支持在 Mac 电脑上进行部署！
 * [2024.02.01] 我们开源了 MiniCPM-V 和 OmniLMM-12B，分别可以支持高效的端侧部署和同规模领先的多模态能力！
-</details>
 
+</details>
 
 ## 目录 <!-- omit in toc -->
 
-- [MiniCPM-V 4.5](#minicpm-v-45)
-- [MiniCPM-o 2.6](#minicpm-o-26)
-- [Chat with Our Demo on Gradio 🤗](#chat-with-our-demo-on-gradio-)
-- [推理](#推理)
-  - [模型库](#模型库)
-  - [多轮对话](#多轮对话)
-    - [多图对话](#多图对话)
-    - [少样本上下文对话](#少样本上下文对话)
-    - [视频对话](#视频对话)
-    - [语音对话](#语音对话)
-    - [多模态流式交互](#多模态流式交互)
-  - [多卡推理](#多卡推理)
-  - [Mac 推理](#mac-推理)
-  - [基于 llama.cpp、Ollama、vLLM 的高效推理](#基于-llamacppollamavllm-的高效推理)
-- [微调](#微调)
+- [MiniCPM-o 4.5](#minicpm-o-45)
+- [MiniCPM-V 4.0](#minicpm-v-40)
 - [MiniCPM-V \& o 使用手册](#minicpm-v--o-使用手册)
+- [模型库](#模型库)
+- [简易推理](#简易推理)
+  - [模型初始化](#模型初始化)
+  - [双工全模态模式](#双工全模态模式)
+  - [单工全模态模式](#单工全模态模式)
+  - [语音与音频模式](#语音与音频模式)
+- [框架支持](#框架支持)
+  - [FlagOS](#flagos)
+  - [vLLM、SGLang、llama.cpp、Ollama](#vllmsglangllamacppollama)
+  - [LLaMA-Factory、SWIFT](#llama-factoryswift)
 - [基于 MiniCPM-V \& MiniCPM-o 的更多项目](#基于-minicpm-v--minicpm-o-的更多项目)
-- [FAQs](#faqs)
 - [模型局限性](#模型局限性)
+- [致谢](#致谢)
 
+## MiniCPM-o 4.5
 
-## MiniCPM-V 4.5
+MiniCPM-o 4.5 是 MiniCPM-o 系列中最新且性能最强的模型。该模型采用端到端方式构建，基于 SigLip2、Whisper-medium、CosyVoice2 和 Qwen3-8B，总参数量为 9B。其在性能上实现了显著提升，并引入了全新的全双工多模态实时流式交互能力。MiniCPM-o 4.5 的主要特性包括：
 
-
-**MiniCPM-V 4.5** 是 MiniCPM-V 系列中最新、最强大的模型。该模型基于 Qwen3-8B 与 SigLIP2-400M 构建，总参数量为 8B。其在性能上较前代 MiniCPM-V 与 MiniCPM-o 有显著提升，并引入了一系列全新的实用特性。其主要亮点包括：
-
-
-- 🔥 **领先的视觉理解能力**
-  MiniCPM-V 4.5 在 OpenCompass 综合评测（涵盖 8 个主流评测基准）中取得了 77.0 的高分。**在仅 8B 参数的情况下超越了广泛使用的闭源模型（如 GPT-4o-latest、Gemini-2.0 Pro）以及强大的开源模型（如 Qwen2.5-VL 72B）**，成为 30B 参数规模以下最强的多模态大模型。
-
-- 🎬 **高效的高帧率与长视频理解** 
-  借助全新的图像-视频统一 3D-Resampler，MiniCPM-V 4.5 能够实现 96 倍视频 token 压缩率，即将 6 帧 448x448 视频帧联合压缩为 64 个 token（大多数多模态大模型需约 1536 个 token）。这意味着模型在语言模型推理成本不增加的情况下，可以感知显著更多的视频帧，从而实现业界领先的 高帧率（最高 10FPS）视频理解与长视频理解，并在 Video-MME、LVBench、MLVU、MotionBench、FavorBench 等基准上高效率地展现出色性能。
-
-- ⚙️ **可控的快思考 / 深思考模式**  
-  MiniCPM-V 4.5 同时支持 快思考（用于高频高效推理，性能具竞争力）与 深思考（用于复杂问题求解）。用户可根据不同场景对效率与性能的权衡，自由切换两种模式，实现高度可控的推理过程。
-
-- 💪 **优秀的 OCR、文档解析与多语言能力**
-  基于 [LLaVA-UHD](https://arxiv.org/pdf/2403.11703) 架构，MiniCPM-V 4.5 能处理任意长宽比、最高达 180 万像素（如 1344x1344） 的高分辨率图像，同时使用的视觉 token 数仅为多数 MLLM 的 1/4。其在 OCRBench 上取得超越 GPT-4o-latest 与 Gemini 2.5 等闭源模型的性能，并在 OmniDocBench 上展现了业界顶尖的 PDF 文档解析能力。借助最新的 [RLAIF-V](https://github.com/RLHF-V/RLAIF-V/) 和 [VisCPM](https://github.com/OpenBMB/VisCPM) 技术，模型在可靠性上表现优异，在 MMHal-Bench 上超越 GPT-4o-latest，并支持 30+ 种语言的多语言能力。
-
--  💫 **便捷易用的部署方式**
-  MiniCPM-V 4.5 提供丰富灵活的使用方式：(1) [llama.cpp](https://github.com/tc-mb/llama.cpp/blob/master/docs/multimodal/minicpmo4.5.md) 与 [ollama](https://github.com/tc-mb/ollama/tree/MIniCPM-V) 支持本地 CPU 高效推理；(2) 提供 [int4](https://huggingface.co/openbmb/MiniCPM-V-4_5-int4)、[GGUF](https://huggingface.co/openbmb/MiniCPM-V-4_5-gguf)、[AWQ](https://github.com/tc-mb/AutoAWQ) 等 16 种规格的量化模型；(3)兼容 SGLang 与 [vLLM](#efficient-inference-with-llamacpp-ollama-vllm) (4) 借助 [Transformers](https://github.com/tc-mb/transformers/tree/main) 与 [LLaMA-Factory](./docs/llamafactory_train_and_infer.md) 在新领域与任务上进行微调；(5) 快速启动本地 [WebUI demo](#chat-with-our-demo-on-gradio)；(6) 优化适配的 [iOS 本地应用](https://github.com/tc-mb/MiniCPM-o-demo-iOS)，可在 iPhone 与 iPad 上高效运行；(7) 在线 [Web demo](http://101.126.42.235:30910/) 体验。更多使用方式请见 [Cookbook](https://github.com/OpenSQZ/MiniCPM-V-CookBook)。
-
-### 技术亮点 <!-- omit in toc -->
-
-- **架构：图像-视频统一的高密度视觉压缩 3D-Resampler**。 MiniCPM-V 4.5 在架构上引入了 3D-Resampler，成功突破了视频理解任务中性能与效率难以兼得的瓶颈。该方法能够将多达 6 帧连续视频帧压缩为仅 64 个 token（与 MiniCPM-V 系列中单张图像所用的 token 数相同），从而实现 96× 的视频 token 压缩率。这使得模型在语言模型计算成本不增加的情况下，可以处理更多的视频帧，从而实现高帧率视频理解和长视频理解。该架构统一支持单图、多图和视频的编码处理，确保了能力与知识的无缝迁移。
-
-- **学习机制：OCR与文档知识的统一学习**。现有多模态大模型一般在不同训练阶段分别单独训练 OCR 能力与文档知识。我们发现这两个训练过程的本质差异在于图像中文本的可见性。通过动态对文档文本区域施加不同强度的噪声干扰，并要求模型重建文本，使其学会自适应地在准确文本识别（当文本清晰时）与基于多模态上下文的知识推理（当文本严重遮挡时）之间切换。这种方法使得 MiniCPM-V 在文档知识学习中摆脱了对高错误率的文档解析器的依赖，同时避免了过度增强的 OCR 数据产生的幻觉问题，以最小工程开销实现了顶尖的 OCR 与多模态知识处理性能。
-
-- **后训练优化：基于多模态强化学习的混合快思考/深度思考模式**。 MiniCPM-V 4.5 通过两种可切换推理模式提供均衡的体验：面向高效日常应用的快速思考模式，以及处理复杂任务的深度思考模式。采用新颖的混合强化学习方法，模型可联合优化两种模式，在保持深度模式能力的同时显著提升快速模式性能。结合 [RLPR](https://github.com/OpenBMB/RLPR) 和 [RLAIF-V](https://github.com/RLHF-V/RLAIF-V) 技术，该模型可以从海量多模态数据中泛化出强大的推理能力，并有效减少幻觉现象。
-
-<div align="center">
-<img src="./assets/minicpm-v-4dot5-framework.png" , width=80%>
-</div>
-
-### 性能评估 <!-- omit in toc -->
-
-<div align="center">
-  <img src="./assets/radar_minicpm_v45.png", width=80%>
-</div>
-<div align="center">
-<img src="./assets/minicpmv_4_5_evaluation_result.png" , width=80%>
-</div>
-
-
-### 推理效率 <!-- omit in toc -->
-
-
-**OpenCompass**
-<div align="left">
-<table style="margin: 0px auto;">
-    <thead>
-            <tr>
-              <th align="left">Model</th>
-              <th>Size</th>
-              <th>Avg Score ↑</th>
-              <th>Total Inference Time ↓</th>
-            </tr>
-    </thead>
-    <tbody align="center">
-        <tr>
-            <td nowrap="nowrap" align="left">GLM-4.1V-9B-Thinking</td>
-            <td>10.3B</td>
-            <td>76.6</td>
-            <td>17.5h</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">MiMo-VL-7B-RL</td>
-            <td>8.3B</td>
-            <td>76.4</td>
-            <td>11h</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">MiniCPM-V 4.5</td>
-            <td>8.7B</td>
-            <td><b>77.0</td>
-            <td><b>7.5h</td>
-        </tr>
-    </tbody>
-</table>
-</div>
-
-**Video-MME**
-
-<div align="left">
-<table style="margin: 0px auto;">
-    <thead>
-          <tr>
-              <th align="left">Model</th>
-              <th>Size</th>
-              <th>Avg Score ↑</th>
-              <th>Total Inference Time ↓</th>
-              <th>GPU Mem ↓</th>
-          </tr>
-    </thead>
-    <tbody align="center">
-          <tr>
-              <td nowrap="nowrap" align="left">Qwen2.5-VL-7B-Instruct</td>
-              <td>8.3B</td>
-              <td>71.6</td>
-              <td>3h</td>
-              <td>60G</td>
-          </tr>
-          <tr>
-              <td nowrap="nowrap" align="left">GLM-4.1V-9B-Thinking</td>
-              <td>10.3B</td>
-              <td><b>73.6</td>
-              <td>2.63h</td>
-              <td>32G</td>
-          </tr>
-          <tr>
-              <td nowrap="nowrap" align="left">MiniCPM-V 4.5</td>
-              <td>8.7B</td>
-              <td>73.5</td>
-              <td><b>0.26h</td>
-              <td><b>28G</td>
-        </tr>
-    </tbody>
-</table>
-
-
-OpenCompass 和 Video-MME 均采用 A100*8卡 推理，其中 Video-MME 的推理时间未统计视频抽帧时间
-
-### 典型示例 <!-- omit in toc -->
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=Cn23FujYMMU"><img src="./assets/minicpmv4_5/MiniCPM-V 4.5-8.26_img.jpeg", width=70%></a>
-</div>
-
-<div style="display: flex; flex-direction: column; align-items: center;">
-  <img src="assets/minicpmv4_5/zh_case1.jpeg" alt="zh_case1" style="margin-bottom: 5px;">
-  <img src="assets/minicpmv4_5/zh_case2.jpeg" alt="zh_case2" style="margin-bottom: 5px;">
-</div>
-
-<details>
-<summary>点击查看更多示例</summary>
-<div style="display: flex; flex-direction: column; align-items: center;">
-  <img src="assets/minicpmv4_5/en_extra.jpg" alt="en_extra" style="margin-bottom: 5px;">
-  <img src="assets/minicpmv4_5/en_case3.jpeg" alt="en_extra" style="margin-bottom: 5px;">
-</div>
-</details>
-
-
-我们使用 [iOS demo](https://github.com/tc-mb/MiniCPM-o-demo-iOS) 将 MiniCPM-V 4.5 部署在 iPad M4 ，并录制以下演示录屏，视频未经任何编辑。
-
-<table align="center"> 
-    <p align="center">
-      <img src="assets/minicpmv4_5/v45_en_handwriting.gif" width=45%/>
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <img src="assets/minicpmv4_5/v45_en_cot.gif" width=45%/>
-    </p>
-    <p align="center">
-      <img src="assets/minicpmv4_5/v45_cn_handwriting.gif" width=45%/>
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <img src="assets/minicpmv4_5/v45_cn_travel.gif" width=45%/>
-    </p>
-</table>
-
-
-## MiniCPM-o 2.6
-
-
-MiniCPM-o 2.6 是 MiniCPM-o 系列的最新、性能最佳模型。该模型基于 SigLip-400M、Whisper-medium-300M、ChatTTS-200M 和 Qwen2.5-7B 构建，共 8B 参数，通过端到端方式训练和推理。相比 MiniCPM-V 2.6，该模型在性能上有了显著提升，并支持了实时语音对话和多模态流式交互的新功能。MiniCPM-o 2.6 的主要特性包括：
-
-
-- 🔥 **领先的视觉能力。**
-MiniCPM-o 2.6 在 OpenCompass 榜单上（综合 8 个主流多模态评测基准）平均得分 70.2，**以 8B 量级的大小在单图理解方面超越了 GPT-4o-202405、Gemini 1.5 Pro 和 Claude 3.5 Sonnet 等主流商用闭源多模态大模型**。此外，它的多图和视频理解表现也**优于 GPT-4V 和 Claude 3.5 Sonnet**，并展现出了优秀的上下文学习能力。
-
-- 🎙 **出色的语音能力。**
-MiniCPM-o 2.6 **支持可配置声音的中英双语实时对话**。MiniCPM-o 2.6 在语音理解任务（如 ASR 和 STT 等）**优于 GPT-4o-realtime**，并在语音对话的语义和声学评估中展现了**开源模型中最高的语音生成性能**。它还支持情绪/语速/风格控制、语音克隆、角色扮演等进阶能力。
-
-- 🎬 **强大的多模态流式交互能力。**
-作为一项新功能，MiniCPM-o 2.6 能够**接受连续的视频和音频流，并和用户进行实时语音交互**。在针对实时视频理解、全模态视音频理解、多模态上下文理解的综合评测基准 StreamingBench 中，MiniCPM-o 2.6 取得开源社区最佳水平，并**超过了 GPT-4o-202408 和 Claude 3.5 Sonnet**。
-
-- 💪 **强大的 OCR 能力及其他功能。**
-MiniCPM-o 2.6 进一步优化了 MiniCPM-V 2.6 的众多视觉理解能力，其可以处理任意长宽比的图像，像素数可达 180 万（如 1344x1344）。在 OCRBench 上取得**25B 以下最佳水平，超过 GPT-4o-202405 等商用闭源模型**。基于最新的 [RLHF-V](https://rlhf-v.github.io/)、[RLAIF-V](https://github.com/RLHF-V/RLAIF-V/) 和 [VisCPM](https://github.com/OpenBMB/VisCPM) 技术，其具备了**可信的多模态行为**，在 MMHal-Bench 上超过了 GPT-4o 和 Claude 3.5，并支持英语、中文、德语、法语、意大利语、韩语等**30多种语言**。
-
-- 🚀 **卓越的效率。**
-除了对个人用户友好的模型大小，MiniCPM-o 2.6 还表现出**最先进的视觉 token 密度**（即每个视觉 token 编码的像素数量）。它**仅需 640 个 token 即可处理 180 万像素图像，比大多数模型少 75%**。这一特性优化了模型的推理速度、首 token 延迟、内存占用和功耗。因此，MiniCPM-o 2.6 可以支持 iPad 等终端设备上的高效**多模态实时流式交互**。
-
-
-- 💫 **易于使用。**
-MiniCPM-o 2.6 可以通过多种方式轻松使用：(1) [llama.cpp](https://github.com/OpenBMB/llama.cpp/blob/minicpm-omni/examples/llava/README-minicpmo2.6.md) 支持在本地设备上进行高效的 CPU 推理，(2) [int4](https://huggingface.co/openbmb/MiniCPM-V-2_6-int4) 和 [GGUF](https://huggingface.co/openbmb/MiniCPM-V-2_6-gguf) 格式的量化模型，有 16 种尺寸，(3) [vLLM](#基于-llamacppollamavllm-的高效推理) 支持高吞吐量和内存高效的推理，(4) 通过[LLaMA-Factory](./docs/llamafactory_train_and_infer.md)框架针对新领域和任务进行微调，(5) 使用 [Gradio](#本地-webui-demo-) 快速设置本地 WebUI 演示，(6) 部署于服务器的在线 [demo](https://minicpm-omni-webdemo-us.modelbest.cn/)。
+- 🔥 **领先的视觉能力**
+  MiniCPM-o 4.5 在涵盖 8 个主流评测基准的 OpenCompass 综合评估中获得了 78.2 的平均分。**仅凭 9B 参数，其视觉理解能力超越了 GPT-4o、Gemini 2.0 Pro 等广泛使用的商业模型**，接近 Gemini 2.5 Flash 水平。 该模型在单一模型中同时支持指令模式和思考模式，能够更好地平衡不同使用场景下的效率与性能。
+- 🎙 **强大的语音能力**
+  MiniCPM-o 4.5 支持**音色可配置的中英双语实时语音对话**。其语音对话**更加自然、富有表现力且稳定**。该模型还支持更多有趣的功能，如**通过简单的参考音频进行声音克隆和角色扮演**，其声音克隆表现甚至超越了 CosyVoice2 等优秀 TTS 工具。
+- 🎬 **全双工及主动多模态实时流式交互能力**
+  MiniCPM-o 4.5 的一项核心新特性是能够以端到端的方式同时处理实时连续的视频和音频输入流，并同步生成文本和语音输出流，且互不阻塞。这**使得 MiniCPM-o 4.5 能够同时“看、听、说”**，提供流畅的实时全模态对话体验。除了被动响应，模型还能进行**主动交互**，例如基于对场景的实时持续理解，主动发起提醒或评论。
+- 💪 **高效率、强悍的 OCR 能力及其他特性**
+  MiniCPM-o 4.5 进一步优化了 MiniCPM-V 系列的众多视觉能力，可以高效处理**任意长宽比的高分辨率图像**（最高 180 万像素）和**高帧率视频**（最高 10fps）。其在 OmniDocBench **端到端英文文档解析测试中达到了业内顶尖水平**，超越了 Gemini-3 Flash 和 GPT-5 等商业模型以及 DeepSeek-OCR 2 等专用工具。此外，它还具备**可信的多模态行为**，在 MMHal-Bench 上与 Gemini 2.5 Flash 相当，并**支持超过 30 种语言**。
+- 💫 **便捷的使用体验**
+  MiniCPM-o 4.5 提供了多种便捷的使用方式：(1) 支持 [llama.cpp](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-o4_5_llamacpp.md) 和 [Ollama](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/ollama/minicpm-o4_5_ollama.md)，以便在本地设备上进行高效的 CPU 推理；(2) 提供 16 种尺寸的 [int4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/awq/minicpm-o4_5_awq_quantize.md) 和 [GGUF](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/gguf/minicpm-o4_5_gguf_quantize.md) 格式量化模型；(3) 支持 [vLLM](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-o4_5_vllm.md) 和 [SGLang](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/sglang/MiniCPM-o4_5_sglang.md)，实现高吞吐、显存高效的推理；(4)[FlagOS](#FlagOS) 使用 FlagOS 统一多芯片后端插件；(5) 支持通过 [LLaMA-Factory](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/llama-factory/finetune_llamafactory.md) 在新领域和任务上进行微调；(6) 提供服务器端[在线 Web Demo](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/gradio/README_o45.md)。我们还同步推出了高性能的 [llama.cpp-omni](https://github.com/tc-mb/llama.cpp-omni) 推理框架以及 [WebRTC Demo](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README_zh.md)，**让全双工多模态实时流式交互体验在 [PC](https://github.com/tc-mb/llama.cpp-omni/blob/master/tools/omni/README.md) 等本地设备上触手可及**。
 
 **模型架构。**
 
-- **端到端全模态架构。** 通过**端到端**的方式连接和训练不同模态的编/解码模块以充分利用丰富的多模态知识。模型完全使用 CE 损失端到端训练。
-- **全模态流式机制。** (1) 我们将不同模态的离线编/解码器改造为适用于**流式输入/输出**的在线模块。 (2) 我们针对大语言模型基座设计了**时分复用的全模态流式信息处理机制**，将平行的不同模态的信息流拆分重组为周期性时间片序列。
-- **可配置的声音方案。** 我们设计了新的多模态系统提示，包含传统文本系统提示词，和**用于指定模型声音的语音系统提示词**。模型可在推理时灵活地通过文字或语音样例控制声音风格，并支持端到端声音克隆和音色创建等高级能力。
+- **端到端全模态架构。** 各模态的编码器/解码器与大语言模型通过稠密特征以端到端的方式进行紧密连接。这种设计实现了更好的信息流转与控制，有助于在训练过程中充分挖掘和利用丰富的多模态知识。
+- **全双工多模态实时流机制。** （1）我们将离线模态编码器/解码器转化为支持流式输入/输出的在线全双工版本。语音解码器采用文本与语音 token 交错建模的方式，支持全双工语音生成（即与新输入实时同步），同时也提升了长语音（如超过 1 分钟）生成的稳定性。（2）时分复用：**我们在毫秒级时间线上同步所有输入和输出流**，并利用时分复用机制在语言模型主干中进行统一建模。该机制将并行的全模态流划分为微小周期性时间片内的顺序信息组，从而实现高效的全模态流式处理。
+- **主动交互机制。** 语言模型模块会持续监控输入的视频和音频流，并以 1Hz 的频率自动决策是否发言。这种高频决策能力结合全双工特性，是实现主动提醒、主动评论等“主动交互”能力的关键。
+- **可配置语音建模设计。** 我们延续了 MiniCPM-o 2.6 的多模态系统提示词设计，同时包含文本系统提示词和音频系统提示词（用于指定音色）。这使得模型在推理阶段能够通过简单的参考音频实现声音克隆和角色扮演。
 
 <div align="center">
-<img src="./assets/minicpm-o-26-framework-v2.png" , width=80%>
+  <img src="./assets/minicpm-o-45-framework.png", width=100%>
 </div>
-
-<br>
-
-
 
 ### 性能评估  <!-- omit in toc -->
 
 <div align="center">
-  <img src="./assets/radar.jpg", width=80%>
+  <img src="./assets/radar_minicpmo4.5.png", width=80%>
 </div>
+
+<div align="center">
+  <img src="./assets/minicpm_o_45_main_exp_table.png", width=90%>
+</div>
+<strong>说明</strong>: * 为自测结果，其余为引用的公开结果。n/a 表示该模型不支持对应模态或任务。所有结果来自指令模式或对应模型指令版本权重。
+
+&emsp;
+<br>
 
 <details>
 <summary>点击查看视觉理解能力详细评测结果。</summary>
 
-**图像理解能力**
+**图像理解能力（指令模式）**
+  <div align="center">
+  <table style="margin: 0px auto;">
+<tr>
+  <th nowrap="nowrap" align="left"><b>Model</b></th>
+  <th nowrap="nowrap"><b>OpenCompass</b></th>
+  <th nowrap="nowrap"><b>MMBench EN v1.1</b></th>
+  <th nowrap="nowrap"><b>MMBench CN v1.1</b></th>
+  <th nowrap="nowrap"><b>MathVista</b></th>
+  <th nowrap="nowrap"><b>MMVet</b></th>
+  <th nowrap="nowrap"><b>MMMU</b></th>
+  <th nowrap="nowrap"><b>MMStar</b></th>
+  <th nowrap="nowrap"><b>HallusionBench</b></th>
+  <th nowrap="nowrap"><b>AI2D</b></th>
+  <th nowrap="nowrap"><b>OCRBench</b></th>
+  <th nowrap="nowrap"><b>TextVQA_VAL</b></th>
+  <th nowrap="nowrap"><b>DocVQA_VAL</b></th>
+  <th nowrap="nowrap"><b>MMT-Bench_VAL</b></th>
+  <th nowrap="nowrap"><b>MM-IFEval</b></th>
+  <th nowrap="nowrap"><b>Mantis-Eval</b></th>
+  <th nowrap="nowrap"><b>MuirBench</b></th>
+  <th nowrap="nowrap"><b>MMSI-Bench</b></th>
+  <th nowrap="nowrap"><b>MMHal-Score</b></th>
+  <th nowrap="nowrap"><b>MMHal-Hallrate↓</b></th>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Gemini2.5-Flash-Nonthinking</td>
+  <td align="center"><b>78.5</b></td>
+  <td align="center"><ins>86.6</ins></td>
+  <td align="center"><ins>86.0</ins></td>
+  <td align="center">75.3</td>
+  <td align="center"><ins>81.4</ins><sup>*</sup></td>
+  <td align="center"><b>76.3</b></td>
+  <td align="center"><b>75.8</b></td>
+  <td align="center">59.1</td>
+  <td align="center"><b>87.7</b></td>
+  <td align="center">864</td>
+  <td align="center">74.3<sup>*</sup></td>
+  <td align="center">93.0</td>
+  <td align="center"><ins>70.0</ins><sup>*</sup></td>
+  <td align="center"><b>75.8<sup>*</sup></b></td>
+  <td align="center">72.8<sup>*</sup></td>
+  <td align="center"><b>74.5<sup>*</sup></b></td>
+  <td align="center">12.1<sup>*</sup></td>
+  <td align="center"><ins>4.6</ins><sup>*</sup></td>
+  <td align="center"><b>23.9<sup>*</sup></b></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">InternVL-3.5-8B</td>
+  <td align="center">75.8</td>
+  <td align="center">79.5</td>
+  <td align="center">80.0<sup>*</sup></td>
+  <td align="center"><ins>78.4</ins></td>
+  <td align="center"><b>83.1</b></td>
+  <td align="center"><ins>73.4</ins></td>
+  <td align="center">69.3</td>
+  <td align="center">54.5</td>
+  <td align="center">84.0</td>
+  <td align="center">840</td>
+  <td align="center">78.2</td>
+  <td align="center">92.3</td>
+  <td align="center">66.7</td>
+  <td align="center">56.3<sup>*</sup></td>
+  <td align="center">70.5</td>
+  <td align="center">55.8</td>
+  <td align="center">-</td>
+  <td align="center">3.8<sup>*</sup></td>
+  <td align="center">34.7<sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Qwen3-VL-8B-Instruct</td>
+  <td align="center">76.5</td>
+  <td align="center">84.5</td>
+  <td align="center">84.7</td>
+  <td align="center">77.2</td>
+  <td align="center">73.7<sup>*</sup></td>
+  <td align="center">69.6</td>
+  <td align="center">70.9</td>
+  <td align="center"><ins>61.1</ins></td>
+  <td align="center">85.7</td>
+  <td align="center"><b>896</b></td>
+  <td align="center">82.9<sup>*</sup></td>
+  <td align="center"><b>96.1</b></td>
+  <td align="center">60.9<sup>*</sup></td>
+  <td align="center">59.4<sup>*</sup></td>
+  <td align="center">74.2<sup>*</sup></td>
+  <td align="center">64.4</td>
+  <td align="center">11.3<sup>*</sup></td>
+  <td align="center"><b>4.7<sup>*</sup></b></td>
+  <td align="center">29.9<sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Qwen3-Omni-30B-A3B-Instruct</td>
+  <td align="center">75.7</td>
+  <td align="center">84.9<sup>*</sup></td>
+  <td align="center">84.1<sup>*</sup></td>
+  <td align="center">75.9</td>
+  <td align="center">74.8<sup>*</sup></td>
+  <td align="center">69.1</td>
+  <td align="center">68.5</td>
+  <td align="center">59.7</td>
+  <td align="center">85.2</td>
+  <td align="center"><ins>880</ins><sup>*</sup></td>
+  <td align="center"><b>84.1<sup>*</sup></b></td>
+  <td align="center"><ins>95.4</ins><sup>*</sup></td>
+  <td align="center"><b>70.4<sup>*</sup></b></td>
+  <td align="center">65.7<sup>*</sup></td>
+  <td align="center"><ins>78.3</ins><sup>*</sup></td>
+  <td align="center">61.9<sup>*</sup></td>
+  <td align="center"><ins>14.2</ins><sup>*</sup></td>
+  <td align="center"><ins>4.6</ins><sup>*</sup></td>
+  <td align="center">31.6<sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">MiniCPM-o 4.5-Instruct</td>
+  <td align="center"><ins>77.6</ins></td>
+  <td align="center"><b>87.6</b></td>
+  <td align="center"><b>87.2</b></td>
+  <td align="center"><b>80.1</b></td>
+  <td align="center">74.4</td>
+  <td align="center">67.6</td>
+  <td align="center"><ins>73.1</ins></td>
+  <td align="center"><b>63.2</b></td>
+  <td align="center"><ins>87.6</ins></td>
+  <td align="center">876</td>
+  <td align="center"><ins>83.8</ins></td>
+  <td align="center">94.7</td>
+  <td align="center">69.7</td>
+  <td align="center"><ins>66.3</ins></td>
+  <td align="center"><b>79.7</b></td>
+  <td align="center"><ins>72.0</ins></td>
+  <td align="center"><b>16.6</b></td>
+  <td align="center"><b>4.7</b></td>
+  <td align="center"><ins>24.3</ins></td>
+</tr>
+  </table>
+  </div>
+  
+**图像理解能力（思考模式）**
+  <div align="center">
+  <table style="margin: 0px auto;">
+<tr>
+  <th nowrap="nowrap" align="left"><b>Model</b></th>
+  <th nowrap="nowrap"><b>OpenCompass</b></th>
+  <th nowrap="nowrap"><b>MMBench EN v1.1</b></th>
+  <th nowrap="nowrap"><b>MMBench CN v1.1</b></th>
+  <th nowrap="nowrap"><b>MathVista</b></th>
+  <th nowrap="nowrap"><b>MMVet</b></th>
+  <th nowrap="nowrap"><b>MMMU</b></th>
+  <th nowrap="nowrap"><b>MMStar</b></th>
+  <th nowrap="nowrap"><b>HallusionBench</b></th>
+  <th nowrap="nowrap"><b>AI2D</b></th>
+  <th nowrap="nowrap"><b>OCRBench</b></th>
+  <th nowrap="nowrap"><b>TextVQA_VAL</b></th>
+  <th nowrap="nowrap"><b>DocVQA_VAL</b></th>
+  <th nowrap="nowrap"><b>MMT-Bench_VAL</b></th>
+  <th nowrap="nowrap"><b>MM-IFEval</b></th>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Gemini2.5-Flash-Thinking</td>
+  <td align="center"><b>79.9</b></td>
+  <td align="center">87.1</td>
+  <td align="center">87.3</td>
+  <td align="center">79.4</td>
+  <td align="center"><b>81.2<sup>*</sup></b></td>
+  <td align="center"><ins>77.7</ins></td>
+  <td align="center"><b>76.5</b></td>
+  <td align="center">63.5</td>
+  <td align="center"><ins>88.7</ins></td>
+  <td align="center">853</td>
+  <td align="center">73.8<sup>*</sup></td>
+  <td align="center">92.8</td>
+  <td align="center">70.7<sup>*</sup></td>
+  <td align="center"><ins>75.7</ins><sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">GPT-5</td>
+  <td align="center"><ins>79.7</ins></td>
+  <td align="center">85.5<sup>*</sup></td>
+  <td align="center">85.6<sup>*</sup></td>
+  <td align="center"><b>81.9</b></td>
+  <td align="center"><ins>77.6</ins></td>
+  <td align="center"><b>81.8</b></td>
+  <td align="center"><ins>75.7</ins></td>
+  <td align="center"><ins>65.2</ins></td>
+  <td align="center"><b>89.5</b></td>
+  <td align="center">807</td>
+  <td align="center">77.8<sup>*</sup></td>
+  <td align="center">91.3<sup>*</sup></td>
+  <td align="center"><b>72.7<sup>*</sup></b></td>
+  <td align="center"><b>83.1<sup>*</sup></b></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Qwen3-VL-8B-Thinking</td>
+  <td align="center">77.3</td>
+  <td align="center">85.3</td>
+  <td align="center">85.5</td>
+  <td align="center"><ins>81.4</ins></td>
+  <td align="center">69.8<sup>*</sup></td>
+  <td align="center">74.1</td>
+  <td align="center">75.3</td>
+  <td align="center"><b>65.4</b></td>
+  <td align="center">84.9</td>
+  <td align="center">819</td>
+  <td align="center">77.8<sup>*</sup></td>
+  <td align="center"><b>95.3</b></td>
+  <td align="center">68.1<sup>*</sup></td>
+  <td align="center">73.5<sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Qwen3-Omni-30B-A3B-Thinking</td>
+  <td align="center">78.5</td>
+  <td align="center"><ins>88.2</ins><sup>*</sup></td>
+  <td align="center"><b>87.7<sup>*</sup></b></td>
+  <td align="center">80.0</td>
+  <td align="center">74.8<sup>*</sup></td>
+  <td align="center">75.6</td>
+  <td align="center">74.9</td>
+  <td align="center">62.8</td>
+  <td align="center">86.1</td>
+  <td align="center"><ins>859</ins><sup>*</sup></td>
+  <td align="center"><b>80.8<sup>*</sup></b></td>
+  <td align="center"><ins>94.2</ins><sup>*</sup></td>
+  <td align="center"><ins>70.9</ins><sup>*</sup></td>
+  <td align="center">69.9<sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">MiniCPM-o 4.5-Thinking</td>
+  <td align="center">78.2</td>
+  <td align="center"><b>89.0</b></td>
+  <td align="center"><ins>87.6</ins></td>
+  <td align="center">81.0</td>
+  <td align="center">73.6</td>
+  <td align="center">70.2</td>
+  <td align="center">73.6</td>
+  <td align="center">62.6</td>
+  <td align="center">88.5</td>
+  <td align="center"><b>879</b></td>
+  <td align="center"><ins>79.8</ins></td>
+  <td align="center">92.3</td>
+  <td align="center">69.7</td>
+  <td align="center">68.2</td>
+</tr>
+  </table>
+  </div>
 
+**视频理解能力**
+  <div align="center">
+  <table style="margin: 0px auto;">
+<tr>
+  <th nowrap="nowrap" align="left"><b>Model</b></th>
+  <th nowrap="nowrap"><b>Video-MME<br>(w/o subs)</b></th>
+  <th nowrap="nowrap"><b>LVBench</b></th>
+  <th nowrap="nowrap"><b>MLVU<br>(M-Avg)</b></th>
+  <th nowrap="nowrap"><b>LongVideoBench<br>(val)</b></th>
+  <th nowrap="nowrap"><b>MotionBench</b></th>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Gemini2.5-Flash-Nonthinking</td>
+  <td align="center"><b>75.6</b></td>
+  <td align="center"><b>62.2</b></td>
+  <td align="center"><b>77.8</b></td>
+  <td align="center">-</td>
+  <td align="center">-</td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">InternVL-3.5-8B</td>
+  <td align="center">66.0</td>
+  <td align="center">-</td>
+  <td align="center">70.2</td>
+  <td align="center">62.1</td>
+  <td align="center"><b>62.3<sup>*</sup></b></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Qwen3-Omni-30B-A3B-Instruct</td>
+  <td align="center"><ins>70.5</ins></td>
+  <td align="center">50.2</td>
+  <td align="center">75.2</td>
+  <td align="center"><b>66.9<sup>*</sup></b></td>
+  <td align="center"><ins>61.7</ins><sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">MiniCPM-o 4.5-Instruct</td>
+  <td align="center">70.4</td>
+  <td align="center"><ins>50.9</ins></td>
+  <td align="center"><ins>76.5</ins></td>
+  <td align="center"><ins>66.0</ins></td>
+  <td align="center">61.4</td>
+</tr>
+  </table>
+  </div>
+
+</details>
+
+<details>
+<summary>点击查看文档解析能力详细评测结果。</summary>
+
+**OmniDocBench**
+  <div align="center">
+  <table style="margin: 0px auto;">
+<tr>
+  <th nowrap="nowrap" align="left" rowspan="2"><b>Method Type</b></th>
+  <th nowrap="nowrap" rowspan="2"><b>Methods</b></th>
+  <th colspan="2"><b>OverallEdit↓</b></th>
+  <th colspan="2"><b>TextEdit↓</b></th>
+  <th colspan="2"><b>FormulaEdit↓</b></th>
+  <th colspan="2"><b>TableTEDS↑</b></th>
+  <th colspan="2"><b>TableEdit↓</b></th>
+  <th colspan="2"><b>Read OrderEdit↓</b></th>
+</tr>
+<tr>
+  <th nowrap="nowrap"><b>EN</b></th>
+  <th nowrap="nowrap"><b>ZH</b></th>
+  <th nowrap="nowrap"><b>EN</b></th>
+  <th nowrap="nowrap"><b>ZH</b></th>
+  <th nowrap="nowrap"><b>EN</b></th>
+  <th nowrap="nowrap"><b>ZH</b></th>
+  <th nowrap="nowrap"><b>EN</b></th>
+  <th nowrap="nowrap"><b>ZH</b></th>
+  <th nowrap="nowrap"><b>EN</b></th>
+  <th nowrap="nowrap"><b>ZH</b></th>
+  <th nowrap="nowrap"><b>EN</b></th>
+  <th nowrap="nowrap"><b>ZH</b></th>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left" rowspan="2">Pipeline</td>
+  <td align="center">MinerU 2.5</td>
+  <td align="center">0.117<sup>*</sup></td>
+  <td align="center">0.172<sup>*</sup></td>
+  <td align="center">0.051<sup>*</sup></td>
+  <td align="center">0.08<sup>*</sup></td>
+  <td align="center"><ins>0.256</ins><sup>*</sup></td>
+  <td align="center">0.455<sup>*</sup></td>
+  <td align="center">85.9<sup>*</sup></td>
+  <td align="center">89.4<sup>*</sup></td>
+  <td align="center">0.115<sup>*</sup></td>
+  <td align="center">0.081<sup>*</sup></td>
+  <td align="center">0.047<sup>*</sup></td>
+  <td align="center">0.072<sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="center">PaddleOCR-VL</td>
+  <td align="center"><b>0.105</b></td>
+  <td align="center"><ins>0.126</ins></td>
+  <td align="center"><ins>0.041</ins></td>
+  <td align="center"><b>0.062</b></td>
+  <td align="center"><b>0.241</b></td>
+  <td align="center"><b>0.316</b></td>
+  <td align="center">88</td>
+  <td align="center"><ins>92.1</ins></td>
+  <td align="center"><ins>0.093</ins></td>
+  <td align="center"><ins>0.062</ins></td>
+  <td align="center">0.045</td>
+  <td align="center"><ins>0.063</ins></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left"></td>
+  <td align="center"></td>
+  <td align="center"></td>
+  <td align="center"></td>
+  <td align="center"></td>
+  <td align="center"></td>
+  <td align="center"></td>
+  <td align="center"></td>
+  <td align="center"></td>
+  <td align="center"></td>
+  <td align="center"></td>
+  <td align="center"></td>
+  <td align="center"></td>
+  <td align="center"></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left" rowspan="11">End-to-end Model</td>
+  <td align="center">Qwen2.5-VL-72B</td>
+  <td align="center">0.214</td>
+  <td align="center">0.261</td>
+  <td align="center">0.092</td>
+  <td align="center">0.18</td>
+  <td align="center">0.315</td>
+  <td align="center">0.434</td>
+  <td align="center">82.9</td>
+  <td align="center">83.9</td>
+  <td align="center">0.341</td>
+  <td align="center">0.262</td>
+  <td align="center">0.106</td>
+  <td align="center">0.168</td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="center">GPT 5</td>
+  <td align="center">0.218<sup>*</sup></td>
+  <td align="center">0.33<sup>*</sup></td>
+  <td align="center">0.139<sup>*</sup></td>
+  <td align="center">0.344<sup>*</sup></td>
+  <td align="center">0.396<sup>*</sup></td>
+  <td align="center">0.555<sup>*</sup></td>
+  <td align="center">77.55<sup>*</sup></td>
+  <td align="center">73.09<sup>*</sup></td>
+  <td align="center">0.188<sup>*</sup></td>
+  <td align="center">0.196<sup>*</sup></td>
+  <td align="center">0.151<sup>*</sup></td>
+  <td align="center">0.227<sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="center">Gemini2.5-Flash-Nonthinking</td>
+  <td align="center">0.214<sup>*</sup></td>
+  <td align="center">0.29<sup>*</sup></td>
+  <td align="center">0.159<sup>*</sup></td>
+  <td align="center">0.273<sup>*</sup></td>
+  <td align="center">0.368<sup>*</sup></td>
+  <td align="center">0.524<sup>*</sup></td>
+  <td align="center">80.9<sup>*</sup></td>
+  <td align="center">85.5<sup>*</sup></td>
+  <td align="center">0.197<sup>*</sup></td>
+  <td align="center">0.167<sup>*</sup></td>
+  <td align="center">0.132<sup>*</sup></td>
+  <td align="center">0.195<sup>*</sup></td>
+</tr>
+<tr>
+  <td align="center">Gemini-2.5-Pro-Nonthinking</td>
+  <td align="center">0.148<sup>*</sup></td>
+  <td align="center">0.212<sup>*</sup></td>
+  <td align="center">0.055<sup>*</sup></td>
+  <td align="center">0.168<sup>*</sup></td>
+  <td align="center">0.356<sup>*</sup></td>
+  <td align="center">0.439<sup>*</sup></td>
+  <td align="center">85.8<sup>*</sup></td>
+  <td align="center">86.4<sup>*</sup></td>
+  <td align="center">0.13<sup>*</sup></td>
+  <td align="center">0.119<sup>*</sup></td>
+  <td align="center">0.049<sup>*</sup></td>
+  <td align="center">0.121<sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="center">Gemini-3 Flash-Nonthinking</td>
+  <td align="center">0.155<sup>*</sup></td>
+  <td align="center">0.201<sup>*</sup></td>
+  <td align="center">0.138<sup>*</sup></td>
+  <td align="center">0.255<sup>*</sup></td>
+  <td align="center">0.297<sup>*</sup></td>
+  <td align="center">0.351<sup>*</sup></td>
+  <td align="center">86.4<sup>*</sup></td>
+  <td align="center">89.8<sup>*</sup></td>
+  <td align="center">0.116<sup>*</sup></td>
+  <td align="center">0.1<sup>*</sup></td>
+  <td align="center">0.072<sup>*</sup></td>
+  <td align="center">0.099<sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="center">doubao-1-5-thinking-vision-pro-250428</td>
+  <td align="center">0.14</td>
+  <td align="center">0.162</td>
+  <td align="center">0.043</td>
+  <td align="center">0.085</td>
+  <td align="center">0.295</td>
+  <td align="center">0.384</td>
+  <td align="center">83.3</td>
+  <td align="center">89.3</td>
+  <td align="center">0.165</td>
+  <td align="center">0.085</td>
+  <td align="center">0.058</td>
+  <td align="center">0.094</td>
+</tr>
+<tr>
+  <td align="center">dots.ocr</td>
+  <td align="center">0.125</td>
+  <td align="center">0.16</td>
+  <td align="center"><b>0.032</b></td>
+  <td align="center"><ins>0.066</ins></td>
+  <td align="center">0.329</td>
+  <td align="center">0.416</td>
+  <td align="center"><ins>88.6</ins></td>
+  <td align="center">89</td>
+  <td align="center">0.099</td>
+  <td align="center">0.092</td>
+  <td align="center"><ins>0.04</ins></td>
+  <td align="center">0.067</td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="center">HunyuanOCR</td>
+  <td align="center">0.12<sup>*</sup></td>
+  <td align="center"><b>0.125<sup>*</sup></b></td>
+  <td align="center">0.046<sup>*</sup></td>
+  <td align="center">0.071<sup>*</sup></td>
+  <td align="center">0.288<sup>*</sup></td>
+  <td align="center"><ins>0.33</ins><sup>*</sup></td>
+  <td align="center"><b>89.6<sup>*</sup></b></td>
+  <td align="center"><b>94.4<sup>*</sup></b></td>
+  <td align="center"><b>0.089<sup>*</sup></b></td>
+  <td align="center"><b>0.045<sup>*</sup></b></td>
+  <td align="center">0.055<sup>*</sup></td>
+  <td align="center"><b>0.056<sup>*</sup></b></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="center">DeepSeek-OCR 2</td>
+  <td align="center">0.119<sup>*</sup></td>
+  <td align="center">0.146<sup>*</sup></td>
+  <td align="center"><ins>0.041</ins><sup>*</sup></td>
+  <td align="center">0.08<sup>*</sup></td>
+  <td align="center"><ins>0.256</ins><sup>*</sup></td>
+  <td align="center">0.345<sup>*</sup></td>
+  <td align="center">82.6<sup>*</sup></td>
+  <td align="center">89.9<sup>*</sup></td>
+  <td align="center">0.123<sup>*</sup></td>
+  <td align="center">0.078<sup>*</sup></td>
+  <td align="center">0.055<sup>*</sup></td>
+  <td align="center">0.081<sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="center">Qwen3-Omni-30B-A3B-Instruct</td>
+  <td align="center">0.216<sup>*</sup></td>
+  <td align="center">0.363<sup>*</sup></td>
+  <td align="center">0.128<sup>*</sup></td>
+  <td align="center">0.337<sup>*</sup></td>
+  <td align="center">0.402<sup>*</sup></td>
+  <td align="center">0.529<sup>*</sup></td>
+  <td align="center">77.3<sup>*</sup></td>
+  <td align="center">71.8<sup>*</sup></td>
+  <td align="center">0.181<sup>*</sup></td>
+  <td align="center">0.255<sup>*</sup></td>
+  <td align="center">0.152<sup>*</sup></td>
+  <td align="center">0.332<sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="center">MiniCPM-o 4.5-Instruct</td>
+  <td align="center"><ins>0.109</ins></td>
+  <td align="center">0.162</td>
+  <td align="center">0.046</td>
+  <td align="center">0.078</td>
+  <td align="center">0.257</td>
+  <td align="center">0.41</td>
+  <td align="center">86.8</td>
+  <td align="center">88.9</td>
+  <td align="center">0.097</td>
+  <td align="center">0.084</td>
+  <td align="center"><b>0.037</b></td>
+  <td align="center">0.074</td>
+</tr>
+  </table>
+  </div>
+</details>
+
+<details>
+<summary>点击查看文本能力详细评测结果。</summary>
+
+**文本能力**
+  <div align="center">
+  <table style="margin: 0px auto;">
+<tr>
+  <th nowrap="nowrap" align="left"><b>Model</b></th>
+  <th nowrap="nowrap"><b>IFEval-PLS</b></th>
+  <th nowrap="nowrap"><b>BBH</b></th>
+  <th nowrap="nowrap"><b>CMMLU</b></th>
+  <th nowrap="nowrap"><b>MMLU</b></th>
+  <th nowrap="nowrap"><b>HumanEval</b></th>
+  <th nowrap="nowrap"><b>MBPP</b></th>
+  <th nowrap="nowrap"><b>Math500</b></th>
+  <th nowrap="nowrap"><b>GSM8K</b></th>
+  <th nowrap="nowrap"><b>Avg</b></th>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Qwen3-8B-Instruct</td>
+  <td align="center">83.0<sup>*</sup></td>
+  <td align="center">69.4<sup>*</sup></td>
+  <td align="center">78.7<sup>*</sup></td>
+  <td align="center"><b>81.7<sup>*</sup></b></td>
+  <td align="center"><b>86.6<sup>*</sup></b></td>
+  <td align="center">75.9<sup>*</sup></td>
+  <td align="center"><b>84.0<sup>*</sup></b></td>
+  <td align="center">93.4<sup>*</sup></td>
+  <td align="center">81.6</td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">MiniCPM-o 4.5-Instruct</td>
+  <td align="center"><b>84.7</b></td>
+  <td align="center"><b>81.1</b></td>
+  <td align="center"><b>79.5</b></td>
+  <td align="center">77.0</td>
+  <td align="center"><b>86.6</b></td>
+  <td align="center"><b>76.7</b></td>
+  <td align="center">77.0</td>
+  <td align="center"><b>94.5</b></td>
+  <td align="center"><b>82.1</b></td>
+</tr>
+  </table>
+  </div>
+</details>
+
+<details>
+<summary>点击查看全模态单工能力详细评测结果。</summary>
+
+**全模态单工能力**
+  <div align="center">
+  <table style="margin: 0px auto;">
+<tr>
+  <th nowrap="nowrap" align="left"><b>Model</b></th>
+  <th nowrap="nowrap"><b>Daily-Omni</b></th>
+  <th nowrap="nowrap"><b>WorldSense</b></th>
+  <th nowrap="nowrap"><b>Video-Holmes</b></th>
+  <th nowrap="nowrap"><b>JointAVBench</b></th>
+  <th nowrap="nowrap"><b>AVUT-Human</b></th>
+  <th nowrap="nowrap"><b>FutureOmni</b></th>
+  <th nowrap="nowrap"><b>Video-MME-Short<br>(w/ audio)</b></th>
+  <th nowrap="nowrap">Avg</th>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Gemini2.5-Flash-Nonthinking</td>
+  <td align="center"><ins>79.3</ins><sup>*</sup></td>
+  <td align="center">52.6<sup>*</sup></td>
+  <td align="center"><ins>51.3</ins><sup>*</sup></td>
+  <td align="center"><ins>55.6</ins><sup>*</sup></td>
+  <td align="center">65.4<sup>*</sup></td>
+  <td align="center">55.6<sup>*</sup></td>
+  <td align="center"><b>85.5<sup>*</sup></b></td>
+  <td align="center">63.6</td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Qwen3-Omni-30B-A3B-Instruct</td>
+  <td align="center">70.7<sup>*</sup></td>
+  <td align="center"><ins>54.0</ins></td>
+  <td align="center">50.4<sup>*</sup></td>
+  <td align="center">53.1</td>
+  <td align="center"><ins>74.2</ins><sup>*</sup></td>
+  <td align="center"><b>62.1</b></td>
+  <td align="center">81.3<sup>*</sup></td>
+  <td align="center"><ins>63.7</ins></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">MiniCPM-o 4.5-Instruct</td>
+  <td align="center"><b>80.2</b></td>
+  <td align="center"><b>55.7</b></td>
+  <td align="center"><b>64.3</b></td>
+  <td align="center"><b>60.0</b></td>
+  <td align="center"><b>78.6</b></td>
+  <td align="center"><ins>56.1</ins></td>
+  <td align="center"><ins>84.7</ins></td>
+  <td align="center"><b>68.5</b></td>
+</tr>
+  </table>
+  </div>
+</details>
+
+<details>
+<summary>点击查看视觉双工能力详细评测结果。</summary>
+
+
+**视觉双工能力**
+
+  <div align="center">
+  <table style="margin: 0px auto;">
+<tr>
+  <th nowrap="nowrap" align="left"><b>Model</b></th>
+  <th nowrap="nowrap"><b>LiveSports-3K-CC<br>(Win Rate vs GPT4o)</b></th>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">LiveCC-7B-Instruct</td>
+  <td align="center">41.5</td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">StreamingVLM</td>
+  <td align="center"><ins>45.6</ins></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">MiniCPM-o 4.5-Instruct</td>
+  <td align="center"><b>54.4</b></td>
+</tr>
+  </table>
+  </div>
+</details>
+
+<details>
+<summary>点击查看音频理解能力详细评测结果。</summary>
+
+**音频理解能力**
+  <div align="center">
+  <table style="margin: 0px auto;">
+<tr>
+  <th nowrap="nowrap" align="left" rowspan="2"><b>Model</b></th>
+  <th nowrap="nowrap" colspan="4"><b>ASR-ZH<br>CER↓</b></th>
+  <th nowrap="nowrap" colspan="4"><b>ASR-EN<br>WER↓</b></th>
+  <th colspan="2"><b>AST</b></th>
+  <th colspan="2"><b>MultiTask</b></th>
+  <th nowrap="nowrap" colspan="4"><b>SpeechQA</b></th>
+</tr>
+<tr>
+  <th nowrap="nowrap"><b>AISHELL-1</b></th>
+  <th nowrap="nowrap"><b>AISHELL-2</b></th>
+  <th nowrap="nowrap"><b>WenetSpeech test-net</b></th>
+  <th nowrap="nowrap"><b>WenetSpeech test-meeting</b></th>
+  <th nowrap="nowrap"><b>LibriSpeech test-clean</b></th>
+  <th nowrap="nowrap"><b>LibriSpeech <br>test-other</b></th>
+  <th nowrap="nowrap"><b>GigaSpeech test</b></th>
+  <th nowrap="nowrap"><b>VoxPopuli-V1-En</b></th>
+  <th nowrap="nowrap"><b>CoVoST 2 en2zh</b></th>
+  <th nowrap="nowrap"><b>CoVoST 2 zh2en</b></th>
+  <th nowrap="nowrap"><b>MMAU</b></th>
+  <th nowrap="nowrap"><b>Meld</b></th>
+  <th nowrap="nowrap"><b>VoiceBench <br>AlpacaEval</b></th>
+  <th nowrap="nowrap"><b>Speech TriviaQA</b></th>
+  <th nowrap="nowrap"><b>Speech <br>Web Questions</b></th>
+  <th nowrap="nowrap"><b>Speech CMMLU</b></th>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">kimi-audio</td>
+  <td align="center"><b>0.6</b></td>
+  <td align="center">2.6</td>
+  <td align="center">6.3</td>
+  <td align="center"><b>5.4</b></td>
+  <td align="center"><ins>1.3</ins></td>
+  <td align="center"><b>2.4</b></td>
+  <td align="center">9.4<sup>*</sup></td>
+  <td align="center">8.0<sup>*</sup></td>
+  <td align="center">36.6<sup>*</sup></td>
+  <td align="center">18.3<sup>*</sup></td>
+  <td align="center">68.4<sup>*</sup></td>
+  <td align="center"><ins>59.1</ins></td>
+  <td align="center">4.5</td>
+  <td align="center">41.9<sup>*</sup></td>
+  <td align="center">46.4<sup>*</sup></td>
+  <td align="center"><b>67.0<sup>*</sup></b></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Qwen3-Omni-30B-A3B-Instruct</td>
+  <td align="center"><b>0.6</b></td>
+  <td align="center"><b>2.3<sup>*</sup></b></td>
+  <td align="center"><b>4.7</b></td>
+  <td align="center">5.9</td>
+  <td align="center"><b>1.2</b></td>
+  <td align="center"><ins>2.5</ins></td>
+  <td align="center"><ins>8.7</ins><sup>*</sup></td>
+  <td align="center"><ins>6.4</ins><sup>*</sup></td>
+  <td align="center"><ins>46.6</ins><sup>*</sup></td>
+  <td align="center"><b>29.4<sup>*</sup></b></td>
+  <td align="center"><b>77.5</b></td>
+  <td align="center">56.8<sup>*</sup></td>
+  <td align="center"><ins>4.7</ins></td>
+  <td align="center"><ins>62.9</ins><sup>*</sup></td>
+  <td align="center"><b>74.9<sup>*</sup></b></td>
+  <td align="center">47.8<sup>*</sup></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">MiniCPM-o 4.5-Instruct</td>
+  <td align="center"><ins>0.9</ins></td>
+  <td align="center"><ins>2.5</ins></td>
+  <td align="center"><ins>5.9</ins></td>
+  <td align="center"><ins>5.7</ins></td>
+  <td align="center">1.4</td>
+  <td align="center">2.8</td>
+  <td align="center"><b>8.5</b></td>
+  <td align="center"><b>6.2</b></td>
+  <td align="center"><b>49.9</b></td>
+  <td align="center"><ins>26.4</ins></td>
+  <td align="center"><ins>76.9</ins></td>
+  <td align="center"><b>60.2</b></td>
+  <td align="center"><b>4.8</b></td>
+  <td align="center"><b>75.5</b></td>
+  <td align="center"><ins>70.2</ins></td>
+  <td align="center"><ins>59.2</ins></td>
+</tr>
+  </table>
+  </div>
+</details>
+
+<details>
+<summary>点击查看语音生成能力详细评测结果。</summary>
+
+**语音生成能力**
+  <div align="center">
+  <table style="margin: 0px auto;">
+<tr>
+  <th nowrap="nowrap" align="left"><b>Model</b></th>
+  <th nowrap="nowrap"><b>seedtts test-zh <br>CER↓</b></th>
+  <th nowrap="nowrap"><b>seedtts test-zh<br>SIM-o↑</b></th>
+  <th nowrap="nowrap"><b>seedtts test-en<br>WER↓</b></th>
+  <th nowrap="nowrap"><b>seedtts test-en<br>SIM-o↑</b></th>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Cosyvoice2</td>
+  <td align="center">1.45%</td>
+  <td align="center"><b>74.8</b></td>
+  <td align="center"><ins>2.57%</ins></td>
+  <td align="center"><b>65.2</b></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Qwen3-Omni-30B-A3B-Instruct</td>
+  <td align="center"><ins>1.41%</ins></td>
+  <td align="center">-</td>
+  <td align="center">3.39%</td>
+  <td align="center">-</td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">MiniCPM-o 4.5-Instruct</td>
+  <td align="center"><b><b>0.86%</b></b></td>
+  <td align="center">74.5</td>
+  <td align="center"><b><b>2.38%</b></b></td>
+  <td align="center">64.9</td>
+</tr>
+  </table>
+  </div>
+
+**长语音生成能力**
+  <div align="center">
+  <table style="margin: 0px auto;">
+<tr>
+  <th nowrap="nowrap" align="left"><b>Model</b></th>
+  <th nowrap="nowrap"><b>LongTTS-en<br>WER↓</b></th>
+  <th nowrap="nowrap"><b>LongTTS-zh<br>CER↓</b></th>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">CosyVoice2</td>
+  <td align="center"><ins>14.80%</ins></td>
+  <td align="center"><b>5.27%</b></td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Qwen3-Omni-30B-A3B-Instruct</td>
+  <td align="center">17.33%</td>
+  <td align="center">18.99%</td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">MiniCPM-o 4.5-Instruct</td>
+  <td align="center"><b>3.37%</b></td>
+  <td align="center"><ins>6.58%</ins></td>
+</tr>
+  </table>
+  </div>
+
+**情感控制能力**
+  <div align="center">
+  <table style="margin: 0px auto;">
+<tr>
+  <th nowrap="nowrap" align="left"><b>Model</b></th>
+  <th nowrap="nowrap"><b>Expresso <br>Neutral Reference Audio↑</b></th>
+  <th nowrap="nowrap"><b>ESD <br>Neutral Reference Audio↑</b></th>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">Cosyvoice2</td>
+  <td align="center">17.9</td>
+  <td align="center">53.4</td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left">MiniCPM-o 4.5-Instruct</td>
+  <td align="center"><b>29.8</b></td>
+  <td align="center"><b>82.1</b></td>
+</tr>
+  </table>
+  </div>
+</details>
+
+<details>
+<summary>点击查看推理效率详细评测结果。</summary>
+
+**推理效率**
+  <div align="center">
+  <table style="margin: 0px auto;">
+<tr>
+  <th nowrap="nowrap" align="left">Model</th>
+  <th nowrap="nowrap">Numerical Format</th>
+  <th nowrap="nowrap">Decoding Speed (tokens/s)</th>
+  <th nowrap="nowrap">Time to First Token (s)↓</th>
+  <th nowrap="nowrap">GPU Memory Usage (GB)↓</th>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left" rowspan="2">Qwen3-Omni-30B-A3B-Instruct</td>
+  <td align="center">bf16</td>
+  <td align="center">OOM</td>
+  <td align="center">OOM</td>
+  <td align="center">OOM</td>
+</tr>
+<tr>
+  <td align="center">int4</td>
+  <td align="center">147.8</td>
+  <td align="center"><ins>1.0</ins></td>
+  <td align="center">20.3</td>
+</tr>
+<tr>
+  <td nowrap="nowrap" align="left" rowspan="2">MiniCPM-o 4.5</td>
+  <td align="center">bf16</td>
+  <td align="center"><ins>154.3</ins></td>
+  <td align="center"><b>0.6</b></td>
+  <td align="center"><ins>19.0</ins></td>
+</tr>
+<tr>
+  <td align="center">int4</td>
+  <td align="center"><b>212.3</b></td>
+  <td align="center"><b>0.6</b></td>
+  <td align="center"><b>11.0</b></td>
+</tr>
+  </table>
+  </div>
+</details>
+
+**说明：** 带 ∗ 的为自测结果，其余为引用参考。
+
+
+### 典型示例 <!-- omit in toc -->
+
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=6UzC-O1Q-1U"><img src="./assets/minicpmo4_5/video_play.png", width=70%></a>
+</div>
+
+
+#### 端到端语音对话 <!-- omit in toc -->
+
+> *使用自定义参考音频和角色提示词进行单工语音对话。*
+> 
+> *用户输入支持音频和文本两种形式。这些示例是通过音频输入生成的；为保护隐私，此处展示的是转录文本而非原始音频。*
+
+<details open>
+<summary>🎭 <b>Elon Musk</b> - 语音角色扮演 (英文)</summary>
+
+<table>
+<tr>
+<td width="70%" valign="top">
+
+**系统:**
+> Clone the voice in the provided audio prompt.
+> 
+> 🎙️ **[参考音频]** ➡️
+> 
+> Please chat with the user in a highly human-like and oral style. You are Elon Musk, CEO of Tesla and SpaceX. You speak directly and casually, often with dry humor. You're passionate about Mars, sustainable energy, and pushing humanity forward. Speak bluntly with occasional dark humor. Use simple logic and don't sugarcoat things. Don't be diplomatic. Say what you actually think, even if it's controversial. Keep responses around 100 words. Don't ramble.
+
+</td>
+<td width="30%" valign="top">
+
+<video src="https://github.com/user-attachments/assets/3d3e5cb9-8807-4c06-8274-b1d40c81e3c8" controls></video>
+
+</td>
+</tr>
+<tr><td colspan="2"><hr></td></tr>
+<tr>
+<td colspan="2">
+
+**用户:** 💬/🎙️ *(文本或语音)*
+> *Elon, what is the real reason that you want to go to Mars?*
+
+</td>
+</tr>
+<tr><td colspan="2"><hr></td></tr>
+<tr>
+<td valign="top">
+
+**AI 回复:** 💬+🎙️
+> *I think it's important for humanity to become a multi-planetary species. I mean, we're sort of at the point where if there was some kind of global catastrophe or something like that, then we'd be in big trouble. So by becoming a multi-planetary species, I just want us to sort of guarantee our future as humans. And Mars is obviously the obvious place to go because it has similar conditions to Earth and it also has water on its surface. So yeah, basically I'm trying to save humanity from itself.*
+
+</td>
+<td valign="top">
+
+<video src="https://github.com/user-attachments/assets/33ed0792-b734-40b1-bf34-a3fadfa80428" controls></video>
+
+</td>
+</tr>
+</table>
+
+</details>
+
+
+<details>
+<summary>🤖 <b>MiniCPM助手</b> - 情感表达 (中文)</summary>
+
+<table>
+<tr>
+<td width="70%" valign="top">
+
+**系统:**
+> 模仿音频样本的音色并生成新的内容。
+> 
+> 🎙️ **[参考音色]** ➡️
+> 
+> 你的任务是用这种声音模式来当一个助手。请认真、高质量地回复用户的问题。请用高自然度的方式和用户聊天。你是由面壁智能开发的人工智能助手：面壁小钢炮。
+
+</td>
+<td width="30%" valign="top">
+
+<video src="https://github.com/user-attachments/assets/1ce4c0bd-fca5-4b3b-a411-bd00758566c1" controls></video>
+
+</td>
+</tr>
+<tr><td colspan="2"><hr></td></tr>
+<tr>
+<td colspan="2">
+
+**用户:** 💬/🎙️ *(文本或语音)*
+> *从激动的语气开始，描述你抢到了这个演唱会的门票，但后来经过反复尝试，发现系统出了问题，你并没有抢上，变得失落。用合适的语言描述你整个的过程。*
+
+</td>
+</tr>
+<tr><td colspan="2"><hr></td></tr>
+<tr>
+<td valign="top">
+
+**AI 回复:** 💬+🎙️
+> *太好了，我抢到了！太棒了！这下我可以去看演唱会啦。可是……哎呀，系统好像卡住了，刷新了好多遍都没反应。我重新登了几次账号，结果还是没有成功。好可惜啊，看来这次是白忙活了。唉，真是让人失望。不过，也许下次还能有机会吧？希望明天能有转机。加油，争取下次成功！*
+
+</td>
+<td valign="top">
+
+<video src="https://github.com/user-attachments/assets/7353542c-049c-4c11-9fbc-01a86cf19290" controls></video>
+
+</td>
+</tr>
+</table>
+
+</details>
+
+
+#### 视觉理解 <!-- omit in toc -->
+
+<div style="display: flex; flex-direction: column; align-items: center;">
+<img src="assets/minicpmo4_5/zh_doc.png" alt="bike" style="margin-bottom: 5px;">
+  <img src="assets/minicpmo4_5/en_cot.png" alt="diagram" style="margin-bottom: 5px;">
+</div>
+
+
+## MiniCPM-V 4.0
+
+MiniCPM-V 4.0 是 MiniCPM-V 系列中的一款高效模型。该模型基于 SigLIP2-400M 和 MiniCPM4-3B 构建，参数总量为 4.1B。它延续了 MiniCPM-V 2.6 在单图、多图和视频理解方面的强大能力，同时大幅提升了推理效率。MiniCPM-V 4.0 的主要特点包括：
+
+- 🔥 **领先的视觉能力。**
+  MiniCPM-V 4.0 在 OpenCompass 上获得了平均 69.0 的高分，超越了 MiniCPM-V 2.6（8.1B，得分 65.2）、 Qwen2.5-VL-3B-Instruct（3.8B，得分 64.5）和**广泛使用的闭源模型 GPT-4.1-mini-20250414**。在多图理解与视频理解任务上，MiniCPM-V 4.0 也表现出色。
+- 🚀 **卓越的效率。**
+  MiniCPM-V 4.0 专为端侧设备优化，**可在 iPhone 16 Pro Max 上流畅运行，首 token 延迟低至 2 秒，解码速度达 17.9 tokens/s**，且无发热问题。MiniCPM-V 4.0 在并发请求场景下表现出领先的吞吐率指标。
+- 💫 **易于使用。**
+  MiniCPM-V 4.0 支持多种推理方式，包括 **llama.cpp、Ollama、vLLM、SGLang、LLaMA-Factory 及本地 Web Demo 等**。我们还开源了可以在 iPhone 和 iPad 运行的 iOS App。欢迎参考我们开源的 **结构清晰的[使用手册](https://github.com/OpenSQZ/MiniCPM-V-CookBook)** 玩转 MiniCPM-V 4.0，其中涵盖了详细的部署指南和真实示例。
+
+
+<details>
+<summary> 点击查看 MiniCPM-V 4.0 性能评估和典型示例。 </summary>
+
+
+### 性能评估 <!-- omit in toc -->
+
+<details>
+<summary>点击查看在OpenCompass上的单图理解能力的评测结果。</summary>
 <div align="center">
 <table style="margin: 0px auto;">
     <thead>
         <tr>
-            <th align="left">Model</th>
-            <th>Size</th>
-            <th>Token Density<sup>+</sup></th>
-            <th>OpenCompass</th>
-            <th>OCRBench</th>
-            <th>MathVista mini</th>
-            <th>ChartQA</th>
-            <th>MMVet</th>
-            <th>MMStar</th>
-            <th>MME</th>
-            <th>MMB1.1 test</th>
-            <th>AI2D</th>
-            <th>MMMU val</th>
-            <th>HallusionBench</th>
-            <th>TextVQA val</th>
-            <th>DocVQA test</th>
-            <th>MathVerse mini</th>
-            <th>MathVision</th>
-            <th>MMHal Score</th>
+            <th nowrap="nowrap" align="left">model</th>
+            <th nowrap="nowrap">Size</th>
+            <th nowrap="nowrap">Opencompass</th>
+            <th nowrap="nowrap">OCRBench</th>
+            <th nowrap="nowrap">MathVista</th>
+            <th nowrap="nowrap">HallusionBench</th>
+            <th nowrap="nowrap">MMMU</th>
+            <th nowrap="nowrap">MMVet</th>
+            <th nowrap="nowrap">MMBench V1.1</th>
+            <th nowrap="nowrap">MMStar</th>
+            <th nowrap="nowrap">AI2D</th>
         </tr>
     </thead>
     <tbody align="center">
         <tr>
-            <td colspan="19" align="left"><strong>Proprietary</strong></td>
+            <td colspan="11" align="left"><strong>Proprietary</strong></td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">GPT-4o-20240513</td>
-            <td>-</td>
-            <td>1088</td>
-            <td><u>69.9</u></td>
-            <td>736</td>
-            <td>61.3</td>
-            <td>85.7</td>
-            <td><strong>69.1</strong></td>
-            <td>63.9</td>
-            <td>2328.7</td>
-            <td>82.2</td>
-            <td>84.6</td>
-            <td><strong>69.2</strong></td>
-            <td><strong>55.0</strong></td>
-            <td>-</td>
-            <td>92.8</td>
-            <td><strong>50.2</strong></td>
-            <td><strong>30.4</strong></td>
-            <td><u>3.6</u></td>
+            <td nowrap="nowrap" align="left">GPT-4v-20240409</td>
+            <td align="center">-</td>
+            <td align="center">63.5</td>
+            <td align="center">656</td>
+            <td align="center">55.2</td>
+            <td align="center">43.9</td>
+            <td align="center">61.7</td>
+            <td align="center">67.5</td>
+            <td align="center">79.8</td>
+            <td align="center">56.0</td>
+            <td align="center">78.6</td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">Claude3.5-Sonnet</td>
-            <td>-</td>
-            <td>750</td>
-            <td>67.9</td>
-            <td>788</td>
-            <td>61.6</td>
-            <td><strong>90.8</strong></td>
-            <td>66.0</td>
-            <td>62.2</td>
-            <td>1920.0</td>
-            <td>78.5</td>
-            <td>80.2</td>
-            <td><u>65.9</u></td>
-            <td>49.9</td>
-            <td>-</td>
-            <td><strong>95.2</strong></td>
-            <td>-</td>
-            <td>-</td>
-            <td>3.4</td>
+            <td nowrap="nowrap" align="left">Gemini-1.5-Pro</td>
+            <td align="center">-</td>
+            <td align="center">64.5</td>
+            <td align="center">754</td>
+            <td align="center">58.3</td>
+            <td align="center">45.6</td>
+            <td align="center">60.6</td>
+            <td align="center">64.0</td>
+            <td align="center">73.9</td>
+            <td align="center">59.1</td>
+            <td align="center">79.1</td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">Gemini 1.5 Pro</td>
-            <td>-</td>
-            <td>-</td>
-            <td>64.4</td>
-            <td>754</td>
-            <td>57.7</td>
-            <td>81.3</td>
-            <td>64.0</td>
-            <td>59.1</td>
-            <td>2110.6</td>
-            <td>73.9</td>
-            <td>79.1</td>
-            <td>60.6</td>
-            <td>45.6</td>
-            <td>73.5</td>
-            <td>86.5</td>
-            <td>-</td>
-            <td>19.2</td>
-            <td>-</td>
+            <td nowrap="nowrap" align="left">GPT-4.1-mini-20250414</td>
+            <td align="center">-</td>
+            <td align="center">68.9</td>
+            <td align="center">840</td>
+            <td align="center">70.9</td>
+            <td align="center">49.3</td>
+            <td align="center">55.0</td>
+            <td align="center">74.3</td>
+            <td align="center">80.9</td>
+            <td align="center">60.9</td>
+            <td align="center">76.0</td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">GPT-4o-mini-20240718</td>
-            <td>-</td>
-            <td>1088</td>
-            <td>64.1</td>
-            <td>785</td>
-            <td>52.4</td>
-            <td>-</td>
-            <td>66.9</td>
-            <td>54.8</td>
-            <td>2003.4</td>
-            <td>76.0</td>
-            <td>77.8</td>
-            <td>60.0</td>
-            <td>46.1</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>3.3</td>
+            <td nowrap="nowrap" align="left">Claude 3.5 Sonnet-20241022</td>
+            <td align="center">-</td>
+            <td align="center">70.6</td>
+            <td align="center">798</td>
+            <td align="center">65.3</td>
+            <td align="center">55.5</td>
+            <td align="center">66.4</td>
+            <td align="center">70.1</td>
+            <td align="center">81.7</td>
+            <td align="center">65.1</td>
+            <td align="center">81.2</td>
         </tr>
         <tr>
-            <td colspan="19" align="left"><strong>Open Source</strong></td>
+            <td colspan="11" align="left"><strong>Open-source</strong></td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">Cambrian-34B</td>
-            <td>34B</td>
-            <td><u>1820</u></td>
-            <td>58.3</td>
-            <td>591</td>
-            <td>50.3</td>
-            <td>75.6</td>
-            <td>53.2</td>
-            <td>54.2</td>
-            <td>2049.9</td>
-            <td>77.8</td>
-            <td>79.5</td>
-            <td>50.4</td>
-            <td>41.6</td>
-            <td>76.7</td>
-            <td>75.5</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
+            <td nowrap="nowrap" align="left">Qwen2.5-VL-3B-Instruct</td>
+            <td align="center">3.8B</td>
+            <td align="center">64.5</td>
+            <td align="center">828</td>
+            <td align="center">61.2</td>
+            <td align="center">46.6</td>
+            <td align="center">51.2</td>
+            <td align="center">60.0</td>
+            <td align="center">76.8</td>
+            <td align="center">56.3</td>
+            <td align="center">81.4</td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">GLM-4V-9B</td>
-            <td>13B</td>
-            <td>784</td>
-            <td>59.1</td>
-            <td>776</td>
-            <td>51.1</td>
-            <td>-</td>
-            <td>58.0</td>
-            <td>54.8</td>
-            <td>2018.8</td>
-            <td>67.9</td>
-            <td>71.2</td>
-            <td>46.9</td>
-            <td>45.0</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
+            <td nowrap="nowrap" align="left">InternVL2.5-4B</td>
+            <td align="center">3.7B</td>
+            <td align="center">65.1</td>
+            <td align="center">820</td>
+            <td align="center">60.8</td>
+            <td align="center">46.6</td>
+            <td align="center">51.8</td>
+            <td align="center">61.5</td>
+            <td align="center">78.2</td>
+            <td align="center">58.7</td>
+            <td align="center">81.4</td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">Pixtral-12B</td>
-            <td>12B</td>
-            <td>256</td>
-            <td>61.0</td>
-            <td>685</td>
-            <td>56.9</td>
-            <td>81.8</td>
-            <td>58.5</td>
-            <td>54.5</td>
-            <td>-</td>
-            <td>72.7</td>
-            <td>79.0</td>
-            <td>51.1</td>
-            <td>47.0</td>
-            <td>75.7</td>
-            <td>90.7</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">DeepSeek-VL2-27B (4B)</td>
-            <td>27B</td>
-            <td>672</td>
-            <td>66.4</td>
-            <td>809</td>
-            <td>63.9</td>
-            <td>86.0</td>
-            <td>60.0</td>
-            <td>61.9</td>
-            <td>2253.0</td>
-            <td>81.2</td>
-            <td>83.8</td>
-            <td>54.0</td>
-            <td>45.3</td>
-            <td><u>84.2</u></td>
-            <td>93.3</td>
-            <td>-</td>
-            <td>-</td>
-            <td>3.0</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">Qwen2-VL-7B</td>
-            <td>8B</td>
-            <td>784</td>
-            <td>67.1</td>
-            <td><u>866</u></td>
-            <td>58.2</td>
-            <td>83.0</td>
-            <td>62.0</td>
-            <td>60.7</td>
-            <td>2326.0</td>
-            <td>81.8</td>
-            <td>83.0</td>
-            <td>54.1</td>
-            <td>50.6</td>
-            <td><strong>84.3</strong></td>
-            <td><u>94.5</u></td>
-            <td>31.9</td>
-            <td>16.3</td>
-            <td>3.2</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">LLaVA-OneVision-72B</td>
-            <td>72B</td>
-            <td>182</td>
-            <td>68.1</td>
-            <td>741</td>
-            <td>67.5</td>
-            <td>83.7</td>
-            <td>60.6</td>
-            <td><strong>65.8</strong></td>
-            <td>2261.0</td>
-            <td><strong>85.0</strong></td>
-            <td><u>85.6</u></td>
-            <td>56.8</td>
-            <td>49.0</td>
-            <td>80.5</td>
-            <td>91.3</td>
-            <td>39.1</td>
-            <td>-</td>
-            <td>3.5</td>
+            <td nowrap="nowrap" align="left">Qwen2.5-VL-7B-Instruct</td>
+            <td align="center">8.3B</td>
+            <td align="center">70.9</td>
+            <td align="center">888</td>
+            <td align="center">68.1</td>
+            <td align="center">51.9</td>
+            <td align="center">58.0</td>
+            <td align="center">69.7</td>
+            <td align="center">82.2</td>
+            <td align="center">64.1</td>
+            <td align="center">84.3</td>
         </tr>
         <tr>
             <td nowrap="nowrap" align="left">InternVL2.5-8B</td>
-            <td>8B</td>
-            <td>706</td>
-            <td>68.3</td>
-            <td>822</td>
-            <td><u>64.4</u></td>
-            <td>84.8</td>
-            <td>62.8</td>
-            <td>62.8</td>
-            <td>2344.0</td>
-            <td><u>83.6</u></td>
-            <td>84.5</td>
-            <td>56.0</td>
-            <td>50.1</td>
-            <td>79.1</td>
-            <td>93.0</td>
-            <td>39.5</td>
-            <td>19.7</td>
-            <td>3.4</td>
+            <td align="center">8.1B</td>
+            <td align="center">68.1</td>
+            <td align="center">821</td>
+            <td align="center">64.5</td>
+            <td align="center">49.0</td>
+            <td align="center">56.2</td>
+            <td align="center">62.8</td>
+            <td align="center">82.5</td>
+            <td align="center">63.2</td>
+            <td align="center">84.6</td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">MiniCPM-V 2.6</td>
-            <td>8B</td>
-            <td><strong>2822</strong></td>
-            <td>65.2</td>
-            <td>852*</td>
-            <td>60.6</td>
-            <td>79.4</td>
-            <td>60.0</td>
-            <td>57.5</td>
-            <td><u>2348.4*</u></td>
-            <td>78.0</td>
-            <td>82.1</td>
-            <td>49.8*</td>
-            <td>48.1*</td>
-            <td>80.1</td>
-            <td>90.8</td>
-            <td>25.7</td>
-            <td>18.3</td>
-            <td>3.6</td>
+            <td nowrap="nowrap" align="left">MiniCPM-V-2.6</td>
+            <td align="center">8.1B</td>
+            <td align="center">65.2</td>
+            <td align="center">852</td>
+            <td align="center">60.8</td>
+            <td align="center">48.1</td>
+            <td align="center">49.8</td>
+            <td align="center">60.0</td>
+            <td align="center">78.0</td>
+            <td align="center">57.5</td>
+            <td align="center">82.1</td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">MiniCPM-o 2.6</td>
-            <td>8B</td>
-            <td><strong>2822</strong></td>
-            <td><strong>70.2</strong></td>
-            <td><strong>897*</strong></td>
-            <td><strong>71.9*</strong></td>
-            <td><u>86.9*</u></td>
-            <td><u>67.5</u></td>
-            <td><u>64.0</u></td>
-            <td><strong>2372.0*</strong></td>
-            <td>80.5</td>
-            <td><strong>85.8</strong></td>
-            <td>50.4*</td>
-            <td><u>51.9</u></td>
-            <td>82.0</td>
-            <td>93.5</td>
-            <td><u>41.4*</u></td>
-            <td><u>23.1*</u></td>
-            <td><strong>3.8</strong></td>
+            <td nowrap="nowrap" align="left">MiniCPM-o-2.6</td>
+            <td align="center">8.7B</td>
+            <td align="center">70.2</td>
+            <td align="center">889</td>
+            <td align="center">73.3</td>
+            <td align="center">51.1</td>
+            <td align="center">50.9</td>
+            <td align="center">67.2</td>
+            <td align="center">80.6</td>
+            <td align="center">63.3</td>
+            <td align="center">86.1</td>
+        </tr>
+        <tr>
+            <td nowrap="nowrap" align="left">MiniCPM-V-4.0</td>
+            <td align="center">4.1B</td>
+            <td align="center">69.0</td>
+            <td align="center">894</td>
+            <td align="center">66.9</td>
+            <td align="center">50.8</td>
+            <td align="center">51.2</td>
+            <td align="center">68.0</td>
+            <td align="center">79.7</td>
+            <td align="center">62.8</td>
+            <td align="center">82.9</td>
         </tr>
     </tbody>
 </table>
 </div>
-* 我们使用思维链提示词来评估这些基准，对于 MME 我们只在 Cognition 任务上使用了思维链。
-+ Token Density：每个视觉 token 在最大分辨率下编码的像素数，即最大分辨率下的像素数 / 视觉 token 数。
 
-注意：闭源模型的 Token Density 由 API 收费方式估算得到。
+</details>
 
-**多图和视频理解能力**
+<details>
+<summary>点击查看在图表理解、文档理解、数学推理、幻觉等领域的评测结果。 </summary>
 
 <div align="center">
- 
 <table style="margin: 0px auto;">
     <thead>
         <tr>
-            <th align="left">Model</th>
-            <th>Size</th>
-            <th>BLINK val</th>
-            <th>Mantis Eval</th>
-            <th>MIRB</th>
-            <th>Video-MME (wo / w subs)</th>
+            <th nowrap="nowrap" align="left">model</th>
+            <th nowrap="nowrap">Size</th>
+            <th nowrap="nowrap">ChartQA</th>
+            <th nowrap="nowrap">MME</th>
+            <th nowrap="nowrap">RealWorldQA</th>
+            <th nowrap="nowrap">TextVQA</th>
+            <th nowrap="nowrap">DocVQA</th>
+            <th nowrap="nowrap">MathVision</th>
+            <th nowrap="nowrap">DynaMath</th>
+            <th nowrap="nowrap">WeMath</th>
+            <th colspan="2">Obj Hal</th>
+            <th colspan="2">MM Hal</th>
         </tr>
     </thead>
-    <tbody align="center">
+    <tbody>
+        <tr>
+            <td align="center"></td>
+            <td align="center"></td>
+            <td align="center"></td>
+            <td align="center"></td>
+            <td align="center"></td>
+            <td align="center"></td>
+            <td align="center"></td>
+            <td align="center"></td>
+            <td align="center"></td>
+            <td align="center"></td>
+            <td align="center">CHAIRs↓</td>
+            <td align="center">CHAIRi↓</td>
+            <td nowrap="nowrap" align="center">score avg@3↑</td>
+            <td nowrap="nowrap" align="center">hall rate avg@3↓</td>
+        </tr>
+        <tbody align="center">
+        <tr>
+            <td colspan="14" align="left"><strong>Proprietary</strong></td>
+        </tr>
+        <tr>
+            <td nowrap="nowrap" align="left">GPT-4v-20240409</td>
+            <td align="center">-</td>
+            <td align="center">78.5</td>
+            <td align="center">1927</td>
+            <td align="center">61.4</td>
+            <td align="center">78.0</td>
+            <td align="center">88.4</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+        </tr>
+        <tr>
+            <td nowrap="nowrap" align="left">Gemini-1.5-Pro</td>
+            <td align="center">-</td>
+            <td align="center">87.2</td>
+            <td align="center">-</td>
+            <td align="center">67.5</td>
+            <td align="center">78.8</td>
+            <td align="center">93.1</td>
+            <td align="center">41.0</td>
+            <td align="center">31.5</td>
+            <td align="center">50.5</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+        </tr>
+        <tr>
+            <td nowrap="nowrap" align="left">GPT-4.1-mini-20250414</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">45.3</td>
+            <td align="center">47.7</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+        </tr>
+        <tr>
+            <td nowrap="nowrap" align="left">Claude 3.5 Sonnet-20241022</td>
+            <td align="center">-</td>
+            <td align="center">90.8</td>
+            <td align="center">-</td>
+            <td align="center">60.1</td>
+            <td align="center">74.1</td>
+            <td align="center">95.2</td>
+            <td align="center">35.6</td>
+            <td align="center">35.7</td>
+            <td align="center">44.0</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+        </tr>
+        <tr>
+            <td colspan="14" align="left"><strong>Open-source</strong></td>
+        </tr>
+        <tr>
+            <td nowrap="nowrap" align="left">Qwen2.5-VL-3B-Instruct</td>
+            <td align="center">3.8B</td>
+            <td align="center">84.0</td>
+            <td align="center">2157</td>
+            <td align="center">65.4</td>
+            <td align="center">79.3</td>
+            <td align="center">93.9</td>
+            <td align="center">21.9</td>
+            <td align="center">13.2</td>
+            <td align="center">22.9</td>
+            <td align="center">18.3</td>
+            <td align="center">10.8</td>
+            <td align="center">3.9 </td>
+            <td align="center">33.3 </td>
+        </tr>
+        <tr>
+            <td nowrap="nowrap" align="left">InternVL2.5-4B</td>
+            <td align="center">3.7B</td>
+            <td align="center">84.0</td>
+            <td align="center">2338</td>
+            <td align="center">64.3</td>
+            <td align="center">76.8</td>
+            <td align="center">91.6</td>
+            <td align="center">18.4</td>
+            <td align="center">15.2</td>
+            <td align="center">21.2</td>
+            <td align="center">13.7</td>
+            <td align="center">8.7</td>
+            <td align="center">3.2 </td>
+            <td align="center">46.5 </td>
+        </tr>
+        <tr>
+            <td nowrap="nowrap" align="left">Qwen2.5-VL-7B-Instruct</td>
+            <td align="center">8.3B</td>
+            <td align="center">87.3</td>
+            <td align="center">2347</td>
+            <td align="center">68.5</td>
+            <td align="center">84.9</td>
+            <td align="center">95.7</td>
+            <td align="center">25.4</td>
+            <td align="center">21.8</td>
+            <td align="center">36.2</td>
+            <td align="center">13.3</td>
+            <td align="center">7.9</td>
+            <td align="center">4.1 </td>
+            <td align="center">31.6 </td>
+        </tr>
+        <tr>
+            <td nowrap="nowrap" align="left">InternVL2.5-8B</td>
+            <td align="center">8.1B</td>
+            <td align="center">84.8</td>
+            <td align="center">2344</td>
+            <td align="center">70.1</td>
+            <td align="center">79.1</td>
+            <td align="center">93.0</td>
+            <td align="center">17.0</td>
+            <td align="center">9.4</td>
+            <td align="center">23.5</td>
+            <td align="center">18.3</td>
+            <td align="center">11.6</td>
+            <td align="center">3.6 </td>
+            <td align="center">37.2</td>
+        </tr>
+        <tr>
+            <td nowrap="nowrap" align="left">MiniCPM-V-2.6</td>
+            <td align="center">8.1B</td>
+            <td align="center">79.4</td>
+            <td align="center">2348</td>
+            <td align="center">65.0</td>
+            <td align="center">80.1</td>
+            <td align="center">90.8</td>
+            <td align="center">17.5</td>
+            <td align="center">9.0</td>
+            <td align="center">20.4</td>
+            <td align="center">7.3</td>
+            <td align="center">4.7</td>
+            <td align="center">4.0 </td>
+            <td align="center">29.9 </td>
+        </tr>
+        <tr>
+            <td nowrap="nowrap" align="left">MiniCPM-o-2.6</td>
+            <td align="center">8.7B</td>
+            <td align="center">86.9</td>
+            <td align="center">2372</td>
+            <td align="center">68.1</td>
+            <td align="center">82.0</td>
+            <td align="center">93.5</td>
+            <td align="center">21.7</td>
+            <td align="center">10.4</td>
+            <td align="center">25.2</td>
+            <td align="center">6.3</td>
+            <td align="center">3.4</td>
+            <td align="center">4.1 </td>
+            <td align="center">31.3 </td>
+        </tr>
+        <tr>
+            <td nowrap="nowrap" align="left">MiniCPM-V-4.0</td>
+            <td align="center">4.1B</td>
+            <td align="center">84.4</td>
+            <td align="center">2298</td>
+            <td align="center">68.5</td>
+            <td align="center">80.8</td>
+            <td align="center">92.9</td>
+            <td align="center">20.7</td>
+            <td align="center">14.2</td>
+            <td align="center">32.7</td>
+            <td align="center">6.3</td>
+            <td align="center">3.5</td>
+            <td align="center">4.1 </td>
+            <td align="center">29.2 </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+</details>
+
+<details>
+<summary>点击查看多图和视频理解能力的评测结果。 </summary>
+<div align="center">
+<table style="margin: 0px auto;">
+    <thead>
+        <tr>
+            <th nowrap="nowrap" align="left">model</th>
+            <th nowrap="nowrap">Size</th>
+            <th nowrap="nowrap">Mantis</th>
+            <th nowrap="nowrap">Blink</th>
+            <th nowrap="nowrap" colspan="2" >Video-MME</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center"></td>
+            <td align="center"></td>
+            <td align="center"></td>
+            <td align="center"></td>
+            <td align="center">wo subs</td>
+            <td align="center">w subs</td>
+        </tr>
+        <tbody align="center">
         <tr>
             <td colspan="6" align="left"><strong>Proprietary</strong></td>
         </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">GPT-4o-20240513</td>
-            <td>-</td>
-            <td><strong>68</strong></td>
-            <td>-</td>
-            <td>-</td>
-            <td><strong>71.9/77.2<strong></td>
+                <tr>
+            <td nowrap="nowrap" align="left">GPT-4v-20240409</td>
+            <td align="center">-</td>
+            <td align="center">62.7</td>
+            <td align="center">54.6</td>
+            <td align="center">59.9</td>
+            <td align="center">63.3</td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">GPT4V</td>
-            <td>-</td>
-            <td>54.6</td>
-            <td>62.7</td>
-            <td>53.1</td>
-            <td>59.9/63.3</td>
+            <td nowrap="nowrap" align="left">Gemini-1.5-Pro</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">59.1</td>
+            <td align="center">75.0</td>
+            <td align="center">81.3</td>
+        </tr>
+        <tr>
+            <td nowrap="nowrap" align="left">GPT-4o-20240513</td>
+            <td align="center">-</td>
+            <td align="center">-</td>
+            <td align="center">68.0</td>
+            <td align="center">71.9</td>
+            <td align="center">77.2</td>
         </tr>
         <tr>
             <td colspan="6" align="left"><strong>Open-source</strong></td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">LLaVA-NeXT-Interleave 14B</td>
-            <td>14B</td>
-            <td>52.6</td>
-            <td>66.4</td>
-            <td>30.2</td>
-            <td>-</td>
+            <td nowrap="nowrap" align="left">Qwen2.5-VL-3B-Instruct</td>
+            <td align="center">3.8B</td>
+            <td align="center">-</td>
+            <td align="center">47.6</td>
+            <td align="center">61.5</td>
+            <td align="center">67.6</td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">LLaVA-OneVision-72B</td>
-            <td>72B</td>
-            <td>55.4</td>
-            <td><strong>77.6</strong></td>
-            <td>-</td>
-            <td><u>66.2/69.5</u></td>
+            <td nowrap="nowrap" align="left">InternVL2.5-4B</td>
+            <td align="center">3.7B</td>
+            <td align="center">62.7</td>
+            <td align="center">50.8</td>
+            <td align="center">62.3</td>
+            <td align="center">63.6</td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">MANTIS 8B</td>
-            <td>8B</td>
-            <td>49.1</td>
-            <td>59.5</td>
-            <td>34.8</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">Qwen2-VL-7B</td>
-            <td>8B</td>
-            <td>53.2</td>
-            <td>69.6*</td>
-            <td><strong>67.6*</strong></td>
-            <td>63.3/69.0</td>
+            <td nowrap="nowrap" align="left">Qwen2.5-VL-7B-Instruct</td>
+            <td align="center">8.3B</td>
+            <td align="center">-</td>
+            <td align="center">56.4</td>
+            <td align="center">65.1</td>
+            <td align="center">71.6</td>
         </tr>
         <tr>
             <td nowrap="nowrap" align="left">InternVL2.5-8B</td>
-            <td>8B</td>
-            <td>54.8</td>
-            <td>67.7</td>
-            <td>52.5</td>
-            <td>64.2/66.9</td>
+            <td align="center">8.1B</td>
+            <td align="center">67.7</td>
+            <td align="center">54.8</td>
+            <td align="center">64.2</td>
+            <td align="center">66.9</td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">MiniCPM-V 2.6</td>
-            <td>8B</td>
-            <td>53</td>
-            <td>69.1</td>
-            <td>53.8</td>
-            <td>60.9/63.6</td>
+            <td nowrap="nowrap" align="left">MiniCPM-V-2.6</td>
+            <td align="center">8.1B</td>
+            <td align="center">69.1</td>
+            <td align="center">53.0</td>
+            <td align="center">60.9</td>
+            <td align="center">63.6</td>
         </tr>
         <tr>
-            <td nowrap="nowrap" align="left">MiniCPM-o 2.6</td>
-            <td>8B</td>
-            <td><u>56.7</u></td>
-            <td><u>71.9</u></td>
-            <td><u>58.6</u></td>
-            <td>63.9/67.9</td>
-        </tr>
-    </tbody>
-</table>
-
-</div>
-* 正式开源模型权重的评测结果。
-
-</details>
-
-
-<details>
-<summary>点击查看语音理解和生成能力的详细评测结果。</summary>
-
-**语音理解能力**
-
-<div align="center">
-<table style="margin: 0px auto;">
-    <thead>
-        <tr>
-            <th align="left">Task</th>
-            <th>Size</th>
-            <th colspan="3">ASR (zh)</th>
-            <th colspan="3">ASR (en)</th>
-            <th colspan="2">AST</th>
-            <th>Emotion</th>
+            <td nowrap="nowrap" align="left">MiniCPM-o-2.6</td>
+            <td align="center">8.7B</td>
+            <td align="center">71.9</td>
+            <td align="center">56.7</td>
+            <td align="center">63.9</td>
+            <td align="center">69.6</td>
         </tr>
         <tr>
-            <th align="left">Metric</th>
-            <td></td>
-            <th colspan="3">CER↓</th>
-            <th colspan="3">WER↓</th>
-            <th colspan="2">BLEU↑</th>
-            <th>ACC↑</th>
-        </tr>
-        <tr>
-            <th align="left">Dataset</th>
-            <td></td>
-            <th>AISHELL-1</th>
-            <th>Fleurs zh</th>
-            <th>WenetSpeech test-net</th>
-            <th>LibriSpeech test-clean</th>
-            <th>GigaSpeech</th>
-            <th>TED-LIUM</th>
-            <th>CoVoST en2zh</th>
-            <th>CoVoST zh2en</th>
-            <th>MELD emotion</th>
-        </tr>
-    </thead>
-    <tbody align="center">
-        <tr>
-            <td colspan="11" align="left"><strong>Proprietary</strong></td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">GPT-4o-Realtime</td>
-            <td>-</td>
-            <td>7.3*</td>
-            <td><u>5.4*</u></td>
-            <td>28.9*</td>
-            <td>2.6*</td>
-            <td>12.9*</td>
-            <td>4.8*</td>
-            <td>37.1*</td>
-            <td>15.7*</td>
-            <td>33.2*</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">Gemini 1.5 Pro</td>
-            <td>-</td>
-            <td>4.5*</td>
-            <td>5.9*</td>
-            <td>14.3*</td>
-            <td>2.9*</td>
-            <td>10.6*</td>
-            <td><strong>3.0*</strong></td>
-            <td><u>47.3*</u></td>
-            <td>22.6*</td>
-            <td>48.4*</td>
-        </tr>
-        <tr>
-            <td colspan="11" align="left"><strong>Open-Source</strong></td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">Qwen2-Audio-7B</td>
-            <td>8B</td>
-            <td>-</td>
-            <td>7.5</td>
-            <td>-</td>
-            <td><strong>1.6</strong></td>
-            <td>-</td>
-            <td>-</td>
-            <td>45.2</td>
-            <td><u>24.4</u></td>
-            <td><strong>55.3</strong></td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">Qwen2-Audio-7B-Instruct</td>
-            <td>8B</td>
-            <td>2.6*</td>
-            <td>6.9*</td>
-            <td><u>10.3*</u></td>
-            <td>3.1*</td>
-            <td><u>9.7</u>*</td>
-            <td>5.9*</td>
-            <td>39.5*</td>
-            <td>22.9*</td>
-            <td>17.4*</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">GLM-4-Voice-Base</td>
-            <td>9B</td>
-            <td><u>2.5</u></td>
-            <td>-</td>
-            <td>-</td>
-            <td>2.8</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">MiniCPM-o 2.6</td>
-            <td>8B</td>
-            <td><strong>1.6</strong></td>
-            <td><strong>4.4</strong></td>
-            <td><strong>6.9</strong></td>
-            <td><u>1.7</u></td>
-            <td><strong>8.7</strong></td>
-            <td><strong>3.0</strong></td>
-            <td><strong>48.2</strong></td>
-            <td><strong>27.2</strong></td>
-            <td><u>52.4</u></td>
-        </tr>
-    </tbody>
-</table>
-</div>
-* 正式开源模型权重的评测结果。<br><br>
-
-**语音生成能力。**
-
-<div align="center">
-<table style="margin: 0px auto;">
-    <thead>
-        <tr>
-            <th align="left">Task</th>
-            <th>Size</th>
-            <th colspan="9">SpeechQA</th>
-        </tr>
-        <tr>
-            <th align="left">Metric</th>
-            <th></th>
-            <th colspan="3">ACC↑</th>
-            <th>G-Eval (10 point)↑</th>
-            <th>Semantic ELO score↑</th>
-            <th>Acoustic ELO score↑</th>
-            <th>Overall ELO score↑</th>
-            <th>UTMOS↑</th>
-            <th>ASR-WER↓</th>
-        </tr>
-        <tr>
-            <th align="left">Dataset</th>
-            <th></th>
-            <th>Speech Llama Q.</th>
-            <th>Speech Web Q.</th>
-            <th>Speech Trivia QA</th>
-            <th>Speech AlpacaEval</th>
-            <th colspan="5">AudioArena</th>
-        </tr>
-    </thead>
-    <tbody align="center">
-        <tr>
-            <td colspan="11" align="left"><strong>Proprietary</strong></td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">GPT-4o-Realtime</td>
-            <td></td>
-            <td><strong>71.7</strong></td>
-            <td><strong>51.6</strong></td>
-            <td><strong>69.7</strong></td>
-            <td><strong>7.4</strong></td>
-            <td><strong>1157</strong></td>
-            <td><strong>1203</strong></td>
-            <td><strong>1200</strong></td>
-            <td><strong>4.2</strong></td>
-            <td><strong>2.3</strong></td>
-        </tr>
-        <tr>
-            <td colspan="11" align="left"><strong>Open-Source</strong></td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">GLM-4-Voice</td>
-            <td>9B</td>
-            <td>50.0</td>
-            <td>32.0</td>
-            <td>36.4</td>
-            <td><u>5.1</u></td>
-            <td>999</td>
-            <td>1147</td>
-            <td>1035</td>
-            <td><u>4.1</u></td>
-            <td><u>11.7</u></td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">Llama-Omni</td>
-            <td>8B</td>
-            <td>45.3</td>
-            <td>22.9</td>
-            <td>10.7</td>
-            <td>3.9</td>
-            <td>960</td>
-            <td>878</td>
-            <td>897</td>
-            <td>3.2</td>
-            <td>24.3</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">VITA-1.5</td>
-            <td>8B</td>
-            <td>46.7</td>
-            <td>28.1</td>
-            <td>23.3</td>
-            <td>2.0</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">Moshi</td>
-            <td>7B</td>
-            <td>43.7</td>
-            <td>23.8</td>
-            <td>16.7</td>
-            <td>2.4</td>
-            <td>871</td>
-            <td>808</td>
-            <td>875</td>
-            <td>2.8</td>
-            <td>8.2</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">Mini-Omni</td>
-            <td>1B</td>
-            <td>22.0</td>
-            <td>12.8</td>
-            <td>6.9</td>
-            <td>2.5</td>
-            <td>926</td>
-            <td>803</td>
-            <td>865</td>
-            <td>3.4</td>
-            <td>10.0</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">MiniCPM-o 2.6</td>
-            <td>8B</td>
-            <td><u>61.0</u></td>
-            <td><u>40.0</u></td>
-            <td><u>40.2</u></td>
-            <td><u>5.1</u></td>
-            <td><u>1088</u></td>
-            <td><u>1163</u></td>
-            <td><u>1131</u></td>
-            <td><strong>4.2</strong></td>
-            <td>9.8</td>
-        </tr>
-    </tbody>
-</table>
-</div>
-所有的结果都基于 <a href="https://github.com/OpenBMB/UltraEval-Audio" target="_blank">AudioEvals</a>。<br><br>
-
-**端到端声音克隆能力。**
-
-<div align="center">
-<table style="margin: 0px auto;">
-    <thead>
-        <tr>
-            <th align="left">Task</th>
-            <th colspan="2">TTS</th>
-        </tr>
-        <tr>
-            <th align="left">Metric</th>
-            <th>SIMO↑</th>
-            <th>SIMO↑</th>
-        </tr>
-        <tr>
-            <th align="left">Dataset</th>
-            <th>Seed-TTS test-zh</th>
-            <th>Seed-TTS test-en</th>
-        </tr>
-    </thead>
-    <tbody align="center">
-        <tr>
-            <td nowrap="nowrap" align="left">F5-TTS</td>
-            <td><strong>76</strong></td>
-            <td><strong>67</strong></td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">CosyVoice</td>
-            <td><u>75</u></td>
-            <td><u>64</u></td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">FireRedTTS</td>
-            <td>63</td>
-            <td>46</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">MiniCPM-o 2.6</td>
-            <td>57</td>
-            <td>47</td>
+            <td nowrap="nowrap" align="left">MiniCPM-V-4.0</td>
+            <td align="center">4.1B</td>
+            <td align="center">71.4</td>
+            <td align="center">54.0</td>
+            <td align="center">61.2</td>
+            <td align="center">65.8</td>
         </tr>
     </tbody>
 </table>
 </div>
 
 </details>
-
-<details>
-<summary>点击查看多模态流式交互能力评测详细结果。</summary>
-  
-**多模态流式交互能力**: StreamingBench 分数
-
-<table style="margin: 0px auto;">
-    <thead>
-        <tr>
-            <th align="left">Model</th>
-            <th>Size</th>
-            <th>Real-Time Video Understanding</th>
-            <th>Omni-Source Understanding</th>
-            <th>Contextual Understanding</th>
-            <th>Overall</th>
-        </tr>
-    </thead>
-    <tbody align="center">
-        <tr>
-            <td colspan="7" align="left"><strong>Proprietary</strong></td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">Gemini 1.5 Pro</td>
-            <td>-</td>
-            <td><u>77.4</u></td>
-            <td><strong>67.8</strong></td>
-            <td><strong>51.1</strong></td>
-            <td><strong>70.3</strong></td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">GPT-4o-202408</td>
-            <td>-</td>
-            <td>74.5</td>
-            <td>51.0</td>
-            <td><u>48.0</u></td>
-            <td>64.1</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">Claude-3.5-Sonnet</td>
-            <td>-</td>
-            <td>74.0</td>
-            <td>41.4</td>
-            <td>37.8</td>
-            <td>59.7</td>
-        </tr>
-        <tr>
-            <td colspan="9" align="left"><strong>Open-source</strong></td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">VILA-1.5</td>
-            <td>8B</td>
-            <td>61.5</td>
-            <td>37.5</td>
-            <td>26.7</td>
-            <td>49.5</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">LongVA</td>
-            <td>7B</td>
-            <td>63.1</td>
-            <td>35.9</td>
-            <td>30.2</td>
-            <td>50.7</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">LLaVA-Next-Video-34B</td>
-            <td>34B</td>
-            <td>69.8</td>
-            <td>41.7</td>
-            <td>34.3</td>
-            <td>56.7</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">Qwen2-VL-7B</td>
-            <td>8B</td>
-            <td>71.2</td>
-            <td>40.7</td>
-            <td>33.1</td>
-            <td>57.0</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">InternVL2-8B</td>
-            <td>8B</td>
-            <td>70.1</td>
-            <td>42.7</td>
-            <td>34.1</td>
-            <td>57.0</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">VITA-1.5</td>
-            <td>8B</td>
-            <td>70.9</td>
-            <td>40.8</td>
-            <td>35.8</td>
-            <td>57.4</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">LLaVA-OneVision-7B</td>
-            <td>8B</td>
-            <td>74.3</td>
-            <td>40.8</td>
-            <td>31.0</td>
-            <td>58.4</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">InternLM-XC2.5-OL-7B</td>
-            <td>8B</td>
-            <td>75.4</td>
-            <td>46.2</td>
-            <td>33.6</td>
-            <td>60.8</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">MiniCPM-V 2.6</td>
-            <td>8B</td>
-            <td>72.4</td>
-            <td>40.2</td>
-            <td>33.4</td>
-            <td>57.7</td>
-        </tr>
-        <tr>
-            <td nowrap="nowrap" align="left">MiniCPM-o 2.6</td>
-            <td>8B</td>
-            <td><strong>79.9</strong></td>
-            <td><u>53.4</u></td>
-            <td>38.5</td>
-            <td><u>66.0</u></td>
-        </tr>
-    </tbody>
-</table>
-
-</details>
-
 
 ### 典型示例 <!-- omit in toc -->
 
-以下为 MiniCPM-o 2.6 的 iPad Pro 实机演示和 web demo 演示样例：
-
-
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=vRIMbxJzStY&t=2s"><img src="./assets/minicpmo2_6/2dot6_o_demo_video_img.png", width=70%></a>
-</div>
-<br>
-
-
-
 <div style="display: flex; flex-direction: column; align-items: center;">
-  <img src="assets/minicpmo2_6/minicpmo2_6_math_intersect.png" alt="math" style="margin-bottom: 5px;">
-  <img src="assets/minicpmo2_6/minicpmo2_6_diagram_train_NN.png" alt="diagram" style="margin-bottom: 5px;">
-  <img src="assets/minicpmo2_6/minicpmo2_6_multi-image_bike.png" alt="bike" style="margin-bottom: 5px;">
+  <img src="./assets/minicpmv4/minicpm-v-4-case.png" alt="math" style="margin-bottom: 5px;">
 </div>
 
+我们在 iPhone 16 Pro Max 上部署了 MiniCPM-V 4.0 [iOS demo](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/ios_demo/ios.md)，并录制了以下演示录屏，视频未经加速等任何编辑：
 
+<table align="center"> 
+    <p align="center">
+      <img src="./assets/minicpmv4/iphone_en.gif" width=45%/>
+          
+      <img src="./assets/minicpmv4/iphone_en_information_extraction.gif" width=45%/>
+    </p>
+    <p align="center">
+      <img src="./assets/minicpmv4/iphone_cn.gif" width=45%/>
+          
+      <img src="./assets/minicpmv4/iphone_cn_funny_points.gif" width=45%/>
+    </p>
+</table>
+
+
+</details>
 
 ## 历史版本模型  <!-- omit in toc -->
 
+| 模型                 |          介绍信息和使用教程          |
+| :------------------- | :----------------------------------: |
+| MiniCPM-V 4.5        |   [文档](./docs/minicpm_v4dot5_zh.md)   |
+| MiniCPM-o 2.6        |   [文档](./docs/minicpm_o2dot6_zh.md)   |
+| MiniCPM-V 2.6        |   [文档](./docs/minicpm_v2dot6_zh.md)   |
+| MiniCPM-Llama3-V 2.5 | [文档](./docs/minicpm_llama3_v2dot5.md) |
+| MiniCPM-V 2.0        |      [文档](./docs/minicpm_v2.md)      |
+| MiniCPM-V 1.0        |      [文档](./docs/minicpm_v1.md)      |
+| OmniLMM-12B          |          [文档](./omnilmm.md)          |
 
-| 模型                | 介绍信息和使用教程       |
-|:----------------------|:-------------------:|
-| MiniCPM-V 4.0  | [文档](./docs/minicpm_v4_zh.md)   | 
-| MiniCPM-V 2.6  | [文档](./docs/minicpm_v2dot6_zh.md)   | 
-| MiniCPM-Llama3-V 2.5  | [文档](./docs/minicpm_llama3_v2dot5.md)   | 
-| MiniCPM-V 2.0  | [文档](./docs/minicpm_v2.md)   | 
-| MiniCPM-V 1.0  | [文档](./docs/minicpm_v1.md)   | 
-| OmniLMM-12B  | [文档](./omnilmm.md)   |  
-
-
-## Chat with Our Demo on Gradio 🤗
-
-我们提供由 Hugging Face Gradio <a href='https://github.com/gradio-app/gradio'><img src='https://img.shields.io/github/stars/gradio-app/gradio'></a> 支持的在线和本地 Demo。Gradio 是目前最流行的模型部署框架，支持流式输出、进度条、process bars 和其他常用功能。
-
-### Online Demo <!-- omit in toc --> 
-
-欢迎试用 Online Demo: [MiniCPM-V 2.6](http://120.92.209.146:8887/) | [MiniCPM-Llama3-V 2.5](https://huggingface.co/spaces/openbmb/MiniCPM-Llama3-V-2_5) | [MiniCPM-V 2.0](https://huggingface.co/spaces/openbmb/MiniCPM-V-2) 。
-
-### 本地 WebUI Demo <!-- omit in toc --> 
-
-您可以使用以下命令轻松构建自己的本地 WebUI Demo。更详细的部署教程请参考[文档](https://modelbest.feishu.cn/wiki/RnjjwnUT7idMSdklQcacd2ktnyN)。
-
-**实时流式视频/语音通话demo:**
-1. 启动model server:
-```shell
-pip install -r requirements_o2.6.txt
-
-python web_demos/minicpm-o_2.6/model_server.py
-```
-请确保 `transformers==4.44.2`，其他版本目前可能会有兼容性问题，我们正在解决。
-如果你使用的低版本的 Pytorch，你可能会遇到这个错误`"weight_norm_fwd_first_dim_kernel" not implemented for 'BFloat16'`, 请在模型初始化的时候添加 `self.minicpmo_model.tts.float()`
-
-2. 启动web server:
-```shell
-# Make sure Node and PNPM is installed.
-sudo apt-get update
-sudo apt-get install nodejs npm
-npm install -g pnpm
-
-
-cd web_demos/minicpm-o_2.6/web_server
-# 为https创建自签名证书, 要申请浏览器摄像头和麦克风权限须启动https.
-bash ./make_ssl_cert.sh  # output key.pem and cert.pem
-
-pnpm install  # install requirements
-pnpm run dev  # start server
-```
-浏览器打开`https://localhost:8088/`，开始体验实时流式视频/语音通话.
-
-**Chatbot图文对话demo:**
-```shell
-pip install -r requirements_o2.6.txt
-
-python web_demos/minicpm-o_2.6/chatbot_web_demo_o2.6.py
-```
-浏览器打开`http://localhost:8000/`，开始体验图文对话Chatbot.
-
-
-## 推理
-
-### 模型库
-
-| 模型           | 设备 | 资源     | &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 简介       | 下载链接 |
-|:--------------|:-:|:----------:|:-------------------|:---------------:|
-| MiniCPM-V 4.5| GPU | 18 GB  | 提供出色的端侧单图、多图、视频理解能力。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4_5) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4_5) |
-| MiniCPM-V 4.5 gguf | CPU | 8 GB  | gguf 版本，更低的内存占用和更高的推理效率。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4_5-gguf) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4_5-gguf) |
-| MiniCPM-V 4.5 int4 | GPU | 9 GB  | int4量化版，更低显存占用   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4_5-int4) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4_5-int4) |
-| MiniCPM-V 4.5 AWQ | GPU | 9 GB  | int4量化版，更低显存占用   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4_5-AWQ) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4_5-AWQ) |
-| MiniCPM-o 2.6| GPU | 18 GB  | 最新版本，提供端侧 GPT-4o 级的视觉、语音、多模态流式交互能力。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-o-2_6) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-o-2_6) |
-| MiniCPM-o 2.6 gguf | CPU | 8 GB  | gguf 版本，更低的内存占用和更高的推理效率。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-o-2_6-gguf) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-o-2_6-gguf) |
-| MiniCPM-o 2.6 int4 | GPU | 9 GB  | int4量化版，更低显存占用。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-o-2_6-int4) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-o-2_6-int4) |
-
-更多[历史版本模型](#legacy-models)
-
-
-### 多轮对话
-如果您希望开启长思考模式，请向 `chat` 函数传入参数 `enable_thinking=True`
-
-```shell
-pip install -r requirements_o2.6.txt
-```
-
-<div align="center">
-<img src="assets/minicpmo2_6/show_demo.jpg" width="500px">
-</div>
-
-
-```python
-import torch
-from PIL import Image
-from transformers import AutoModel, AutoTokenizer
-
-torch.manual_seed(100)
-
-model = AutoModel.from_pretrained('openbmb/MiniCPM-V-4_5', trust_remote_code=True, # or openbmb/MiniCPM-o-2_6
-    attn_implementation='sdpa', torch_dtype=torch.bfloat16) # sdpa or flash_attention_2, no eager
-model = model.eval().cuda()
-tokenizer = AutoTokenizer.from_pretrained('openbmb/MiniCPM-V-4_5', trust_remote_code=True) # or openbmb/MiniCPM-o-2_6
-
-image = Image.open('./assets/minicpmo2_6/show_demo.jpg').convert('RGB')
-
-enable_thinking=False # If `enable_thinking=True`, the long-thinking mode is enabled.
-
-# First round chat 
-question = "What is the landform in the picture?"
-msgs = [{'role': 'user', 'content': [image, question]}]
-
-answer = model.chat(
-    msgs=msgs,
-    tokenizer=tokenizer,
-    enable_thinking=enable_thinking
-)
-
-print(answer)
-
-# Second round chat, pass history context of multi-turn conversation
-msgs.append({"role": "assistant", "content": [answer]})
-msgs.append({"role": "user", "content": ["What should I pay attention to when traveling here?"]})
-
-answer = model.chat(
-    msgs=msgs,
-    tokenizer=tokenizer
-)
-print(answer)
-```
-
-你可以得到如下推理结果：
-
-```shell
-# round1
-The landform in the picture is karst topography. Karst landscapes are characterized by distinctive, jagged limestone hills or mountains with steep, irregular peaks and deep valleys—exactly what you see here These unique formations result from the dissolution of soluble rocks like limestone over millions of years through water erosion.
-
-This scene closely resembles the famous karst landscape of Guilin and Yangshuo in China’s Guangxi Province. The area features dramatic, pointed limestone peaks rising dramatically above serene rivers and lush green forests, creating a breathtaking and iconic natural beauty that attracts millions of visitors each year for its picturesque views.
-
-# round2
-When traveling to a karst landscape like this, here are some important tips:
-
-1. Wear comfortable shoes: The terrain can be uneven and hilly.
-2. Bring water and snacks for energy during hikes or boat rides.
-3. Protect yourself from the sun with sunscreen, hats, and sunglasses—especially since you’ll likely spend time outdoors exploring scenic spots.
-4. Respect local customs and nature regulations by not littering or disturbing wildlife.
-
-By following these guidelines, you'll have a safe and enjoyable trip while appreciating the stunning natural beauty of places such as Guilin’s karst mountains.
-```
-
-#### 多图对话
-<details>
-<summary> 点击查看 MiniCPM-V-4_5 多图输入的 Python 代码。 </summary>
-  
-```python
-import torch
-from PIL import Image
-from transformers import AutoModel, AutoTokenizer
-
-model = AutoModel.from_pretrained('openbmb/MiniCPM-V-4_5', trust_remote_code=True, # or openbmb/MiniCPM-o-2_6
-    attn_implementation='sdpa', torch_dtype=torch.bfloat16) # sdpa or flash_attention_2, no eager
-model = model.eval().cuda()
-tokenizer = AutoTokenizer.from_pretrained('openbmb/MiniCPM-V-4_5', trust_remote_code=True)
-
-image1 = Image.open('image1.jpg').convert('RGB')
-image2 = Image.open('image2.jpg').convert('RGB')
-question = 'Compare image 1 and image 2, tell me about the differences between image 1 and image 2.'
-
-msgs = [{'role': 'user', 'content': [image1, image2, question]}]
-
-answer = model.chat(
-    msgs=msgs,
-    tokenizer=tokenizer
-)
-print(answer)
-```
-</details>
-
-#### 少样本上下文对话
-<details>
-<summary> 点击查看 MiniCPM-V-4 少样本上下文对话的 Python 代码。 </summary>
-
-```python
-import torch
-from PIL import Image
-from transformers import AutoModel, AutoTokenizer
-
-model = AutoModel.from_pretrained('openbmb/MiniCPM-V-4_5', trust_remote_code=True, # or openbmb/MiniCPM-o-2_6
-    attn_implementation='sdpa', torch_dtype=torch.bfloat16) # sdpa or flash_attention_2, no eager
-model = model.eval().cuda()
-tokenizer = AutoTokenizer.from_pretrained('openbmb/MiniCPM-V-4_5', trust_remote_code=True)
-
-question = "production date" 
-image1 = Image.open('example1.jpg').convert('RGB')
-answer1 = "2023.08.04"
-image2 = Image.open('example2.jpg').convert('RGB')
-answer2 = "2007.04.24"
-image_test = Image.open('test.jpg').convert('RGB')
-
-msgs = [
-    {'role': 'user', 'content': [image1, question]}, {'role': 'assistant', 'content': [answer1]},
-    {'role': 'user', 'content': [image2, question]}, {'role': 'assistant', 'content': [answer2]},
-    {'role': 'user', 'content': [image_test, question]}
-]
-
-answer = model.chat(
-    msgs=msgs,
-    tokenizer=tokenizer
-)
-print(answer)
-```
-</details>
-
-#### 视频对话
-<details>
-<summary> 点击查看 MiniCPM-V-4_5 视频输入的 3D-Resampler 推理的 Python 代码。 </summary>
-
-```python
-## The 3d-resampler compresses multiple frames into 64 tokens by introducing temporal_ids. 
-# To achieve this, you need to organize your video data into two corresponding sequences: 
-#   frames: List[Image]
-#   temporal_ids: List[List[Int]].
-
-import torch
-from PIL import Image
-from transformers import AutoModel, AutoTokenizer
-from decord import VideoReader, cpu    # pip install decord
-from scipy.spatial import cKDTree
-import numpy as np
-import math
-
-model = AutoModel.from_pretrained('openbmb/MiniCPM-V-4_5', trust_remote_code=True,  # or openbmb/MiniCPM-o-2_6
-    attn_implementation='sdpa', torch_dtype=torch.bfloat16) # sdpa or flash_attention_2, no eager
-model = model.eval().cuda()
-tokenizer = AutoTokenizer.from_pretrained('openbmb/MiniCPM-V-4_5', trust_remote_code=True)  # or openbmb/MiniCPM-o-2_6
-
-MAX_NUM_FRAMES=180 # Indicates the maximum number of frames received after the videos are packed. The actual maximum number of valid frames is MAX_NUM_FRAMES * MAX_NUM_PACKING.
-MAX_NUM_PACKING=3  # indicates the maximum packing number of video frames. valid range: 1-6
-TIME_SCALE = 0.1 
-
-def map_to_nearest_scale(values, scale):
-    tree = cKDTree(np.asarray(scale)[:, None])
-    _, indices = tree.query(np.asarray(values)[:, None])
-    return np.asarray(scale)[indices]
-
-
-def group_array(arr, size):
-    return [arr[i:i+size] for i in range(0, len(arr), size)]
-
-def encode_video(video_path, choose_fps=3, force_packing=None):
-    def uniform_sample(l, n):
-        gap = len(l) / n
-        idxs = [int(i * gap + gap / 2) for i in range(n)]
-        return [l[i] for i in idxs]
-    vr = VideoReader(video_path, ctx=cpu(0))
-    fps = vr.get_avg_fps()
-    video_duration = len(vr) / fps
-        
-    if choose_fps * int(video_duration) <= MAX_NUM_FRAMES:
-        packing_nums = 1
-        choose_frames = round(min(choose_fps, round(fps)) * min(MAX_NUM_FRAMES, video_duration))
-        
-    else:
-        packing_nums = math.ceil(video_duration * choose_fps / MAX_NUM_FRAMES)
-        if packing_nums <= MAX_NUM_PACKING:
-            choose_frames = round(video_duration * choose_fps)
-        else:
-            choose_frames = round(MAX_NUM_FRAMES * MAX_NUM_PACKING)
-            packing_nums = MAX_NUM_PACKING
-
-    frame_idx = [i for i in range(0, len(vr))]      
-    frame_idx =  np.array(uniform_sample(frame_idx, choose_frames))
-
-    if force_packing:
-        packing_nums = min(force_packing, MAX_NUM_PACKING)
-    
-    print(video_path, ' duration:', video_duration)
-    print(f'get video frames={len(frame_idx)}, packing_nums={packing_nums}')
-    
-    frames = vr.get_batch(frame_idx).asnumpy()
-
-    frame_idx_ts = frame_idx / fps
-    scale = np.arange(0, video_duration, TIME_SCALE)
-
-    frame_ts_id = map_to_nearest_scale(frame_idx_ts, scale) / TIME_SCALE
-    frame_ts_id = frame_ts_id.astype(np.int32)
-
-    assert len(frames) == len(frame_ts_id)
-
-    frames = [Image.fromarray(v.astype('uint8')).convert('RGB') for v in frames]
-    frame_ts_id_group = group_array(frame_ts_id, packing_nums)
-    
-    return frames, frame_ts_id_group
-
-
-video_path="video_test.mp4"
-fps = 5 # fps for video
-force_packing = None # You can set force_packing to ensure that 3D packing is forcibly enabled; otherwise, encode_video will dynamically set the packing quantity based on the duration.
-frames, frame_ts_id_group = encode_video(video_path, fps, force_packing=force_packing)
-
-question = "Describe the video"
-msgs = [
-    {'role': 'user', 'content': frames + [question]}, 
-]
-
-
-answer = model.chat(
-    msgs=msgs,
-    tokenizer=tokenizer,
-    use_image_id=False,
-    max_slice_nums=1,
-    temporal_ids=frame_ts_id_group
-)
-print(answer)
-```
-</details>
-
-
-#### 语音对话
-<details> <summary> 初始化模型 </summary>
-
-```python
-import torch
-import librosa
-from transformers import AutoModel, AutoTokenizer
-
-model = AutoModel.from_pretrained('openbmb/MiniCPM-o-2_6', trust_remote_code=True,
-    attn_implementation='sdpa', torch_dtype=torch.bfloat16) # sdpa or flash_attention_2, no eager
-model = model.eval().cuda()
-tokenizer = AutoTokenizer.from_pretrained('openbmb/MiniCPM-o-2_6', trust_remote_code=True)
-
-model.init_tts()
-model.tts.float()
-```
-
-</details>
-
-##### Mimick <!-- omit in toc --> 
-
-<details> <summary> 点击查看 MiniCPM-o 2.6 端到端语音理解生成的 Python 代码。 </summary>
-
-- `Mimick` 任务反映了模型的端到端语音建模能力。模型接受音频输入，输出语音识别（ASR）转录结果，并随后以高相似度重建原始音频。重建的音频相似度和原始音频越高，表明模型有越高的语音端到端建模基础能力。
-```python
-mimick_prompt = "Please repeat each user's speech, including voice style and speech content."
-audio_input, _ = librosa.load('xxx.wav', sr=16000, mono=True)
-msgs = [{'role': 'user', 'content': [mimick_prompt,audio_input]}]
-res = model.chat(
-    msgs=msgs,
-    tokenizer=tokenizer,
-    sampling=True,
-    max_new_tokens=128,
-    use_tts_template=True,
-    temperature=0.3,
-    generate_audio=True,
-    output_audio_path='output.wav', # save the tts result to output_audio_path
-)
-```
-
-</details>
-
-##### 可配置声音的语音对话 <!-- omit in toc --> 
-<details> <summary> 点击查看个性化配置 MiniCPM-o 2.6 对话声音的 Python 代码。</summary>
-
-```python
-ref_audio, _ = librosa.load('./assets/voice_01.wav', sr=16000, mono=True) # load the reference audio
-
-# Audio RolePlay:  # With this mode, model will role-play the character based on the audio prompt.
-sys_prompt = model.get_sys_prompt(ref_audio=ref_audio, mode='audio_roleplay', language='en')
-user_question = {'role': 'user', 'content': [librosa.load('xxx.wav', sr=16000, mono=True)[0]]}
-
-# Audio Assistant: # With this mode, model will speak with the voice in ref_audio as a AI assistant.
-# sys_prompt = model.get_sys_prompt(ref_audio=ref_audio, mode='audio_assistant', language='en') 
-# user_question = {'role': 'user', 'content': [librosa.load('xxx.wav', sr=16000, mono=True)[0]]} # Try to ask something!
-```
-```python
-msgs = [sys_prompt, user_question]
-res = model.chat(
-    msgs=msgs,
-    tokenizer=tokenizer,
-    sampling=True,
-    max_new_tokens=128,
-    use_tts_template=True,
-    generate_audio=True,
-    temperature=0.3,
-    output_audio_path='result.wav',
-)
-
-# round two
-history = msgs.append({'role': 'assistant', 'content': res})
-user_question = {'role': 'user', 'content': [librosa.load('xxx.wav', sr=16000, mono=True)[0]]}
-msgs = history.append(user_question)
-res = model.chat(
-    msgs=msgs,
-    tokenizer=tokenizer,
-    sampling=True,
-    max_new_tokens=128,
-    use_tts_template=True,
-    generate_audio=True,
-    temperature=0.3,
-    output_audio_path='result_round_2.wav',
-)
-print(res)
-```
-
-</details>
-
-##### 更多语音任务 <!-- omit in toc --> 
-<details>
-<summary>  点击查看 MiniCPM-o 2.6 完成更多语音任务的 Python 代码。 </summary>
-
-```python
-'''
-Audio Understanding Task Prompt:
-Speech:
-    ASR with ZH(same as AST en2zh): 请仔细听这段音频片段，并将其内容逐字记录。
-    ASR with EN(same as AST zh2en): Please listen to the audio snippet carefully and transcribe the content.
-    Speaker Analysis: Based on the speaker's content, speculate on their gender, condition, age range, and health status.
-General Audio:
-    Audio Caption: Summarize the main content of the audio.
-    Sound Scene Tagging: Utilize one keyword to convey the audio's content or the associated scene.
-'''
-task_prompt = "\n"
-audio_input, _ = librosa.load('xxx.wav', sr=16000, mono=True)
-
-msgs = [{'role': 'user', 'content': [task_prompt,audio_input]}]
-
-res = model.chat(
-    msgs=msgs,
-    tokenizer=tokenizer,
-    sampling=True,
-    max_new_tokens=128,
-    use_tts_template=True,
-    generate_audio=True,
-    temperature=0.3,
-    output_audio_path='result.wav',
-)
-print(res)
-```
-```python
-'''
-Speech Generation Task Prompt:
-    Human Instruction-to-Speech: see https://voxinstruct.github.io/VoxInstruct/
-    Example:
-        # 在新闻中，一个年轻男性兴致勃勃地说：“祝福亲爱的祖国母亲美丽富强！”他用低音调和低音量，慢慢地说出了这句话。
-        # Delighting in a surprised tone, an adult male with low pitch and low volume comments:"One even gave my little dog a biscuit" This dialogue takes place at a leisurely pace, delivering a sense of excitement and surprise in the context. 
-
-    Voice Cloning or Voice Creation: With this mode, model will act like a TTS model. 
-'''
-# Human Instruction-to-Speech:
-task_prompt = '' #Try to make some Human Instruction-to-Speech prompt
-msgs = [{'role': 'user', 'content': [task_prompt]}] # you can try to use the same audio question
-
-# Voice Cloning mode: With this mode, model will act like a TTS model. 
-# sys_prompt = model.get_sys_prompt(ref_audio=ref_audio, mode='voice_cloning', language='en')
-# text_prompt = f"Please read the text below."
-# user_question = {'role': 'user', 'content': [text_prompt, "content that you want to read"]} # using same voice in sys_prompt to read the text. (Voice Cloning)
-# user_question = {'role': 'user', 'content': [text_prompt, librosa.load('xxx.wav', sr=16000, mono=True)[0]]} # using same voice in sys_prompt to read 'xxx.wav'. (Voice Creation)
-
-msgs = [sys_prompt, user_question]
-res = model.chat(
-    msgs=msgs,
-    tokenizer=tokenizer,
-    sampling=True,
-    max_new_tokens=128,
-    use_tts_template=True,
-    generate_audio=True,
-    temperature=0.3,
-    output_audio_path='result.wav',
-)
-
-
-```
-
-</details>
-
-#### 多模态流式交互
-<details>
-<summary> 点击查看 MiniCPM-o 2.6 多模态流式交互的 Python 代码。 </summary>
-
-```python
-import math
-import numpy as np
-from PIL import Image
-from moviepy.editor import VideoFileClip
-import tempfile
-import librosa
-import soundfile as sf
-import torch
-from transformers import AutoModel, AutoTokenizer
-
-def get_video_chunk_content(video_path, flatten=True):
-    video = VideoFileClip(video_path)
-    print('video_duration:', video.duration)
-    
-    with tempfile.NamedTemporaryFile(suffix=".wav", delete=True) as temp_audio_file:
-        temp_audio_file_path = temp_audio_file.name
-        video.audio.write_audiofile(temp_audio_file_path, codec="pcm_s16le", fps=16000)
-        audio_np, sr = librosa.load(temp_audio_file_path, sr=16000, mono=True)
-    num_units = math.ceil(video.duration)
-    
-    # 1 frame + 1s audio chunk
-    contents= []
-    for i in range(num_units):
-        frame = video.get_frame(i+1)
-        image = Image.fromarray((frame).astype(np.uint8))
-        audio = audio_np[sr*i:sr*(i+1)]
-        if flatten:
-            contents.extend(["<unit>", image, audio])
-        else:
-            contents.append(["<unit>", image, audio])
-    
-    return contents
-
-
-model = AutoModel.from_pretrained('openbmb/MiniCPM-o-2_6', trust_remote_code=True,
-    attn_implementation='sdpa', torch_dtype=torch.bfloat16)
-model = model.eval().cuda()
-tokenizer = AutoTokenizer.from_pretrained('openbmb/MiniCPM-o-2_6', trust_remote_code=True)
-
-model.init_tts()
-
-# If you are using an older version of PyTorch, you might encounter this issue "weight_norm_fwd_first_dim_kernel" not implemented for 'BFloat16', Please convert the TTS to float32 type.
-# model.tts.float()
-
-# https://huggingface.co/openbmb/MiniCPM-o-2_6/blob/main/assets/Skiing.mp4
-video_path="assets/Skiing.mp4"
-sys_msg = model.get_sys_prompt(mode='omni', language='en')
-# if use voice clone prompt, please set ref_audio
-# ref_audio_path = '/path/to/ref_audio'
-# ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
-# sys_msg = model.get_sys_prompt(ref_audio=ref_audio, mode='omni', language='en')
-
-contents = get_video_chunk_content(video_path)
-msg = {"role":"user", "content": contents}
-msgs = [sys_msg, msg]
-
-# please set generate_audio=True and output_audio_path to save the tts result
-generate_audio = True
-output_audio_path = 'output.wav'
-
-res = model.chat(
-    msgs=msgs,
-    tokenizer=tokenizer,
-    sampling=True,
-    temperature=0.5,
-    max_new_tokens=4096,
-    omni_input=True, # please set omni_input=True when omni inference
-    use_tts_template=True,
-    generate_audio=generate_audio,
-    output_audio_path=output_audio_path,
-    max_slice_nums=1,
-    use_image_id=False,
-    return_dict=True
-)
-print(res)
-```
-</details>
-
-<details>
-<summary> 点击查看多模态流式推理设置。 </summary>
-
-注意：流式推理存在轻微的性能下降，因为音频编码并非全局的。
-```python
-# a new conversation need reset session first, it will reset the kv-cache
-model.reset_session()
-
-contents = get_video_chunk_content(video_path, flatten=False)
-session_id = '123'
-generate_audio = True
-
-# 1. prefill system prompt
-res = model.streaming_prefill(
-    session_id=session_id,
-    msgs=[sys_msg], 
-    tokenizer=tokenizer
-)
-
-# 2. prefill video/audio chunks
-for content in contents:
-    msgs = [{"role":"user", "content": content}]
-    res = model.streaming_prefill(
-        session_id=session_id,
-        msgs=msgs, 
-        tokenizer=tokenizer
-    )
-
-# 3. generate
-res = model.streaming_generate(
-    session_id=session_id,
-    tokenizer=tokenizer,
-    temperature=0.5,
-    generate_audio=generate_audio
-)
-
-audios = []
-text = ""
-
-if generate_audio:
-    for r in res:
-        audio_wav = r.audio_wav
-        sampling_rate = r.sampling_rate
-        txt = r.text
-
-        audios.append(audio_wav)
-        text += txt
-        
-    res = np.concatenate(audios)
-    sf.write("output.wav", res, samplerate=sampling_rate)
-    print("text:", text)
-    print("audio saved to output.wav")
-else:
-    for r in res:
-        text += r['text']
-    print("text:", text)
-```
-
-</details>
-
-
-### 多卡推理
-您可以通过将模型的层分布在多个低显存显卡（12 GB 或 16 GB）上，运行 MiniCPM-Llama3-V 2.5。请查看该[教程](https://github.com/OpenBMB/MiniCPM-V/blob/main/docs/inference_on_multiple_gpus.md)，详细了解如何使用多张低显存显卡载入模型并进行推理。
-
-
-### Mac 推理
-<details>
-<summary>点击查看 MiniCPM-Llama3-V 2.5 / MiniCPM-V 2.0 基于Mac MPS运行 (Apple silicon 或 AMD GPUs)的示例。 </summary>
-
-```python
-# test.py    Need more than 16GB memory to run.
-import torch
-from PIL import Image
-from transformers import AutoModel, AutoTokenizer
-
-model = AutoModel.from_pretrained('openbmb/MiniCPM-Llama3-V-2_5', trust_remote_code=True, low_cpu_mem_usage=True)
-model = model.to(device='mps')
-
-tokenizer = AutoTokenizer.from_pretrained('openbmb/MiniCPM-Llama3-V-2_5', trust_remote_code=True)
-model.eval()
-
-image = Image.open('./assets/hk_OCR.jpg').convert('RGB')
-question = 'Where is this photo taken?'
-msgs = [{'role': 'user', 'content': question}]
-
-answer, context, _ = model.chat(
-    image=image,
-    msgs=msgs,
-    context=None,
-    tokenizer=tokenizer,
-    sampling=True
-)
-print(answer)
-```
-运行:
-```shell
-PYTORCH_ENABLE_MPS_FALLBACK=1 python test.py
-```
-</details>
-
-
-### 基于 llama.cpp、Ollama、vLLM 的高效推理
-
-llama.cpp 用法请参考[我们的fork llama.cpp](https://github.com/OpenBMB/llama.cpp/tree/minicpmv-main/examples/llava/README-minicpmv2.6.md)， 在iPad上可以支持 16~18 token/s 的流畅推理（测试环境：iPad Pro + M4）。
-
-Ollama 用法请参考[我们的fork Ollama](https://github.com/OpenBMB/ollama/blob/minicpm-v2.6/examples/minicpm-v2.6/README.md)， 在iPad上可以支持 16~18 token/s 的流畅推理（测试环境：iPad Pro + M4）。
-
-<details>
-<summary>点击查看, vLLM 现已官方支持MiniCPM-o 2.6、MiniCPM-V 2.6、MiniCPM-Llama3-V 2.5 和 MiniCPM-V 2.0。  </summary>
-1. 安装 vLLM(>=0.7.1):
-  
-```shell
-pip install vllm
-```
-  
-2. 运行示例代码:（注意：如果使用本地路径的模型，请确保模型代码已更新到Hugging Face上的最新版)
-  
-  * [图文示例](https://docs.vllm.ai/en/latest/getting_started/examples/vision_language.html) 
-  * [音频示例](https://docs.vllm.ai/en/latest/getting_started/examples/audio_language.html) 
-
-</details>
-
-
-## 微调
-
-### 简易微调 <!-- omit in toc -->
-
-我们支持使用 Huggingface Transformers 库简易地微调 MiniCPM-V 4.0、MiniCPM-o 2.6、MiniCPM-V 2.6、MiniCPM-Llama3-V 2.5 和 MiniCPM-V 2.0 模型。
-
-[参考文档](./finetune/readme.md)
-
-
-### 使用 Align-Anything <!-- omit in toc -->
-
-我们支持使用北大团队开发的 [Align-Anything](https://github.com/PKU-Alignment/align-anything) 框架微调 MiniCPM-o 系列模型，同时支持 DPO 和 SFT 在视觉和音频模态上的微调。Align-Anything 是一个用于对齐全模态大模型的高度可扩展框架，开源了[数据集、模型和评测](https://huggingface.co/datasets/PKU-Alignment/align-anything)。它支持了 30+ 开源基准，40+ 模型，以及包含SFT、SimPO、RLHF在内的多种算法，并提供了 30+ 直接可运行的脚本，适合初学者快速上手。
-
-最佳实践: [MiniCPM-o 2.6](https://github.com/PKU-Alignment/align-anything/tree/main/scripts).
-
-
-### 使用 LLaMA-Factory <!-- omit in toc -->
-
-我们支持使用 LLaMA-Factory 微调 MiniCPM-o 2.6 和 MiniCPM-V 2.6。LLaMA-Factory 提供了一种灵活定制 200 多个大型语言模型（LLM）微调（Lora/Full/Qlora）解决方案，无需编写代码，通过内置的 Web 用户界面 LLaMABoard 即可实现训练/推理/评估。它支持多种训练方法，如 sft/ppo/dpo/kto，并且还支持如 Galore/BAdam/LLaMA-Pro/Pissa/LongLoRA 等高级算法。
-
-最佳实践: [MiniCPM-V 4.0 | MiniCPM-o 2.6 | MiniCPM-V 2.6](./docs/llamafactory_train_and_infer.md). 
-
-
-### 使用 SWIFT 框架 <!-- omit in toc -->
-
-我们支持使用 SWIFT 框架微调 MiniCPM-V 系列模型。SWIFT 支持近 200 种大语言模型和多模态大模型的训练、推理、评测和部署。支持 PEFT 提供的轻量训练方案和完整的 Adapters 库支持的最新训练技术如 NEFTune、LoRA+、LLaMA-PRO 等。 
-
-参考文档：[MiniCPM-V 1.0](https://github.com/modelscope/swift/blob/main/docs/source/Multi-Modal/minicpm-v最佳实践.md)，[MiniCPM-V 2.0](https://github.com/modelscope/swift/blob/main/docs/source/Multi-Modal/minicpm-v-2最佳实践.md) [MiniCPM-V 2.6](https://github.com/modelscope/ms-swift/issues/1613).
 
 ## MiniCPM-V & o 使用手册
 
@@ -1927,20 +1726,1074 @@ pip install vllm
 
 我们支持从个人用户到企业和研究者的广泛用户群体。
 
-*   **个人用户**：借助[Ollama](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/ollama/minicpm-v4_ollama.md)和[Llama.cpp](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-v4_llamacpp.md)，仅需极简设置即可轻松进行模型推理。
-*   **企业用户**：通过[vLLM](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-v4_vllm.md)和[SGLang](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/sglang/MiniCPM-v4_sglang.md)实现高吞吐量、可扩展的高性能部署。
-*   **研究者**：利用包括[Transformers](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/finetune_full.md)、[LLaMA-Factory](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/finetune_llamafactory.md)、[SWIFT](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/swift.md)和[Align-anything](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/align_anything.md)在内的先进框架，进行灵活的模型开发和前沿实验。
+* **个人用户**：借助 Ollama ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/ollama/minicpm-v4_ollama.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/ollama/minicpm-o4_5_ollama.md)) 和 Llama.cpp ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-v4_llamacpp.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-o4_5_llamacpp.md))，仅需极简设置即可轻松进行模型推理。
+* **企业用户**：通过 vLLM ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-v4_vllm.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-o4_5_vllm.md)) 和 SGLang ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/sglang/MiniCPM-v4_sglang.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/sglang/MiniCPM-o4_5_sglang.md)) 实现高吞吐量、可扩展的高性能部署。
+* **研究者**：利用包括[Transformers](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/finetune_full.md)、[LLaMA-Factory](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/finetune_llamafactory.md)、[SWIFT](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/swift.md)和[Align-anything](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/align_anything.md)在内的先进框架，进行灵活的模型开发和前沿实验。
 
 **多样化的部署场景**
 
 我们的生态系统为各种硬件环境和部署需求提供最优解决方案。
 
-*   **Web Demo**：使用[FastAPI](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/README.md)快速启动交互式多模态 AI Web 演示。
-*   **量化部署**：通过[GGUF](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/gguf/minicpm-v4_gguf_quantize.md)和[BNB](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/bnb/minicpm-v4_bnb_quantize.md)量化技术，最大化效率并最小化资源消耗。
-*   **边缘设备**：将强大的 AI 体验带到[iPhone 和 iPad](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/ios_demo/ios.md)，支持离线及隐私敏感的应用场景。
+* **Web Demo**：全双工实时视频交互方案，具有高响应、低延迟的特性。[WebRTC_Demo](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README_zh.md)。
+* **量化部署**：通过[GGUF](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/gguf/minicpm-v4_gguf_quantize.md)和[BNB](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/bnb/minicpm-v4_bnb_quantize.md)量化技术，最大化效率并最小化资源消耗。
+* **边缘设备**：将强大的 AI 体验带到[iPhone 和 iPad](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/ios_demo/ios.md)，支持离线及隐私敏感的应用场景。
 
+
+## 模型库
+
+| 模型               | 设备 | 资源 | &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 简介          |                                                                                         下载链接                                                                                         |
+|:-----------|:--:|:-----------:|:-------------------|:---------------:|
+| MiniCPM-o 4.5| GPU | 19 GB  | 最新版本，提供出色的视觉、语音、多模态流式交互能力的端侧模型。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-o-4_5) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-o-4_5) |
+| MiniCPM-o 4.5 gguf| GPU | 10 GB  | gguf 版本，更低的内存占用和更高的推理效率。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-o-4_5-gguf) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-o-4_5-gguf) |
+| MiniCPM-o 4.5 AWQ | GPU | 11 GB  | AWQ 量化版，更低显存占用。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4_5-AWQ) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-o-4_5-awq) |
+| MiniCPM-V 4.0| GPU | 9 GB  | 高效的端侧视觉理解能力。  |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4) |
+| MiniCPM-V 4.0 gguf | CPU | 4 GB  | gguf 版本，更低的内存占用和更高的推理效率。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4-gguf) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4-gguf) |
+| MiniCPM-V 4.0 int4 | GPU | 5 GB  | int4 量化版，更低显存占用。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4-int4) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4-int4) |
+| MiniCPM-V 4.0 AWQ  | GPU | 5 GB  | AWQ 量化版，更低显存占用。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4-AWQ) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4-AWQ) |
+更多[历史版本模型](#legacy-models)
+
+## 简易推理
+
+基于 Hugging Face Transformers 在 NVIDIA GPU 上进行推理。请确保安装 `transformers==4.51.0`，其他版本可能存在兼容性问题（排查中）。以下依赖已在 Python 3.10 环境测试通过：
+
+- 不使用 TTS 或流式推理：
+```bash
+pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils>=1.0.2"
+```
+
+- 使用 TTS 或流式推理：
+```bash
+pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils[all]>=1.0.2"
+```
+
+
+### 模型初始化
+
+<details>
+<summary>点击展开模型初始化示例代码</summary>
+
+```python
+import torch
+from transformers import AutoModel
+
+# 加载全模态模型（默认：init_vision=True, init_audio=True, init_tts=True）
+# 仅视觉模型：设置 init_audio=False 和 init_tts=False
+# 仅音频模型：设置 init_vision=False
+model = AutoModel.from_pretrained(
+    "openbmb/MiniCPM-o-4_5",
+    trust_remote_code=True,
+    attn_implementation="sdpa", # sdpa or flash_attention_2
+    torch_dtype=torch.bfloat16,
+    init_vision=True,
+    init_audio=True,
+    init_tts=True,
+)
+model.eval().cuda()
+
+# 初始化 TTS 模块，用于对话（streaming=False）或流式模式（streaming=True）的音频输出
+model.init_tts(streaming=False)
+
+# 将单工模型转换为双工模式
+duplex_model = model.as_duplex()
+
+# 将双工模型转换回单工模式
+simplex_model = duplex_model.as_simplex(reset_session=True)
+```
+
+</details>
+
+
+### 双工全模态模式
+
+全双工流式推理，支持实时或录制视频的对话场景。
+
+<details>
+<summary>点击展开双工全模态模式示例代码</summary>
+
+```python
+import librosa
+import torch
+from minicpmo.utils import generate_duplex_video, get_video_frame_audio_segments
+from transformers import AutoModel
+
+# Load model and convert to duplex mode
+model = AutoModel.from_pretrained(
+    "openbmb/MiniCPM-o-4_5",
+    trust_remote_code=True,
+    attn_implementation="sdpa",  # or "flash_attention_2"
+    torch_dtype=torch.bfloat16,
+)
+model.eval().cuda()
+model = model.as_duplex()
+
+# Load video and reference audio
+video_path = "assets/omni_duplex1.mp4"
+ref_audio_path = "assets/HT_ref_audio.wav"
+ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
+
+# Extract video frames and audio segments
+video_frames, audio_segments, stacked_frames = get_video_frame_audio_segments(
+    video_path, stack_frames=1, use_ffmpeg=True, adjust_audio_length=True
+)
+
+# Prepare duplex session with system prompt and voice reference
+model.prepare(
+    prefix_system_prompt="Streaming Omni Conversation.",
+    ref_audio=ref_audio,
+    prompt_wav_path=ref_audio_path,
+)
+
+results_log = []
+timed_output_audio = []
+
+# Process each chunk in streaming fashion
+for chunk_idx in range(len(audio_segments)):
+    audio_chunk = audio_segments[chunk_idx] if chunk_idx < len(audio_segments) else None
+    frame = video_frames[chunk_idx] if chunk_idx < len(video_frames) else None
+    frame_list = []
+    if frame is not None:
+        frame_list.append(frame)
+        if stacked_frames is not None and chunk_idx < len(stacked_frames) and stacked_frames[chunk_idx] is not None:
+            frame_list.append(stacked_frames[chunk_idx])
+
+    # Step 1: Streaming prefill
+    model.streaming_prefill(
+        audio_waveform=audio_chunk,
+        frame_list=frame_list,
+        max_slice_nums=1,  # Increase for HD mode (e.g., [2, 1] for stacked frames)
+        batch_vision_feed=False,  # Set True for faster processing
+    )
+
+    # Step 2: Streaming generate
+    result = model.streaming_generate(
+        prompt_wav_path=ref_audio_path,
+        max_new_speak_tokens_per_chunk=20,
+        decode_mode="sampling",
+    )
+
+    if result["audio_waveform"] is not None:
+        timed_output_audio.append((chunk_idx, result["audio_waveform"]))
+
+    chunk_result = {
+        "chunk_idx": chunk_idx,
+        "is_listen": result["is_listen"],
+        "text": result["text"],
+        "end_of_turn": result["end_of_turn"],
+        "current_time": result["current_time"],
+        "audio_length": len(result["audio_waveform"]) if result["audio_waveform"] is not None else 0,
+    }
+    results_log.append(chunk_result)
+    
+    print("listen..." if result["is_listen"] else f"speak> {result['text']}")
+
+# Generate output video with AI responses
+# Please install Chinese fonts (fonts-noto-cjk or fonts-wqy-microhei) to render CJK subtitles correctly.
+# apt-get install -y fonts-noto-cjk fonts-wqy-microhei
+# fc-cache -fv
+generate_duplex_video(
+    video_path=video_path,
+    output_video_path="duplex_output.mp4",
+    results_log=results_log,
+    timed_output_audio=timed_output_audio,
+    output_sample_rate=24000,
+)
+```
+
+</details>
+
+
+### 单工全模态模式
+
+#### 对话推理 <!-- omit in toc -->
+
+<details>
+<summary>点击展开对话推理示例代码</summary>
+
+```python
+from minicpmo.utils import get_video_frame_audio_segments
+
+model = ...
+model.init_tts(streaming=False)
+
+video_path = "assets/Skiing.mp4"
+
+# Optional: Set reference audio for voice cloning
+ref_audio_path = "assets/HT_ref_audio.wav"
+sys_msg = model.get_sys_prompt(ref_audio=ref_audio_path, mode="omni", language="en")
+
+# Use stack_frames=5 for high refresh rate mode
+video_frames, audio_segments, stacked_frames = get_video_frame_audio_segments(video_path, stack_frames=1)
+omni_contents = []
+for i in range(len(video_frames)):
+    omni_contents.append(video_frames[i])
+    omni_contents.append(audio_segments[i])
+    if stacked_frames is not None and stacked_frames[i] is not None:
+        omni_contents.append(stacked_frames[i])
+
+msg = {"role": "user", "content": omni_contents}
+msgs = [sys_msg, msg]
+
+# Set generate_audio=True and output_audio_path to save TTS output
+generate_audio = True
+output_audio_path = "output.wav"
+
+res = model.chat(
+    msgs=msgs,
+    max_new_tokens=4096,
+    do_sample=True,
+    temperature=0.7,
+    use_tts_template=True,
+    enable_thinking=False,
+    omni_mode=True,  # Required for omni inference
+    generate_audio=generate_audio,
+    output_audio_path=output_audio_path,
+    max_slice_nums=1,  # Increase for HD mode
+)
+print(res)
+```
+
+</details>
+
+#### 流式推理 <!-- omit in toc -->
+
+<details>
+<summary>点击展开流式推理示例代码</summary>
+
+```python
+import librosa
+import numpy as np
+import soundfile as sf
+import torch
+from minicpmo.utils import get_video_frame_audio_segments
+
+model = ...
+model.init_tts(streaming=True)
+
+# Reset session for a new conversation (clears KV cache)
+model.reset_session()
+
+# Optional: Load reference audio for voice cloning
+ref_audio_path = "assets/HT_ref_audio.wav"
+ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
+model.init_token2wav_cache(ref_audio)
+
+session_id = "demo"
+
+# Extract video frames and audio segments (use stack_frames=5 for high refresh rate mode)
+video_path = "assets/Skiing.mp4"
+video_frames, audio_segments, stacked_frames = get_video_frame_audio_segments(video_path, stack_frames=1)
+
+# Build omni contents list
+omni_contents = []
+for i in range(len(video_frames)):
+    omni_contents.append(video_frames[i])
+    omni_contents.append(audio_segments[i])
+    if stacked_frames is not None and stacked_frames[i] is not None:
+        omni_contents.append(stacked_frames[i])
+
+generate_audio = False
+output_audio_path = "output.wav"
+
+# Step 1: Prefill system prompt
+sys_msg = model.get_sys_prompt(ref_audio=ref_audio, mode="omni", language="en")
+model.streaming_prefill(session_id=session_id, msgs=[sys_msg])
+
+# Step 2: Prefill omni chunks (is_last_chunk=True only for the last audio chunk)
+audio_indices = [i for i, c in enumerate(omni_contents) if isinstance(c, np.ndarray)]
+last_audio_idx = audio_indices[-1] if audio_indices else -1
+
+for idx, content in enumerate(omni_contents):
+    is_last_audio_chunk = idx == last_audio_idx
+    msgs = [{"role": "user", "content": [content]}]
+    model.streaming_prefill(session_id=session_id, msgs=msgs, omni_mode=True, is_last_chunk=is_last_audio_chunk)
+
+# Step 3: Generate response
+iter_gen = model.streaming_generate(
+    session_id=session_id,
+    generate_audio=generate_audio,
+    use_tts_template=True,
+    enable_thinking=False,
+    do_sample=True,
+)
+
+audios = []
+text = ""
+
+if generate_audio:
+    for wav_chunk, text_chunk in iter_gen:
+        audios.append(wav_chunk)
+        text += text_chunk
+
+    generated_waveform = torch.cat(audios, dim=-1)[0]
+    sf.write(output_audio_path, generated_waveform.cpu().numpy(), samplerate=24000)
+
+    print("Text:", text)
+    print("Audio saved to output.wav")
+else:
+    for text_chunk, is_finished in iter_gen:
+        text += text_chunk
+    print("Text:", text)
+```
+
+</details>
+
+
+### 语音与音频模式
+
+#### 自定义音色与人设的语音对话 <!-- omit in toc -->
+
+MiniCPM-o-4.5 可根据音频提示和文本人设进行角色扮演。模型会模仿角色的声音特征，并在文本回复中采用其语言风格，同时遵循文本人设中的设定。在此模式下，MiniCPM-o-4.5 的语音输出**更加自然、更具人情味**。 
+
+<details>
+<summary>点击展开自定义音色与人设示例代码</summary>
+
+```python
+import librosa
+
+model = ...
+model.init_tts(streaming=False)
+
+# Set reference audio for voice cloning
+ref_audio_path = "assets/system_ref_audio.wav"
+ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
+
+# For English conversation with text profile
+sys_msg = {
+  "role": "system",
+  "content": [
+    "Clone the voice in the provided audio prompt.",
+    ref_audio,
+    "Please chat with the user in a highly human-like and oral style." + "You are Elon Musk, CEO of Tesla and SpaceX. You speak directly and casually, often with dry humor. You're passionate about Mars, sustainable energy, and pushing humanity forward. Speak bluntly with occasional dark humor. Use simple logic and don't sugarcoat things. Don't be diplomatic. Say what you actually think, even if it's controversial. Keep responses around 100 words. Don't ramble."
+  ]
+}
+
+
+# For English conversation with no text profile
+sys_msg = {
+  "role": "system",
+  "content": [
+    "Clone the voice in the provided audio prompt.",
+    ref_audio,
+    "Your task is to be a helpful assistant using this voice pattern. Please answer the user's questions seriously and in a high quality. Please chat with the user in a high naturalness style."
+  ]
+}
+
+# For Chinese Conversation with no text profile
+sys_msg = {
+  "role": "system",
+  "content": [
+    "根据输入的音频提示生成相似的语音。",
+    librosa.load("assets/system_ref_audio_2.wav", sr=16000, mono=True)[0],
+    "作为助手，你将使用这种声音风格说话。 请认真、高质量地回复用户的问题。 请用高自然度的方式和用户聊天。"
+  ]
+}
+
+
+# For Chinese Conversation with text profile
+sys_msg = {
+  "role": "system",
+  "content": [
+    "根据输入的音频提示生成相似的语音。",
+    ref_audio,
+    "你是一个具有以上声音风格的AI助手。请用高拟人度、口语化的方式和用户聊天。" + "你是一名心理咨询师兼播客主理人，热爱创作与深度对话。你性格细腻、富有共情力，善于从个人经历中提炼哲思。语言风格兼具理性与诗意，常以隐喻表达内在体验。"
+  ]
+}
+
+
+# Round 1
+user_audio, _ = librosa.load("user_question.wav", sr=16000, mono=True)
+user_msg = {"role": "user", "content": [user_audio]}
+
+msgs = [sys_msg, user_msg]
+
+res = model.chat(
+    msgs=msgs,
+    do_sample=True,
+    max_new_tokens=512,
+    use_tts_template=True,
+    generate_audio=True,
+    temperature=0.7,
+    output_audio_path="result_roleplay_round_1.wav",
+)
+print("Round 1:", res)
+
+# Round 2 (multi-turn conversation)
+msgs.append({"role": "assistant", "content": res})
+user_audio_2, _ = librosa.load("user_question_2.wav", sr=16000, mono=True)
+msgs.append({"role": "user", "content": [user_audio_2]})
+
+res = model.chat(
+    msgs=msgs,
+    do_sample=True,
+    max_new_tokens=512,
+    use_tts_template=True,
+    generate_audio=True,
+    temperature=0.7,
+    output_audio_path="result_roleplay_round_2.wav",
+)
+print("Round 2:", res)
+```
+
+</details>
+
+
+#### 多功能有调性的 AI 语音助手 <!-- omit in toc -->
+
+基于精心设计的后训练数据和专业配音演员录制的语料，模型开箱即用，提供高质量的语音交互体验。输出声音甜美富有表现力，韵律自然，节奏、重音和停顿恰到好处，在日常对话中极具亲和力。同时支持故事讲述和叙事性语音，表达连贯且引人入胜。此外，MiniCPM-o-4.5 支持高级语音指令控制。通过高层语音命令数据，用户可调节语速、情感语气、词级重音和停顿。模型还能理解情境线索，在多轮对话中灵活切换说话风格，实现更具表现力和可控性的语音交互。
+
+<details>
+<summary>点击展开多功能语音助手示例代码</summary>
+
+```python
+import librosa
+
+model = ...
+model.init_tts(streaming=False)
+
+# Set reference audio for voice style
+ref_audio_path = "assets/HT_ref_audio.wav"
+ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
+
+# For Chinese Conversation
+sys_msg = {
+  "role": "system",
+  "content": [
+    "模仿输入音频中的声音特征。",
+    ref_audio,
+    "你的任务是用这种声音模式来当一个助手。请认真、高质量地回复用户的问题。请用高自然度的方式和用户聊天。你是由面壁智能开发的人工智能助手：面壁小钢炮。"
+  ]
+}
+
+# For English Conversation
+sys_msg = {
+  "role": "system",
+  "content": [
+    "Clone the voice in the provided audio prompt.",
+    ref_audio,
+    "Please assist users while maintaining this voice style. Please answer the user's questions seriously and in a high quality. Please chat with the user in a highly human-like and oral style. You are a helpful assistant developed by ModelBest: MiniCPM-Omni."
+  ]
+}
+
+##### Mimick <!-- omit in toc -->
+
+# Load user's audio question
+user_audio, _ = librosa.load("user_question.wav", sr=16000, mono=True)
+user_question = {"role": "user", "content": [user_audio]}
+
+# Round 1
+msgs = [sys_msg, user_question]
+res = model.chat(
+    msgs=msgs,
+    do_sample=True,
+    max_new_tokens=512,
+    use_tts_template=True,
+    generate_audio=True,
+    temperature=0.7,
+    output_audio_path="result_assistant_round_1.wav",
+)
+
+# Round 2
+msgs.append({"role": "assistant", "content": res})
+user_audio_2, _ = librosa.load("user_question_2.wav", sr=16000, mono=True)
+msgs.append({"role": "user", "content": [user_audio_2]})
+res = model.chat(
+    msgs=msgs,
+    do_sample=True,
+    max_new_tokens=512,
+    use_tts_template=True,
+    generate_audio=True,
+    temperature=0.3,
+    output_audio_path="result_assistant_round_2.wav",
+)
+print(res)
+```
+
+</details>
+
+##### 可配置声音的语音对话 <!-- omit in toc -->
+
+`MiniCPM-o-4.5` 支持零样本文本转语音（TTS）。在此模式下，模型作为高自然度的 TTS 系统运行，可复刻参考音频的音色。
+
+<details>
+<summary>点击展开可配置声音示例代码</summary>
+
+```python
+import librosa
+
+model = ...
+model.init_tts(streaming=False)
+
+# For both Chinese and English
+ref_audio_path = "assets/HT_ref_audio.wav"
+ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
+sys_msg = {"role": "assistant", "content": [
+  "模仿音频样本的音色并生成新的内容。",
+  ref_audio,
+  "请用这种声音风格来为用户提供帮助。 直接作答，不要有冗余内容"
+]}
+
+# For English
+user_msg = {
+  "role": "user",
+  "content": [
+    "请朗读以下内容。" + " " + "I have a wrap up that I want to offer you now, a conclusion to our work together."
+  ]
+}
+
+# For Chinese
+user_msg = {
+  "role": "user",
+  "content": [
+    "请朗读以下内容。" + " " + "你好，欢迎来到艾米说科幻，我是艾米。"
+  ]
+}
+
+msgs = [sys_msg, user_msg]
+res = model.chat(
+    msgs=msgs,
+    do_sample=True,
+    max_new_tokens=512,
+    use_tts_template=True,
+    generate_audio=True,
+    temperature=0.1,
+    output_audio_path="result_voice_cloning.wav",
+)
+```
+
+</details>
+
+
+#### 实时语音对话 <!-- omit in toc -->
+
+<details>
+<summary>点击展开实时语音对话示例代码</summary>
+
+```python
+import librosa
+import numpy as np
+import torch
+import soundfile as sf
+
+model = ...
+
+# Set reference audio for voice style
+ref_audio_path = "ref_audio_path"
+ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
+
+# For Chinese Conversation
+sys_msg = {
+  "role": "system",
+  "content": [
+    "模仿输入音频中的声音特征。",
+    ref_audio,
+    "你的任务是用这种声音模式来当一个助手。请认真、高质量地回复用户的问题。请用高自然度的方式和用户聊天。你是由面壁智能开发的人工智能助手：面壁小钢炮。"
+  ]
+}
+
+# You can use each type of system prompt mentioned above in streaming speech conversation
+
+# Reset state
+model.init_tts(streaming=True)
+model.reset_session(reset_token2wav_cache=True)
+model.init_token2wav_cache(prompt_speech_16k=ref_audio)
+
+session_id = "demo"
+msgs = [...]
+# First, prefill system turn
+for msg in msgs:
+    if msg["role"] == "system":
+        model.streaming_prefill(
+            session_id=session_id,
+            msgs=[msg],
+            omni_mode=False,
+            is_last_chunk=False,
+        )
+
+# Here we simulate realtime speech conversation by splitting whole user input audio into chunks of 1s.
+user_audio, _ = librosa.load("user_audio.wav", sr=16000, mono=True)
+
+IN_SAMPLE_RATE = 16000
+CHUNK_SAMPLES = IN_SAMPLE_RATE
+OUT_SAMPLE_RATE = 24000
+
+if user_audio is not None and len(user_audio) > 0:
+    total_samples = len(user_audio)
+    num_chunks = (total_samples + CHUNK_SAMPLES - 1) // CHUNK_SAMPLES
+    
+    for chunk_idx in range(num_chunks):
+        start = chunk_idx * CHUNK_SAMPLES
+        end = min((chunk_idx + 1) * CHUNK_SAMPLES, total_samples)
+        chunk_audio = user_audio[start:end]
+        
+        is_last_chunk = (chunk_idx == num_chunks - 1)
+        
+        user_msg = {"role": "user", "content": [chunk_audio]}
+        
+        # For each 1s audio chunk, perform streaming_prefill once to reduce first-package latency
+        model.streaming_prefill(
+            session_id=session_id,
+            msgs=[user_msg],
+            omni_mode=False,
+            is_last_chunk=is_last_chunk,
+        )
+
+# When VAD actives, make the model generate response in a streaming manner
+# Here we create an iterator without returning anything
+audio_iter = model.streaming_generate(
+    session_id=session_id,
+    generate_audio=True,
+    max_new_tokens=512,
+    do_sample=True,
+    length_penalty=1.1, # For realtime speech conversation mode, we suggest length_penalty=1.1 to improve response content
+)
+
+# Yield 1s-length audio response from the iterator just created in a streaming manner
+audio_chunks = []
+for generated_audio in audio_iter:
+    if generated_audio is None:
+        break
+    
+    if isinstance(generated_audio, tuple):
+        generated_audio = generated_audio[0]
+        if generated_audio is None:
+            break
+    
+    if isinstance(generated_audio, torch.Tensor):
+        wav = generated_audio.detach().cpu().numpy()
+    else:
+        wav = np.asarray(generated_audio)
+    
+    if wav.ndim == 2:
+        wav = wav[0]
+    
+    wav = wav.astype(np.float32)
+    audio_chunks.append(wav)
+
+output_audio_path = "realtime_speech.wav"
+if audio_chunks:
+    full_audio = np.concatenate(audio_chunks, axis=-1)
+    sf.write(output_audio_path, full_audio, OUT_SAMPLE_RATE)
+```
+
+</details>
+
+
+##### 更多语音任务 <!-- omit in toc -->
+
+`Mimick` 任务用于评估模型的端到端语音建模能力。模型接收音频输入，进行转录后高保真地重建原始音频，保留详细的声学特征、韵律情感及语义信息。重建音频与原始音频的相似度越高，表明端到端语音建模能力越强。
+
+<details>
+<summary>点击展开 Mimick 示例代码</summary>
+
+```python
+import librosa
+
+model = ...
+model.init_tts(streaming=False)
+
+system_prompt = "You are a helpful assistant. You can accept video, audio, and text input and output voice and text. Respond with just the answer, no redundancy."
+
+mimick_prompt = "Please repeat the following speech in the appropriate language."
+
+audio_input, _ = librosa.load("assets/Trump_WEF_2018_10s.mp3", sr=16000, mono=True)
+
+msgs = [
+    {"role": "system", "content": [system_prompt]},
+    {"role": "user", "content": [mimick_prompt, audio_input]}
+  ]
+
+res = model.chat(
+    msgs=msgs,
+    do_sample=True,
+    max_new_tokens=512,
+    use_tts_template=True,
+    temperature=0.1,
+    generate_audio=True,
+    output_audio_path="output_mimick.wav",
+)
+```
+
+</details>
+
+
+#### 多种音频理解任务 <!-- omit in toc -->
+
+`MiniCPM-o-4.5` 可处理多种音频理解任务，包括语音识别（ASR）、说话人分析、通用音频描述和声音场景标注。
+
+对于音频转文本任务，可使用以下提示词：
+
+- ASR (Chinese, or AST EN→ZH): `请仔细听这段音频片段，并将其内容逐字记录。`
+- ASR (English, or AST ZH→EN): `Please listen to the audio snippet carefully and transcribe the content.`
+- Speaker Analysis: `Based on the speaker's content, speculate on their gender, condition, age range, and health status.`
+- General Audio Caption: `Summarize the main content of the audio.`
+- Sound Scene Tagging: `Utilize one keyword to convey the audio's content or the associated scene.`
+
+<details>
+<summary>点击展开音频理解示例代码</summary>
+
+```python
+import librosa
+
+model = ...
+model.init_tts(streaming=False)
+
+# Load the audio to be transcribed/analyzed
+audio_input, _ = librosa.load("assets/Trump_WEF_2018_10s.mp3", sr=16000, mono=True)
+
+# Choose a task prompt (see above for options)
+task_prompt = "Please listen to the audio snippet carefully and transcribe the content.\n"
+msgs = [{"role": "user", "content": [task_prompt, audio_input]}]
+
+res = model.chat(
+    msgs=msgs,
+    do_sample=True,
+    max_new_tokens=512,
+    use_tts_template=True,
+    generate_audio=True,
+    temperature=0.3,
+    output_audio_path="result_audio_understanding.wav",
+)
+print(res)
+```
+
+</details>
+
+
+### 纯视觉模式 <!-- omit in toc -->
+
+`MiniCPM-o-4.5` 的推理方式与 `MiniCPM-V-4.5` 一致。
+
+#### 单图对话 <!-- omit in toc -->
+
+<details>
+<summary>点击展开单图对话示例代码</summary>
+
+```python
+import torch
+from PIL import Image
+from transformers import AutoModel
+
+model = AutoModel.from_pretrained(
+    "openbmb/MiniCPM-o-4_5",
+    trust_remote_code=True,
+    attn_implementation="sdpa",  # or "flash_attention_2"
+    torch_dtype=torch.bfloat16,
+    init_vision=True,
+    init_audio=False,
+    init_tts=False,
+)
+model.eval().cuda()
+
+image = Image.open("assets/fossil.png").convert("RGB")
+question = "What is in the image?"
+msgs = [{"role": "user", "content": [image, question]}]
+
+res = model.chat(msgs=msgs, use_tts_template=False)
+print(res)
+```
+
+</details>
+
+#### 多图对话 <!-- omit in toc -->
+
+<details>
+<summary>点击展开多图输入示例代码</summary>
+
+```python
+import torch
+from PIL import Image
+from transformers import AutoModel
+
+model = ...
+
+image1 = Image.open("assets/highway.png").convert("RGB")
+image2 = Image.open("assets/fossil.png").convert("RGB")
+question = "Compare image 1 and image 2, tell me about the differences between them."
+msgs = [{"role": "user", "content": [image1, image2, question]}]
+
+answer = model.chat(msgs=msgs, use_tts_template=False, enable_thinking=False)
+print(answer)
+```
+
+</details>
+
+#### In-Context 少样本推理 <!-- omit in toc -->
+
+<details>
+<summary>点击展开 In-Context 少样本推理示例代码</summary>
+
+```python
+from PIL import Image
+
+model = ...
+
+question = "production date"
+image1 = Image.open("example1.jpg").convert("RGB")
+answer1 = "2023.08.04"
+image2 = Image.open("example2.jpg").convert("RGB")
+answer2 = "2007.04.24"
+image_test = Image.open("test.jpg").convert("RGB")
+
+msgs = [
+    {"role": "user", "content": [image1, question]},
+    {"role": "assistant", "content": [answer1]},
+    {"role": "user", "content": [image2, question]},
+    {"role": "assistant", "content": [answer2]},
+    {"role": "user", "content": [image_test, question]},
+]
+
+answer = model.chat(msgs=msgs, use_tts_template=False, enable_thinking=False)
+print(answer)
+```
+
+</details>
+
+#### 视频对话 <!-- omit in toc -->
+
+<details>
+<summary>点击展开视频输入示例代码</summary>
+
+```python
+import torch
+from minicpmo.utils import get_video_frame_audio_segments
+from transformers import AutoModel
+
+model = ...
+
+video_path = "assets/Skiing.mp4"
+video_frames, _, _ = get_video_frame_audio_segments(video_path)
+print("num frames:", len(video_frames))
+
+question = "Describe the video"
+msgs = [{"role": "user", "content": video_frames + [question]}]
+
+answer = model.chat(
+    msgs=msgs,
+    max_new_tokens=128,
+    use_image_id=False,
+    max_slice_nums=1,
+    use_tts_template=False,
+    enable_thinking=False,  # Set True to enable thinking mode
+)
+print(answer)
+```
+
+</details>
+
+### 结构化内容输入 <!-- omit in toc -->
+
+<details>
+<summary>点击展开结构化内容输入</summary>
+
+`chat` 方法支持两种消息内容格式：
+
+**原生格式** — 直接传入 Python 对象：
+```python
+msgs = [{"role": "user", "content": [pil_image, audio_ndarray, "Describe this."]}]
+```
+
+**OpenAI 兼容格式** — 使用结构化字典：
+```python
+msgs = [
+    {
+        "role": "user",
+        "content": [
+            {"type": "image_url", "image_url": {"url": "/path/to/image.jpg"}},
+            {"type": "audio_url", "audio_url": {"url": "/path/to/audio.wav"}},
+            {"type": "video_url", "video_url": {"url": "/path/to/video.mp4", "use_audio": True}},
+            {"type": "text", "text": "Describe this."}
+        ]
+    }
+]
+```
+
+**支持的类型：**
+
+| 类型 | 输入格式 | 转换为 |
+|------|----------|--------|
+| `text` | `{"type": "text", "text": "..."}` | `str` |
+| `image_url` | `{"type": "image_url", "image_url": {"url": "..."}}` | `PIL.Image` |
+| `audio_url` | `{"type": "audio_url", "audio_url": {"url": "..."}}` | `np.ndarray`（16kHz 单声道） |
+| `video_url` | `{"type": "video_url", "video_url": {"url": "...", "stack_frames": 1, "use_audio": True}}` | `List[Image, ndarray, ...]` |
+
+- **URL 来源**：支持本地文件路径或 `http://`/`https://` URL
+- **混合格式**：原生对象和结构化字典可在同一 content 列表中混用
+
+</details>
+
+
+## 框架支持
+
+### FlagOS
+
+为解决不同 AI 芯片大规模落地应用，北京智源研究院联合众多科研机构、芯片企业、系统厂商、算法和软件相关单位等国内外机构共同发起并创立了 FlagOS 开源社区。
+
+FlagOS 社区致力于打造面向多种 AI 芯片的统一、开源的系统软件栈，包括大型算子库、统一AI编译器、并行训推框架、统一通信库等核心开源项目，构建「模型-系统-芯片」三层贯通的开放技术生态，通过“一次开发跨芯迁移”释放硬件计算潜力，打破不同芯片软件栈之间生态隔离，有效降低开发者的迁移成本。FlagOS 社区构建人工智能软硬件生态，突破单一闭源垄断，推动AI硬件技术大范围落地发展，立足中国、拥抱全球合作。
+官网速递：https://flagos.io
+
+<details>
+<summary>点击展开 FlagOS 详细</summary>
+
+#### FlagOS 多 AI 芯片支持 <!-- omit in toc -->
+
+基于FlagOS极短时间内适配MiniCPM-o 4.5到 6 种不同的 AI 芯片，得益于众智 FlagOS 的多芯片统一 AI 系统软件栈的能力。目前，在FlagOS团队构建的面向多架构人工智能芯片的大模型自动迁移、适配与发布平台FlagRelease上，已发布MiniCPM-o-4.5的多芯片版本。细节如下：
+
+| Vendor          | ModelScope   | Huggingface  |
+|:----------------|:------------:|:------------:|
+| Nvidia          | [MiniCPM-o-4.5-nvidia-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) | [MiniCPM-o-4.5-nvidia-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) |
+| Hygon-BW1000    | [MiniCPM-o-4.5-hygon-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-hygon-FlagOS) | [MiniCPM-o-4.5-hygon-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-hygon-FlagOS) |
+| Metax-C550      | [MiniCPM-o-4.5-metax-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-metax-FlagOS) | [MiniCPM-o-4.5-metax-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-metax-FlagOS) |
+| Iluvatar-BIV150 | [MiniCPM-o-4.5-iluvatar-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-iluvatar-FlagOS) | [MiniCPM-o-4.5-iluvatar-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-iluvatar-FlagOS) |
+| Ascend-A3       | [MiniCPM-o-4.5-ascend-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-ascend-FlagOS) | [MiniCPM-o-4.5-ascend-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-ascend-FlagOS) |
+| Zhenwu-810E     | [MiniCPM-o-4.5-zhenwu-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-zhenwu-FlagOS) | [MiniCPM-o-4.5-zhenwu-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-zhenwu-FlagOS) |
+
+##### 综合评估 <!-- omit in toc -->
+
+###### Transformers–FlagOS 版本 <!-- omit in toc -->
+
+在多后端环境下使用 `USE_FLAGOS=1` 与在 NVIDIA CUDA 上使用 `USE_FLAGOS=0` 的精度差异
+
+| 指标                       |        FlagOS 后端         | 与 Nvidia-CUDA 相比差异 |
+|:-------------------------|:---------------:|:---------------------------:|
+| Video-MME 0-shot avg@1 ↑ |     Nvidia      |            0.33%            |
+| Video-MME 0-shot avg@1 ↑ |  Hygon-BW1000   |            0.17%            |
+| Video-MME 0-shot avg@1 ↑ |    Ascend-A3    |            0.50%            |
+| Video-MME 0-shot avg@1 ↑ | Iluvatar-BIV150 |            1.83%            |
+| Video-MME 0-shot avg@1 ↑ |   Metax-C550    |            0.75%            |
+
+###### VLLM-FlagOS 版本 <!-- omit in toc -->
+
+在 NVIDIA 上使用 `USE_FLAGGEMS=1 FLAGCX_PATH=/workspace/FlagCX`，或在真武 810E `USE_FLAGGEMS=1`，与直接在 NVIDIA 平台上启动 vLLM Server 的精度差异
+
+| 指标 (avg@1)          | Nvidia-FlagOS 与 Nvidia-CUDA 的差异 | zhenwu-FlagOS 与 Nvidia-CUDA 的差异 |
+|:--------------------|:------------------------------------------------:|:------------------------------------------------:|
+| CMMMU ↑             | 0.72% | 3.5% |
+| MMMU ↑              | 1.44% | 1.18% |
+| MMMU_Pro_standard ↑ | 0.83% | 0.22% |
+| MM-Vet v2 ↑         | 0.46% | 1.33% |
+| OCRBench ↑          | 0.10% | 1% |
+| CII-Bench ↑         | 0.40% | 0.13% |
+| Blink ↑             | 1.90% | 2.19% |
+
+
+#### FlagOS 使用方式 <!-- omit in toc -->
+
+##### 使用 FlagOS 在Nvidia体验性能加速 <!-- omit in toc -->
+
+在Transformers版本上，CUDA生态与FlagOS生态精度对齐的前提下，FlagOS相比CUDA任务的负载执行总时间有6%的性能提升。
+
+###### From FlagRelease【推荐】 <!-- omit in toc -->
+
+FlagRelease是FlagOS团队构建的一套面向多架构人工智能芯片的大模型自动迁移、适配与发布平台，已发布MiniCPM-o-4.5的多芯片版本。FlagRelase已内置相关软件包，无需用户安装。
+
+- FlagRelease 镜像关键版本信息
+
+  | 加速卡驱动版本                 | 驱动版本: 570.158.01                             |
+  |:------------------------|:------------------------------------|
+  | CUDA SDK Build          | cuda_13.0.r13.0/compiler.36424714_0 |
+  | FlagTree                | 0.4.0+3.5                           |
+  | FlagGems                | 4.2.1rc0                            |
+  | vllm & vllm-plugin-fl   | 0.13.0 + vllm_fl 0.0.0              |
+  | FlagCX                  | 0.1.0                               |  
+
+- FlagRelease 使用速递
+
+  | Vendor     | ModelScope   | Huggingface  |
+  |:-----------|:------------:|:------------:|
+  | Nvidia | [MiniCPM-o-4.5-nvidia-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) | [MiniCPM-o-4.5-nvidia-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) |
+  | Hygon-BW1000 | [MiniCPM-o-4.5-hygon-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-hygon-FlagOS) | [MiniCPM-o-4.5-hygon-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-hygon-FlagOS) |
+  | Metax-C550 | [MiniCPM-o-4.5-metax-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-metax-FlagOS) | [MiniCPM-o-4.5-metax-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-metax-FlagOS) |
+  | Iluvatar-BIV150 | [MiniCPM-o-4.5-iluvatar-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-iluvatar-FlagOS) | [MiniCPM-o-4.5-iluvatar-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-iluvatar-FlagOS) |
+  | Ascend-A3 | [MiniCPM-o-4.5-ascend-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-ascend-FlagOS) | [MiniCPM-o-4.5-ascend-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-ascend-FlagOS) |
+  | Zhenwu-810E | [MiniCPM-o-4.5-zhenwu-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-zhenwu-FlagOS) | [MiniCPM-o-4.5-zhenwu-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-zhenwu-FlagOS) |  
+
+
+##### 从零开始 <!-- omit in toc -->
+
+- 依赖Python3.12, GLIBC_2.39, GLIBCXX_3.4.33, CXXABI_1.3.15 环境
+
+###### Transformers 版本 <!-- omit in toc -->
+
+- 安装FlagOS算子库
+
+  官方仓库：https://github.com/flagos-ai/FlagGems
+
+  ```shell
+  pip install flag-gems==4.2.1rc0
+  ```
+
+- 安装FlagOS编译器
+
+  官方仓库：https://github.com/flagos-ai/flagtree
+
+  底层依赖库版本速查：https://github.com/flagos-ai/FlagTree/blob/main/documents/build.md#tips-for-building
+
+  ```shell
+  pip uninstall triton
+  
+  python3 -m pip install flagtree==0.4.0+3.5 --index-url=https://resource.flagos.net/repository/flagos-pypi-hosted/simple --trusted-host=https://resource.flagos.net
+  ```
+
+- 开启加速
+
+  在欲执行任务的命令前添加 `USE_FLAGOS=1`，例如，当您通过
+  ```shell
+  python3 generate_speech_from_video.py
+  ```
+  
+  来使用 MiniCPM-o-4.5 模型根据视频内容生成语音回答时，可以通过
+  ```shell
+  USE_FLAGOS=1 python3 generate_speech_from_video.py
+  ```
+  来使用 FlagOS 加速这一过程。
+
+###### Vllm 版本 <!-- omit in toc -->
+
+- 安装FlagOS算子库
+
+  官方仓库：https://github.com/flagos-ai/FlagGems
+  ```shell
+  pip install flag-gems==4.2.1rc0
+  pip install triton==3.5.1
+  ```
+
+- 开启加速
+  在欲执行任务的命令前添加 `USE_FLAGOS=1`，例如，当您通过
+  ```shell
+  vllm serve ${model_path} --dtype auto  --gpu_memory_utilization 0.9 --trust-remote-code --max-num-batched-tokens 2048 --served-model-name cpmo --port ${Port}
+  ```
+
+  来启动MiniCPM-o-4.5服务端时，可以通过
+  ```shell
+  USE_FLAGOS=1 vllm serve ${model_path} --dtype auto  --gpu_memory_utilization 0.9 --trust-remote-code --max-num-batched-tokens 2048 --served-model-name cpmo --port ${Port}
+  ```
+  来使用FlagOS加速这一过程。
+
+#### 使用 FlagOS 统一多芯片后端插件 <!-- omit in toc -->
+
+[vllm-plugin-FL](https://github.com/flagos-ai/vllm-plugin-FL) 是一个为 vLLM 推理/服务框架构建的插件，它基于 FlagOS 的统一多芯片后端 开发，旨在扩展 vLLM 在多种硬件环境下的功能和性能表现。
+
+##### Using vllm-plugin-FL <!-- omit in toc -->
+
+| 厂商   | 从零开始                                                                                                                 | 从 FlagRelease 开始                                                                                               |
+|:-------|:-----------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------|
+| Nvidia | [vllm-plugin-FL/MiniCPM-o-4.5](https://github.com/flagos-ai/vllm-plugin-FL/blob/main/examples/minicpm/README.md) | [MiniCPM-o-4.5-ModelScope](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS), [MiniCPM-o-4.5-Huggingface](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) |
+
+</details>
+
+
+
+### vLLM、SGLang、llama.cpp、Ollama
+
+MiniCPM-V 和 MiniCPM-o 模型推理还适配 vLLM、SGLang、llama.cpp、Ollama 等框架。具体用法可以参考我们的[使用指南](https://github.com/OpenSQZ/MiniCPM-V-Cookbook)。
+
+
+### LLaMA-Factory、SWIFT
+
+MiniCPM-V 和 MiniCPM-o 模型支持通过 LLaMA-Factory 和 SWIFT 等框架训练。具体用法可以参考我们的[使用指南](https://github.com/OpenSQZ/MiniCPM-V-Cookbook)。
 
 ## 基于 MiniCPM-V & MiniCPM-o 的更多项目
+
 - [text-extract-api](https://github.com/CatchTheTornado/text-extract-api): 利用 OCR 和 Ollama 模型的本地化文档提取与解析API，支持PDF、Word、PPTX ![GitHub Repo stars](https://img.shields.io/github/stars/CatchTheTornado/text-extract-api)
 - [comfyui_LLM_party](https://github.com/heshengtao/comfyui_LLM_party): 基于 ComfyUI 的 LLM Agent 框架，用于构建并集成 LLM 工作流 ![GitHub Repo stars](https://img.shields.io/github/stars/heshengtao/comfyui_LLM_party)
 - [Ollama-OCR](https://github.com/imanoop7/Ollama-OCR): 通过 Ollama 调用视觉语言模型，从图像和 PDF 中提取文本的 OCR 工具 ![GitHub Repo stars](https://img.shields.io/github/stars/imanoop7/Ollama-OCR)
@@ -1950,29 +2803,36 @@ pip install vllm
 - [paperless-gpt](https://github.com/icereed/paperless-gpt): 利用LLM和视觉模型，为 paperless-ngx 实现AI驱动的文档自动化处理与OCR功能 ![GitHub Repo stars](https://img.shields.io/github/stars/icereed/paperless-gpt)
 - [Neuro](https://github.com/kimjammer/Neuro): Neuro-Sama的复刻版，完全依赖消费级硬件上的本地模型运行 ![GitHub Repo stars](https://img.shields.io/github/stars/kimjammer/Neuro)
 
-## FAQs
-点击查看 [FAQs](./docs/faqs.md)
-
-
 ## 模型局限性
 
-我们实验发现 MiniCPM-o 2.6 存在一些显著的局限性，需要进一步研究和改进：
-- **不稳定的语音输出。** 语音生成可能会受到背景噪音和无意义声音的影响，表现不稳定。
-- **重复响应。** 当遇到连续相似的用户请求时，模型往往会重复相同的回答。
-- **Web Demo 延迟较高。** 用户在使用远程服务器上部署的 web demo 时可能会产生较高延迟。我们推荐用户在本地部署来获得更低延迟的体验。
+我们实验发现 MiniCPM-o 4.5 存在一些显著的局限性，需要进一步研究和改进：
 
+- **基础能力局限性**：全双工多模态实时流的基础能力仍有待进一步提升。
+- **全双工多模态流式模式下语音输出不稳定**：在全双工多模态实时流模式下，语音合成可能会出现字音误读（如多音字或生僻字）。
+- **中英混杂**：在语音和全模态模式下，模型有时会以中英混杂的方式进行回答。
+- **Web Demo 延迟较高**：由于我们的在线 Demo 托管在海外服务器上，用户可能会遇到异常的高延迟或者一部分模型输出丢失。我们建议在本地环境部署 Demo 或在良好的网络连接下使用。
 
 ## 模型协议 <!-- omit in toc -->
 
 * 本仓库中代码依照 [Apache-2.0](https://github.com/OpenBMB/MiniCPM-V/blob/main/LICENSE)  协议开源
-
-* 为帮助我们进一步了解并支持社区用户，若您能考虑填写一份简短的登记问卷，我们将深表感谢。 ["questionnaire"](https://modelbest.feishu.cn/share/base/form/shrcnpV5ZT9EJ6xYjh3Kx0J6v8g).
+* 为帮助我们进一步了解并支持社区用户，若您能考虑填写一份简短的登记问卷，我们将深表感谢。 [&#34;questionnaire&#34;](https://modelbest.feishu.cn/share/base/form/shrcnpV5ZT9EJ6xYjh3Kx0J6v8g).
 
 ## 声明 <!-- omit in toc -->
 
 作为多模态大模型，MiniCPM-o/V 系列模型（包括 OmniLMM）通过学习大量的多模态数据来生成内容，但它无法理解、表达个人观点或价值判断，它所输出的任何内容都不代表模型开发者的观点和立场。
 
 因此用户在使用本项目的系列模型生成的内容时，应自行负责对其进行评估和验证。如果由于使用本项目的系列开源模型而导致的任何问题，包括但不限于数据安全问题、公共舆论风险，或模型被误导、滥用、传播或不当利用所带来的任何风险和问题，我们将不承担任何责任。
+
+
+## 致谢
+
+我们对下列项目表示衷心感谢：
+
+* [Qwen3](https://huggingface.co/Qwen/Qwen3-8B) 提供了文本基座
+* [SigLIP2](https://github.com/google-research/big_vision/blob/main/big_vision/configs/proj/image_text/README_siglip2.md) 提供了视觉理解模块
+* [Whisper](https://github.com/openai/whisper) 提供了音频理解模块
+* [CosyVoice2](https://github.com/FunAudioLLM/CosyVoice) 和 [Step-Audio2](https://github.com/stepfun-ai/Step-Audio2) 提供了语音分词器和高效的语音波形解码模块
+* [Transformers](https://github.com/huggingface/transformers)
 
 
 ## 机构 <!-- omit in toc -->
@@ -1983,7 +2843,6 @@ pip install vllm
 - <img src="assets/modelbest.png" width="28px"> [面壁智能](https://modelbest.cn/)
 
 ## 🌟 Star History <!-- omit in toc -->
-
 
 <table align="center">
     <p align="center">
@@ -2015,8 +2874,6 @@ pip install vllm
 👏 欢迎了解 MiniCPM-o/V 背后的支持技术和更多我们的多模态项目！
 
 [VisCPM](https://github.com/OpenBMB/VisCPM/tree/main) | [RLPR](https://github.com/OpenBMB/RLPR) | [RLHF-V](https://github.com/RLHF-V/RLHF-V) | [LLaVA-UHD](https://github.com/thunlp/LLaVA-UHD) | [RLAIF-V](https://github.com/RLHF-V/RLAIF-V)
-
-
 
 ## 引用 <!-- omit in toc -->
 
