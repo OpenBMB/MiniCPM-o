@@ -1833,13 +1833,39 @@ MiniCPM-V 4.0 是 MiniCPM-V 系列中的一款高效模型。该模型基于 Sig
 
 - 不使用 TTS 或流式推理：
 ```bash
-pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils>=1.0.2"
+pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils>=1.0.5"
 ```
 
 - 使用 TTS 或流式推理：
 ```bash
-pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils[all]>=1.0.2"
+pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils[all]>=1.0.5"
 ```
+
+
+<details>
+<summary> 点击展开 FFmpeg 安装 (可选) </summary>
+
+**注意：** 视频帧提取（`get_video_frame_audio_segments` 使用 `use_ffmpeg=True`）和视频生成（`generate_duplex_video`）需要安装 FFmpeg。更多信息请访问 [FFmpeg 官网](https://www.ffmpeg.org/)。
+
+  **macOS (Homebrew):**
+
+  ```bash
+  brew install ffmpeg
+  ```
+
+  **Ubuntu/Debian:**
+
+  ```bash
+  sudo apt update && sudo apt install ffmpeg
+  ```
+
+  **验证:**
+
+  ```bash
+  ffmpeg -version
+  ```
+</details>
+
 
 
 ### 模型初始化
@@ -1865,8 +1891,8 @@ model = AutoModel.from_pretrained(
 )
 model.eval().cuda()
 
-# 初始化 TTS 模块，用于对话（streaming=False）或流式模式（streaming=True）的音频输出
-model.init_tts(streaming=False)
+# 初始化 TTS 模块，用于对话的音频输出
+model.init_tts()
 
 # 将单工模型转换为双工模式
 duplex_model = model.as_duplex()
@@ -1988,7 +2014,7 @@ generate_duplex_video(
 from minicpmo.utils import get_video_frame_audio_segments
 
 model = ...
-model.init_tts(streaming=False)
+model.init_tts()
 
 video_path = "assets/Skiing.mp4"
 
@@ -2042,7 +2068,7 @@ import torch
 from minicpmo.utils import get_video_frame_audio_segments
 
 model = ...
-model.init_tts(streaming=True)
+model.init_tts()
 
 # Reset session for a new conversation (clears KV cache)
 model.reset_session()
@@ -2120,9 +2146,9 @@ else:
 <details>
 <summary>点击展开单工模式实时语音对话 API 用法。</summary>
 
-首先，确保你已安装所有依赖，尤其是 `minicpmo-utils[all]>=1.0.2`：
+首先，确保你已安装所有依赖，尤其是 `minicpmo-utils[all]>=1.0.5`：
 ```bash
-pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils[all]>=1.0.2"
+pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils[all]>=1.0.5"
 ```
 
 ```python
@@ -2354,7 +2380,7 @@ sys_msg = {
 import librosa
 
 model = ...
-model.init_tts(streaming=False)
+model.init_tts()
 
 # 同时适用于中文与英文
 ref_audio_path = "assets/HT_ref_audio.wav"
@@ -2407,7 +2433,7 @@ res = model.chat(
 import librosa
 
 model = ...
-model.init_tts(streaming=False)
+model.init_tts()
 
 system_prompt = "你是一个乐于助人的助手。你可以接收视频、音频和文本输入，并输出语音与文本。请只给出答案，不要有冗余内容。"
 
@@ -2453,7 +2479,7 @@ res = model.chat(
 import librosa
 
 model = ...
-model.init_tts(streaming=False)
+model.init_tts()
 
 # 加载待转写/分析的音频
 audio_input, _ = librosa.load("assets/Trump_WEF_2018_10s.mp3", sr=16000, mono=True)

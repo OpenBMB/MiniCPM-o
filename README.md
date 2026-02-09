@@ -1870,13 +1870,37 @@ Inference using Hugging Face Transformers on NVIDIA GPUs. Please ensure `transfo
 
 - Without TTS or streaming inference:
 ```bash
-pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils>=1.0.2"
+pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils>=1.0.5"
 ```
 
 - With TTS or streaming inference:
 ```bash
-pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils[all]>=1.0.2"
+pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils[all]>=1.0.5"
 ```
+
+<details>
+<summary>Click to show FFmpeg installation instructions (optional).</summary>
+
+**Note:** FFmpeg is required for video frame extraction (`get_video_frame_audio_segments` with `use_ffmpeg=True`) and video generation (`generate_duplex_video`). For more information, visit the [official FFmpeg website](https://www.ffmpeg.org/).
+
+  **macOS (Homebrew):**
+
+  ```bash
+  brew install ffmpeg
+  ```
+
+  **Ubuntu/Debian:**
+
+  ```bash
+  sudo apt update && sudo apt install ffmpeg
+  ```
+
+  **Verify installation:**
+
+  ```bash
+  ffmpeg -version
+  ```
+</details>
 
 
 ### Model Initialization
@@ -1902,8 +1926,8 @@ model = AutoModel.from_pretrained(
 )
 model.eval().cuda()
 
-# Initialize TTS for audio output in chat or streaming mode
-model.init_tts(streaming=False)  # or streaming=True
+# Initialize TTS for audio output
+model.init_tts()
 
 # Convert simplex model to duplex mode
 duplex_model = model.as_duplex()
@@ -1998,6 +2022,9 @@ for chunk_idx in range(len(audio_segments)):
     print("listen..." if result["is_listen"] else f"speak> {result['text']}")
 
 # Generate output video with AI responses
+# Please install Chinese fonts (fonts-noto-cjk or fonts-wqy-microhei) to render CJK subtitles correctly.
+# apt-get install -y fonts-noto-cjk fonts-wqy-microhei
+# fc-cache -fv
 generate_duplex_video(
     video_path=video_path,
     output_video_path="duplex_output.mp4",
@@ -2022,7 +2049,7 @@ We provide two inference modes: chat and streaming.
 from minicpmo.utils import get_video_frame_audio_segments
 
 model = ...
-model.init_tts(streaming=False)
+model.init_tts()
 
 video_path = "assets/Skiing.mp4"
 
@@ -2080,7 +2107,7 @@ import torch
 from minicpmo.utils import get_video_frame_audio_segments
 
 model = ...
-model.init_tts(streaming=True)
+model.init_tts()
 
 # Reset session for a new conversation (clears KV cache)
 model.reset_session()
@@ -2196,7 +2223,7 @@ sys_msg = {
 # You can use each type of system prompt mentioned above in streaming speech conversation
 
 # Reset state
-model.init_tts(streaming=True)
+model.init_tts()
 model.reset_session(reset_token2wav_cache=True)
 model.init_token2wav_cache(prompt_speech_16k=ref_audio)
 
@@ -2376,7 +2403,7 @@ sys_msg = {
 </details>
 
 
-### Speech and Audio Mode  <!-- omit in toc -->
+### Speech and Audio Mode
 
 #### Zero-shot Text-to-speech (TTS) <!-- omit in toc -->
 
@@ -2389,7 +2416,7 @@ sys_msg = {
 import librosa
 
 model = ...
-model.init_tts(streaming=False)
+model.init_tts()
 
 # For both Chinese and English
 ref_audio_path = "assets/HT_ref_audio.wav"
@@ -2442,7 +2469,7 @@ The `Mimick` task evaluates a model's end-to-end speech modeling capability. The
 import librosa
 
 model = ...
-model.init_tts(streaming=False)
+model.init_tts()
 
 system_prompt = "You are a helpful assistant. You can accept video, audio, and text input and output voice and text. Respond with just the answer, no redundancy."
 
@@ -2488,7 +2515,7 @@ For audio-to-text tasks, you can use the following prompts:
 import librosa
 
 model = ...
-model.init_tts(streaming=False)
+model.init_tts()
 
 # Load the audio to be transcribed/analyzed
 audio_input, _ = librosa.load("assets/Trump_WEF_2018_10s.mp3", sr=16000, mono=True)
