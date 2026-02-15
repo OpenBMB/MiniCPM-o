@@ -135,9 +135,11 @@ MiniCPM-o 4.5 是 MiniCPM-o 系列中最新且性能最强的模型。该模型�
 
 ### 性能评估  <!-- omit in toc -->
 
+
 <div align="center">
   <img src="./assets/radar_minicpmo4.5.png", width=80%>
 </div>
+
 
 <div align="center">
   <img src="./assets/minicpm_o_45_main_exp_table.png", width=90%>
@@ -497,12 +499,12 @@ MiniCPM-o 4.5 是 MiniCPM-o 系列中最新且性能最强的模型。该模型�
 <tr>
   <th nowrap="nowrap" align="left" rowspan="2"><b>Method Type</b></th>
   <th nowrap="nowrap" rowspan="2"><b>Methods</b></th>
-  <th colspan="2"><b>OverallEdit↓</b></th>
-  <th colspan="2"><b>TextEdit↓</b></th>
-  <th colspan="2"><b>FormulaEdit↓</b></th>
-  <th colspan="2"><b>TableTEDS↑</b></th>
-  <th colspan="2"><b>TableEdit↓</b></th>
-  <th colspan="2"><b>Read OrderEdit↓</b></th>
+  <th nowrap="nowrap" colspan="2"><b>OverallEdit↓</b></th>
+  <th nowrap="nowrap" colspan="2"><b>TextEdit↓</b></th>
+  <th nowrap="nowrap" colspan="2"><b>FormulaEdit↓</b></th>
+  <th nowrap="nowrap" colspan="2"><b>TableTEDS↑</b></th>
+  <th nowrap="nowrap" colspan="2"><b>TableEdit↓</b></th>
+  <th nowrap="nowrap" colspan="2"><b>Read OrderEdit↓</b></th>
 </tr>
 <tr>
   <th nowrap="nowrap"><b>EN</b></th>
@@ -873,8 +875,8 @@ MiniCPM-o 4.5 是 MiniCPM-o 系列中最新且性能最强的模型。该模型�
   <th nowrap="nowrap" align="left" rowspan="2"><b>Model</b></th>
   <th nowrap="nowrap" colspan="4"><b>ASR-ZH<br>CER↓</b></th>
   <th nowrap="nowrap" colspan="4"><b>ASR-EN<br>WER↓</b></th>
-  <th colspan="2"><b>AST</b></th>
-  <th colspan="2"><b>MultiTask</b></th>
+  <th nowrap="nowrap" colspan="2"><b>AST</b></th>
+  <th nowrap="nowrap" colspan="2"><b>MultiTask</b></th>
   <th nowrap="nowrap" colspan="4"><b>SpeechQA</b></th>
 </tr>
 <tr>
@@ -1090,10 +1092,10 @@ MiniCPM-o 4.5 是 MiniCPM-o 系列中最新且性能最强的模型。该模型�
 ### 典型示例 <!-- omit in toc -->
 
 #### 整体能力 <!-- omit in toc -->
+
 <div align="center">
   <a href="https://www.youtube.com/watch?v=6UzC-O1Q-1U"><img src="./assets/minicpmo4_5/video_play.png", width=70%></a>
 </div>
-
 
 #### 全双工全模态对话 <!-- omit in toc -->
 
@@ -1106,13 +1108,8 @@ MiniCPM-o 4.5 是 MiniCPM-o 系列中最新且性能最强的模型。该模型�
 > [!NOTE]
 > 更全面的语音对话案例展示，请参考[语音展示页面](https://openbmb.github.io/minicpm-o-4_5/)
 
-
-> *使用自定义参考音频和角色提示词进行单工语音对话。*
-> 
-> *用户输入支持音频和文本两种形式。这些示例是通过音频输入生成的；为保护隐私，此处展示的是转录文本而非原始音频。*
-
-<details open>
-<summary>🎭 <b>Elon Musk</b> - 语音角色扮演 (英文)</summary>
+<details>
+<summary>🚀 <b>Elon Musk</b> - 语音角色扮演 (英文)</summary>
 
 <table>
 <tr>
@@ -1211,10 +1208,17 @@ MiniCPM-o 4.5 是 MiniCPM-o 系列中最新且性能最强的模型。该模型�
 
 #### 视觉理解 <!-- omit in toc -->
 
-<div style="display: flex; flex-direction: column; align-items: center;">
-<img src="assets/minicpmo4_5/zh_doc.png" alt="bike" style="margin-bottom: 5px;">
-  <img src="assets/minicpmo4_5/en_cot.png" alt="diagram" style="margin-bottom: 5px;">
-</div>
+
+<details>
+<summary>点击查看视觉理解案例。</summary>
+<br>
+
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <img src="assets/minicpmo4_5/zh_doc.png" alt="math" style="margin-bottom: 5px;">
+    <img src="assets/minicpmo4_5/en_cot.png" alt="diagram" style="margin-bottom: 5px;">
+  </div>
+
+</details>
 
 
 ## 简易推理
@@ -2494,8 +2498,8 @@ MiniCPM-V 4.0 是 MiniCPM-V 系列中的一款高效模型。该模型基于 Sig
             <th nowrap="nowrap">MathVision</th>
             <th nowrap="nowrap">DynaMath</th>
             <th nowrap="nowrap">WeMath</th>
-            <th colspan="2">Obj Hal</th>
-            <th colspan="2">MM Hal</th>
+            <th nowrap="nowrap" colspan="2">Obj Hal</th>
+            <th nowrap="nowrap" colspan="2">MM Hal</th>
         </tr>
     </thead>
     <tbody>
@@ -2830,18 +2834,19 @@ MiniCPM-V 4.0 是 MiniCPM-V 系列中的一款高效模型。该模型基于 Sig
 <table align="center"> 
     <p align="center">
       <img src="./assets/minicpmv4/iphone_en.gif" width=45%/>
-          
+      &nbsp;&nbsp;&nbsp;&nbsp;
       <img src="./assets/minicpmv4/iphone_en_information_extraction.gif" width=45%/>
     </p>
     <p align="center">
       <img src="./assets/minicpmv4/iphone_cn.gif" width=45%/>
-          
+      &nbsp;&nbsp;&nbsp;&nbsp;
       <img src="./assets/minicpmv4/iphone_cn_funny_points.gif" width=45%/>
     </p>
-</table>
+</table> 
 
 
 </details>
+
 
 ## 模型库
 
