@@ -2103,11 +2103,27 @@ msgs = [
 
 ## Deploy a Realtime Web Demo on Your Own Device
 
-- Option A: **Pytorch Inference with Nvidia GPU** for 100% model precision with no deductions in performance.
+### Option A (Recommended): **Pytorch Inference with Nvidia GPU** for 100% model precision with no deductions in performance.
 
-- Option B: **llama.cpp-omni** for end-side inference with PCs like Mac and low-resource devices.
+We provide a pytorch-based [full-functional web demo](https://github.com/OpenBMB/minicpm-o-4_5-pytorch-simple-demo) which could boost the model inference performance, supports:
+
+- full-duplex omnimodal live streaming
+- full-duplex speech live streaming
+- simplex speech realtime conversation
+- turn-based chat conversation
+- customizable system prompts
+- customizable reference audio
+
+Requirements:
+- Nvidia GPU with at least 28GB GPU memory.
+
+### Option B: **llama.cpp-omni & Docker Image** for end-side inference with PCs like Mac and low-resource devices.
 
 We provide [ready-to-run guidance]([https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README.md]) to access the low-latency full-duplex communication directly on your own Mac using our new official Docker image.
+
+Requirements: 
+- For simplex speech realtime conversation: Apple M3/M4/M5 chip with at least 16GB RAM or low-resource Nvidia GPU with at least 12GB GPU memory
+- For full-duplex omnimodal live streaming: Apple M4 Max chip with at least 24GB RAM or low-resource Nvidia GPU with at least 12GB GPU memory
 
 ## Supported Frameworks
 
@@ -2280,6 +2296,32 @@ We support inference with vLLM, SGLang, llama.cpp and Ollama. Refer to our [Cook
 ### LLaMA-Factory, SWIFT
 
 We support fine-tuning with LLaMA-Factory, SWIFT. Refer to our [Cookbook](https://github.com/OpenSQZ/MiniCPM-V-Cookbook) for more details.
+
+## MiniCPM-V & o Cookbook
+
+Discover comprehensive, ready-to-deploy solutions for the MiniCPM-V and MiniCPM-o model series in our structured [Cookbook](https://github.com/OpenSQZ/MiniCPM-V-CookBook), which empowers developers to rapidly implement multimodal AI applications with integrated vision, speech, and live-streaming capabilities. Key features include:
+
+**Easy Usage Documentation**
+
+Our comprehensive [documentation website](https://minicpm-o.readthedocs.io/en/latest/index.html) presents every recipe in a clear, well-organized manner.
+All features are displayed at a glance, making it easy for you to quickly find exactly what you need.
+
+**Broad User Spectrum**
+
+We support a wide range of users, from individuals to enterprises and researchers.
+
+* **Individuals**: Enjoy effortless inference using Ollama ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/ollama/minicpm-v4_ollama.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/ollama/minicpm-o4_5_ollama.md)) and Llama.cpp ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-v4_llamacpp.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-o4_5_llamacpp.md)) with minimal setup.
+* **Enterprises**: Achieve high-throughput, scalable performance with vLLM ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-v4_vllm.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-o4_5_vllm.md)) and SGLang ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/sglang/MiniCPM-v4_sglang.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/sglang/MiniCPM-o4_5_sglang.md)).
+* **Researchers**: Leverage advanced frameworks including [Transformers](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/finetune_full.md), [LLaMA-Factory](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/finetune_llamafactory.md), [SWIFT](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/swift.md), and [Align-anything](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/align_anything.md) to enable flexible model development and cutting-edge experimentation.
+
+**Versatile Deployment Scenarios**
+
+Our ecosystem delivers optimal solution for a variety of hardware environments and deployment demands.
+
+* **Web Demo**: Full-duplex real-time video interaction solution with high responsiveness and low latency. [WebRTC_Demo](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README.md).
+* **Quantized deployment**: Maximize efficiency and minimize resource consumption using [GGUF](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/gguf/minicpm-v4_gguf_quantize.md) and [BNB](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/bnb/minicpm-v4_bnb_quantize.md).
+* **End devices**: Bring powerful AI experiences to [iPhone and iPad](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/ios_demo/ios.md), supporting offline and privacy-sensitive applications.
+
 
 
 
@@ -2843,32 +2885,6 @@ We deploy MiniCPM-V 4.0 on iPhone 16 Pro Max with [iOS demo](https://github.com/
 
 </details>
 
-
-
-## MiniCPM-V & o Cookbook
-
-Discover comprehensive, ready-to-deploy solutions for the MiniCPM-V and MiniCPM-o model series in our structured [Cookbook](https://github.com/OpenSQZ/MiniCPM-V-CookBook), which empowers developers to rapidly implement multimodal AI applications with integrated vision, speech, and live-streaming capabilities. Key features include:
-
-**Easy Usage Documentation**
-
-Our comprehensive [documentation website](https://minicpm-o.readthedocs.io/en/latest/index.html) presents every recipe in a clear, well-organized manner.
-All features are displayed at a glance, making it easy for you to quickly find exactly what you need.
-
-**Broad User Spectrum**
-
-We support a wide range of users, from individuals to enterprises and researchers.
-
-* **Individuals**: Enjoy effortless inference using Ollama ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/ollama/minicpm-v4_ollama.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/ollama/minicpm-o4_5_ollama.md)) and Llama.cpp ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-v4_llamacpp.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-o4_5_llamacpp.md)) with minimal setup.
-* **Enterprises**: Achieve high-throughput, scalable performance with vLLM ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-v4_vllm.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-o4_5_vllm.md)) and SGLang ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/sglang/MiniCPM-v4_sglang.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/sglang/MiniCPM-o4_5_sglang.md)).
-* **Researchers**: Leverage advanced frameworks including [Transformers](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/finetune_full.md), [LLaMA-Factory](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/finetune_llamafactory.md), [SWIFT](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/swift.md), and [Align-anything](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/align_anything.md) to enable flexible model development and cutting-edge experimentation.
-
-**Versatile Deployment Scenarios**
-
-Our ecosystem delivers optimal solution for a variety of hardware environments and deployment demands.
-
-* **Web Demo**: Full-duplex real-time video interaction solution with high responsiveness and low latency. [WebRTC_Demo](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README.md).
-* **Quantized deployment**: Maximize efficiency and minimize resource consumption using [GGUF](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/gguf/minicpm-v4_gguf_quantize.md) and [BNB](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/bnb/minicpm-v4_bnb_quantize.md).
-* **End devices**: Bring powerful AI experiences to [iPhone and iPad](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/ios_demo/ios.md), supporting offline and privacy-sensitive applications.
 
 
 
