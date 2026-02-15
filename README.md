@@ -2105,7 +2105,7 @@ msgs = [
 
 ### Option A (Recommended): **Pytorch Inference with Nvidia GPU** for 100% model precision with no deductions in performance.
 
-We provide a pytorch-based [full-functional yet simplified web demo](https://github.com/OpenBMB/minicpm-o-4_5-pytorch-simple-demo) which could boost the model inference performance, supports:
+We provide a pytorch-based [simplified yet full-functional web demo](https://github.com/OpenBMB/minicpm-o-4_5-pytorch-simple-demo) which could boost the model inference performance, supports:
 
 - full-duplex omnimodal live streaming
 - full-duplex speech live streaming
