@@ -42,7 +42,7 @@
 #### 📌 Pinned
 
 > [!NOTE]
-> [2026.02.06] 🥳 🥳 🥳 MiniCPM-o 4.5 Local & Ready-to-Run! Experience **full-duplex communication** directly **on your own Mac** using our new official Docker image. [Try it now](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README.md)!
+> [2026.02.06] 🥳 🥳 🥳 We open-sourced a realtime web demo deployable on your own devices like Mac or GPU. [Try it now](#deploy-a-realtime-web-demo-on-your-own-device)!
 
 
 * [2026.02.05] 📢📢📢 We note the web demo may experience latency issues due to network conditions. We are working actively to provide a Docker image for local deployment of the real-time interactive Demo as soon as possible. Please stay tuned!
