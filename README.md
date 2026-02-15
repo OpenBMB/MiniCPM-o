@@ -115,13 +115,14 @@
 - [MiniCPM-V \& o Cookbook](#minicpm-v--o-cookbook)
 - [Model Zoo](#model-zoo)
 - [Local Interactive Demo](#local-interactive-demo)
-- [Inference with Transformers](#inference-with-transformers)
+- [Offline Inference Examples with Transformers](#offline-inference-examples-with-transformers)
   - [Model Initialization](#model-initialization)
   - [Duplex Omni Mode](#duplex-omni-mode)
   - [Simplex Omni Mode](#simplex-omni-mode)
   - [Simplex Realtime Speech Conversation Mode](#simplex-realtime-speech-conversation-mode)
   - [Visual Understanding](#visual-understanding)
   - [Structured Content Input](#structured-content-input)
+- [Deploy a Realtime Web Demo on Your Own Device](#deploy-a-realtime-web-demo-on-your-own-device)
 - [Supported Frameworks](#supported-frameworks)
   - [FlagOS](#flagos)
   - [vLLM, SGLang, llama.cpp, Ollama](#vllm-sglang-llamacpp-ollama)
@@ -1253,10 +1254,7 @@ Advancing popular visual capabilities from MiniCPM-V series, MiniCPM-o 4.5 can p
 </details>
 
 
-We provide [ready-to-run guidance](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README.md) to access the **low-latency full-duplex communication** directly **on your own Mac** using our new official Docker image.
-
-
-## Inference with Transformers
+## Offline Inference Examples with Transformers
 
 Inference using Hugging Face Transformers on NVIDIA GPUs. Please ensure `transformers==4.51.0` is installed, as other versions may have compatibility issues (under investigation). Requirements tested on Python 3.10:
 
@@ -2103,9 +2101,13 @@ msgs = [
 
 
 
-## Deploy Demo on Your Own Device
+## Deploy a Realtime Web Demo on Your Own Device
 
-Hello
+- Option A: **Pytorch Inference with Nvidia GPU** for 100% model precision with no deductions in performance.
+
+- Option B: **llama.cpp-omni** for end-side inference with PCs like Mac and low-resource devices.
+
+We provide [ready-to-run guidance]([https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README.md]) to access the low-latency full-duplex communication directly on your own Mac using our new official Docker image.
 
 ## Supported Frameworks
 
