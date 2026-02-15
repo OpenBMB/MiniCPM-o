@@ -111,10 +111,6 @@
 
 
 - [MiniCPM-o 4.5](#minicpm-o-45)
-- [MiniCPM-V 4.0](#minicpm-v-40)
-- [MiniCPM-V \& o Cookbook](#minicpm-v--o-cookbook)
-- [Model Zoo](#model-zoo)
-- [Local Interactive Demo](#local-interactive-demo)
 - [Offline Inference Examples with Transformers](#offline-inference-examples-with-transformers)
   - [Model Initialization](#model-initialization)
   - [Duplex Omni Mode](#duplex-omni-mode)
@@ -127,6 +123,9 @@
   - [FlagOS](#flagos)
   - [vLLM, SGLang, llama.cpp, Ollama](#vllm-sglang-llamacpp-ollama)
   - [LLaMA-Factory, SWIFT](#llama-factory-swift)
+- [MiniCPM-V \& o Cookbook](#minicpm-v--o-cookbook)
+- [MiniCPM-V 4.0](#minicpm-v-40)
+- [Model Zoo](#model-zoo)
 - [Awesome work using MiniCPM-V \& MiniCPM-o](#awesome-work-using-minicpm-v--minicpm-o)
 - [Limitations](#limitations)
 - [Acknowledgements](#acknowledgements)
@@ -2103,9 +2102,9 @@ msgs = [
 
 ## Deploy a Realtime Web Demo on Your Own Device
 
-### Option A (Recommended): **Pytorch Inference with Nvidia GPU** for 100% model precision with no deductions in performance.
+### Option A (Recommended): **PyTorch Inference with Nvidia GPU** for 100% model precision with no deductions in performance.
 
-We provide a pytorch-based [simplified yet full-functional web demo](https://github.com/OpenBMB/minicpm-o-4_5-pytorch-simple-demo) which could boost the model inference performance, supports:
+We provide a PyTorch-based [simplified yet full-functional web demo](https://github.com/OpenBMB/minicpm-o-4_5-pytorch-simple-demo) which could boost the model inference performance, supports:
 
 - full-duplex omnimodal live streaming
 - full-duplex speech live streaming
