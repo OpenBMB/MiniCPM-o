@@ -87,20 +87,22 @@
 ## 目录 <!-- omit in toc -->
 
 - [MiniCPM-o 4.5](#minicpm-o-45)
-- [MiniCPM-V 4.0](#minicpm-v-40)
-- [MiniCPM-V \& o 使用手册](#minicpm-v--o-使用手册)
-- [模型库](#模型库)
-- [本地 Demo 部署](#本地-demo-部署)
 - [简易推理](#简易推理)
   - [模型初始化](#模型初始化)
   - [双工全模态模式](#双工全模态模式)
   - [单工全模态模式](#单工全模态模式)
   - [单工实时语音对话模式](#单工实时语音对话模式)
   - [语音与音频模式](#语音与音频模式)
+  - [纯视觉模式](#纯视觉模式)
+  - [结构化内容输入](#结构化内容输入)
+- [本地 Demo 部署](#本地-demo-部署)
 - [框架支持](#框架支持)
   - [FlagOS](#flagos)
   - [vLLM、SGLang、llama.cpp、Ollama](#vllmsglangllamacppollama)
   - [LLaMA-Factory、SWIFT](#llama-factoryswift)
+- [MiniCPM-V \& o 使用手册](#minicpm-v--o-使用手册)
+- [MiniCPM-V 4.0](#minicpm-v-40)
+- [模型库](#模型库)
 - [基于 MiniCPM-V \& MiniCPM-o 的更多项目](#基于-minicpm-v--minicpm-o-的更多项目)
 - [模型局限性](#模型局限性)
 - [致谢](#致谢)
@@ -110,15 +112,15 @@
 MiniCPM-o 4.5 是 MiniCPM-o 系列中最新且性能最强的模型。该模型采用端到端方式构建，基于 SigLip2、Whisper-medium、CosyVoice2 和 Qwen3-8B，总参数量为 9B。其在性能上实现了显著提升，并引入了全新的全双工多模态实时流式交互能力。MiniCPM-o 4.5 的主要特性包括：
 
 - 🔥 **领先的视觉能力**
-  MiniCPM-o 4.5 在涵盖 8 个主流评测基准的 OpenCompass 综合评估中获得了 78.2 的平均分。**仅凭 9B 参数，其视觉理解能力超越了 GPT-4o、Gemini 2.0 Pro 等广泛使用的商业模型**，接近 Gemini 2.5 Flash 水平。 该模型在单一模型中同时支持指令模式和思考模式，能够更好地平衡不同使用场景下的效率与性能。
+  MiniCPM-o 4.5 在涵盖 8 个主流评测基准的 OpenCompass 综合评估中获得了 77.6 的平均分。**仅凭 9B 参数，其视觉理解能力超越了 GPT-4o、Gemini 2.0 Pro 等广泛使用的商业模型**，接近 Gemini 2.5 Flash 水平。 该模型在单一模型中同时支持指令模式和思考模式，能够更好地平衡不同使用场景下的效率与性能。
 - 🎙 **强大的语音能力**
   MiniCPM-o 4.5 支持**音色可配置的中英双语实时语音对话**。其语音对话**更加自然、富有表现力且稳定**。该模型还支持更多有趣的功能，如**通过简单的参考音频进行声音克隆和角色扮演**，其声音克隆表现甚至超越了 CosyVoice2 等优秀 TTS 工具。
 - 🎬 **全双工及主动多模态实时流式交互能力**
   MiniCPM-o 4.5 的一项核心新特性是能够以端到端的方式同时处理实时连续的视频和音频输入流，并同步生成文本和语音输出流，且互不阻塞。这**使得 MiniCPM-o 4.5 能够同时“看、听、说”**，提供流畅的实时全模态对话体验。除了被动响应，模型还能进行**主动交互**，例如基于对场景的实时持续理解，主动发起提醒或评论。
 - 💪 **高效率、强悍的 OCR 能力及其他特性**
   MiniCPM-o 4.5 进一步优化了 MiniCPM-V 系列的众多视觉能力，可以高效处理**任意长宽比的高分辨率图像**（最高 180 万像素）和**高帧率视频**（最高 10fps）。其在 OmniDocBench **端到端英文文档解析测试中达到了业内顶尖水平**，超越了 Gemini-3 Flash 和 GPT-5 等商业模型以及 DeepSeek-OCR 2 等专用工具。此外，它还具备**可信的多模态行为**，在 MMHal-Bench 上与 Gemini 2.5 Flash 相当，并**支持超过 30 种语言**。
-- 💫 **便捷的使用体验**
-  MiniCPM-o 4.5 提供了多种便捷的使用方式：(1) 支持 [llama.cpp](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-o4_5_llamacpp.md) 和 [Ollama](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/ollama/minicpm-o4_5_ollama.md)，以便在本地设备上进行高效的 CPU 推理；(2) 提供 16 种尺寸的 [int4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/awq/minicpm-o4_5_awq_quantize.md) 和 [GGUF](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/gguf/minicpm-o4_5_gguf_quantize.md) 格式量化模型；(3) 支持 [vLLM](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-o4_5_vllm.md) 和 [SGLang](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/sglang/MiniCPM-o4_5_sglang.md)，实现高吞吐、显存高效的推理；(4)[FlagOS](#FlagOS) 使用 FlagOS 统一多芯片后端插件；(5) 支持通过 [LLaMA-Factory](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/llama-factory/finetune_llamafactory.md) 在新领域和任务上进行微调；(6) 提供服务器端[在线 Web Demo](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/gradio/README_o45.md)。我们还同步推出了高性能的 [llama.cpp-omni](https://github.com/tc-mb/llama.cpp-omni) 推理框架以及 [WebRTC Demo](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README_zh.md)，**让全双工多模态实时流式交互体验在 [PC](https://github.com/tc-mb/llama.cpp-omni/blob/master/README.md) 等本地设备上触手可及**。
+-  💫  **便捷的使用体验**
+  MiniCPM-o 4.5 提供了多种便捷的使用方式：**基础用法（推荐，100% 精度）：** 基于 PyTorch 的 Nvidia GPU 推理。**其他端侧适配**包括：(1) 支持 llama.cpp 和 Ollama，以便在本地设备上进行高效的 CPU 推理；(2) 提供 16 种尺寸的 int4 和 GGUF 格式量化模型；(3) 支持 vLLM 和 SGLang，实现高吞吐、显存高效的推理；(4) 支持 FlagOS 统一多芯片后端插件。**我们还开源了 Web Demo**，**让全双工多模态实时流式交互体验在 GPU、PC（如 MacBook）等本地设备上触手可及**。
 
 **模型架构。**
 
@@ -894,7 +896,7 @@ MiniCPM-o 4.5 是 MiniCPM-o 系列中最新且性能最强的模型。该模型�
   <th nowrap="nowrap"><b>Speech CMMLU</b></th>
 </tr>
 <tr>
-  <td nowrap="nowrap" align="left">kimi-audio</td>
+  <td nowrap="nowrap" align="left">Kimi-Audio</td>
   <td align="center"><b>0.6</b></td>
   <td align="center">2.6</td>
   <td align="center">6.3</td>
@@ -1093,10 +1095,16 @@ MiniCPM-o 4.5 是 MiniCPM-o 系列中最新且性能最强的模型。该模型�
 </div>
 
 
+#### 全双工全模态对话 <!-- omit in toc -->
+
+> [!NOTE]
+> 更全面的全双工全模态对话案例展示，请参考[全模态全双工展示页面](https://openbmb.github.io/minicpm-o-4_5-omni/)
+
+
 #### 实时语音对话 <!-- omit in toc -->
 
 > [!NOTE]
-> 更全面的语音对话案例展示，请参考 [语音展示页面](https://openbmb.github.io/minicpm-o-4_5/)
+> 更全面的语音对话案例展示，请参考[语音展示页面](https://openbmb.github.io/minicpm-o-4_5/)
 
 
 > *使用自定义参考音频和角色提示词进行单工语音对话。*
@@ -1207,6 +1215,1073 @@ MiniCPM-o 4.5 是 MiniCPM-o 系列中最新且性能最强的模型。该模型�
 <img src="assets/minicpmo4_5/zh_doc.png" alt="bike" style="margin-bottom: 5px;">
   <img src="assets/minicpmo4_5/en_cot.png" alt="diagram" style="margin-bottom: 5px;">
 </div>
+
+
+## 简易推理
+
+基于 Hugging Face Transformers 在 NVIDIA GPU 上进行推理。请确保安装 `transformers==4.51.0`，其他版本可能存在兼容性问题（排查中）。以下依赖已在 Python 3.10 环境测试通过：
+
+- 不使用 TTS 或流式推理：
+```bash
+pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils>=1.0.5"
+```
+
+- 使用 TTS 或流式推理：
+```bash
+pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils[all]>=1.0.5"
+```
+
+
+<details>
+<summary> 点击展开 FFmpeg 安装 (可选) </summary>
+
+**注意：** 视频帧提取（`get_video_frame_audio_segments` 使用 `use_ffmpeg=True`）和视频生成（`generate_duplex_video`）需要安装 FFmpeg。更多信息请访问 [FFmpeg 官网](https://www.ffmpeg.org/)。
+
+  **macOS (Homebrew):**
+
+  ```bash
+  brew install ffmpeg
+  ```
+
+  **Ubuntu/Debian:**
+
+  ```bash
+  sudo apt update && sudo apt install ffmpeg
+  ```
+
+  **验证:**
+
+  ```bash
+  ffmpeg -version
+  ```
+</details>
+
+
+
+### 模型初始化
+
+<details>
+<summary>点击展开模型初始化示例代码</summary>
+
+```python
+import torch
+from transformers import AutoModel
+
+# 加载全模态模型（默认：init_vision=True, init_audio=True, init_tts=True）
+# 仅视觉模型：设置 init_audio=False 和 init_tts=False
+# 仅音频模型：设置 init_vision=False
+model = AutoModel.from_pretrained(
+    "openbmb/MiniCPM-o-4_5",
+    trust_remote_code=True,
+    attn_implementation="sdpa", # sdpa or flash_attention_2
+    torch_dtype=torch.bfloat16,
+    init_vision=True,
+    init_audio=True,
+    init_tts=True,
+)
+model.eval().cuda()
+
+# 初始化 TTS 模块，用于对话的音频输出
+model.init_tts()
+
+# 将单工模型转换为双工模式
+duplex_model = model.as_duplex()
+
+# 将双工模型转换回单工模式
+model = duplex_model.as_simplex(reset_session=True)
+```
+
+</details>
+
+
+### 双工全模态模式
+
+全双工流式推理，支持实时或录制视频的对话场景。
+
+<details>
+<summary>点击展开双工全模态模式示例代码</summary>
+
+```python
+import librosa
+import torch
+from minicpmo.utils import generate_duplex_video, get_video_frame_audio_segments
+from transformers import AutoModel
+
+# Load model and convert to duplex mode
+model = AutoModel.from_pretrained(
+    "openbmb/MiniCPM-o-4_5",
+    trust_remote_code=True,
+    attn_implementation="sdpa",  # or "flash_attention_2"
+    torch_dtype=torch.bfloat16,
+)
+model.eval().cuda()
+model = model.as_duplex()
+
+# Load video and reference audio
+video_path = "assets/omni_duplex1.mp4"
+ref_audio_path = "assets/HT_ref_audio.wav"
+ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
+
+# Extract video frames and audio segments
+video_frames, audio_segments, stacked_frames = get_video_frame_audio_segments(
+    video_path, stack_frames=1, use_ffmpeg=True, adjust_audio_length=True
+)
+
+# Prepare duplex session with system prompt and voice reference
+model.prepare(
+    prefix_system_prompt="Streaming Omni Conversation.",
+    ref_audio=ref_audio,
+    prompt_wav_path=ref_audio_path,
+)
+
+results_log = []
+timed_output_audio = []
+
+# Process each chunk in streaming fashion
+for chunk_idx in range(len(audio_segments)):
+    audio_chunk = audio_segments[chunk_idx] if chunk_idx < len(audio_segments) else None
+    frame = video_frames[chunk_idx] if chunk_idx < len(video_frames) else None
+    frame_list = []
+    if frame is not None:
+        frame_list.append(frame)
+        if stacked_frames is not None and chunk_idx < len(stacked_frames) and stacked_frames[chunk_idx] is not None:
+            frame_list.append(stacked_frames[chunk_idx])
+
+    # Step 1: Streaming prefill
+    model.streaming_prefill(
+        audio_waveform=audio_chunk,
+        frame_list=frame_list,
+        max_slice_nums=1,  # Increase for HD mode (e.g., [2, 1] for stacked frames)
+        batch_vision_feed=False,  # Set True for faster processing
+    )
+
+    # Step 2: Streaming generate
+    result = model.streaming_generate(
+        prompt_wav_path=ref_audio_path,
+        max_new_speak_tokens_per_chunk=20,
+        decode_mode="sampling",
+    )
+
+    if result["audio_waveform"] is not None:
+        timed_output_audio.append((chunk_idx, result["audio_waveform"]))
+
+    chunk_result = {
+        "chunk_idx": chunk_idx,
+        "is_listen": result["is_listen"],
+        "text": result["text"],
+        "end_of_turn": result["end_of_turn"],
+        "current_time": result["current_time"],
+        "audio_length": len(result["audio_waveform"]) if result["audio_waveform"] is not None else 0,
+    }
+    results_log.append(chunk_result)
+    
+    print("listen..." if result["is_listen"] else f"speak> {result['text']}")
+
+# Generate output video with AI responses
+# Please install Chinese fonts (fonts-noto-cjk or fonts-wqy-microhei) to render CJK subtitles correctly.
+# apt-get install -y fonts-noto-cjk fonts-wqy-microhei
+# fc-cache -fv
+generate_duplex_video(
+    video_path=video_path,
+    output_video_path="duplex_output.mp4",
+    results_log=results_log,
+    timed_output_audio=timed_output_audio,
+    output_sample_rate=24000,
+)
+```
+
+</details>
+
+
+### 单工全模态模式
+
+#### 对话推理 <!-- omit in toc -->
+
+<details>
+<summary>点击展开对话推理示例代码</summary>
+
+```python
+from minicpmo.utils import get_video_frame_audio_segments
+
+model = ...
+model.init_tts()
+
+video_path = "assets/Skiing.mp4"
+
+# Optional: Set reference audio for voice cloning
+ref_audio_path = "assets/HT_ref_audio.wav"
+sys_msg = model.get_sys_prompt(ref_audio=ref_audio_path, mode="omni", language="en")
+
+# Use stack_frames=5 for high refresh rate mode
+video_frames, audio_segments, stacked_frames = get_video_frame_audio_segments(video_path, stack_frames=1)
+omni_contents = []
+for i in range(len(video_frames)):
+    omni_contents.append(video_frames[i])
+    omni_contents.append(audio_segments[i])
+    if stacked_frames is not None and stacked_frames[i] is not None:
+        omni_contents.append(stacked_frames[i])
+
+msg = {"role": "user", "content": omni_contents}
+msgs = [sys_msg, msg]
+
+# Set generate_audio=True and output_audio_path to save TTS output
+generate_audio = True
+output_audio_path = "output.wav"
+
+res = model.chat(
+    msgs=msgs,
+    max_new_tokens=4096,
+    do_sample=True,
+    temperature=0.7,
+    use_tts_template=True,
+    enable_thinking=False,
+    omni_mode=True,  # Required for omni inference
+    generate_audio=generate_audio,
+    output_audio_path=output_audio_path,
+    max_slice_nums=1,  # Increase for HD mode
+)
+print(res)
+```
+
+</details>
+
+#### 流式推理 <!-- omit in toc -->
+
+<details>
+<summary>点击展开流式推理示例代码</summary>
+
+```python
+import librosa
+import numpy as np
+import soundfile as sf
+import torch
+from minicpmo.utils import get_video_frame_audio_segments
+
+model = ...
+model.init_tts()
+
+# Reset session for a new conversation (clears KV cache)
+model.reset_session()
+
+# Optional: Load reference audio for voice cloning
+ref_audio_path = "assets/HT_ref_audio.wav"
+ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
+model.init_token2wav_cache(ref_audio)
+
+session_id = "demo"
+
+# Extract video frames and audio segments (use stack_frames=5 for high refresh rate mode)
+video_path = "assets/Skiing.mp4"
+video_frames, audio_segments, stacked_frames = get_video_frame_audio_segments(video_path, stack_frames=1)
+
+# Build omni contents list
+omni_contents = []
+for i in range(len(video_frames)):
+    omni_contents.append(video_frames[i])
+    omni_contents.append(audio_segments[i])
+    if stacked_frames is not None and stacked_frames[i] is not None:
+        omni_contents.append(stacked_frames[i])
+
+generate_audio = False
+output_audio_path = "output.wav"
+
+# Step 1: Prefill system prompt
+sys_msg = model.get_sys_prompt(ref_audio=ref_audio, mode="omni", language="en")
+model.streaming_prefill(session_id=session_id, msgs=[sys_msg])
+
+# Step 2: Prefill omni chunks (is_last_chunk=True only for the last audio chunk)
+audio_indices = [i for i, c in enumerate(omni_contents) if isinstance(c, np.ndarray)]
+last_audio_idx = audio_indices[-1] if audio_indices else -1
+
+for idx, content in enumerate(omni_contents):
+    is_last_audio_chunk = idx == last_audio_idx
+    msgs = [{"role": "user", "content": [content]}]
+    model.streaming_prefill(session_id=session_id, msgs=msgs, omni_mode=True, is_last_chunk=is_last_audio_chunk)
+
+# Step 3: Generate response
+iter_gen = model.streaming_generate(
+    session_id=session_id,
+    generate_audio=generate_audio,
+    use_tts_template=True,
+    enable_thinking=False,
+    do_sample=True,
+)
+
+audios = []
+text = ""
+
+if generate_audio:
+    for wav_chunk, text_chunk in iter_gen:
+        audios.append(wav_chunk)
+        text += text_chunk
+
+    generated_waveform = torch.cat(audios, dim=-1)[0]
+    sf.write(output_audio_path, generated_waveform.cpu().numpy(), samplerate=24000)
+
+    print("Text:", text)
+    print("Audio saved to output.wav")
+else:
+    for text_chunk, is_finished in iter_gen:
+        text += text_chunk
+    print("Text:", text)
+```
+
+</details>
+
+
+
+### 单工实时语音对话模式 <!-- omit in toc -->
+
+
+<details>
+<summary>点击展开单工模式实时语音对话 API 用法。</summary>
+
+首先，确保你已安装所有依赖，尤其是 `minicpmo-utils[all]>=1.0.5`：
+```bash
+pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils[all]>=1.0.5"
+```
+
+```python
+import librosa
+import numpy as np
+import torch
+import soundfile as sf
+
+model = ...
+
+# 设置参考音频，用于音色风格
+ref_audio_path = "ref_audio_path"
+ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
+
+# 英文对话示例系统消息
+sys_msg = {
+  "role": "system",
+  "content": [
+    "Clone the voice in the provided audio prompt.",
+    ref_audio,
+    "Please assist users while maintaining this voice style. Please answer the user's questions seriously and in a high quality. Please chat with the user in a highly human-like and oral style. You are a helpful assistant developed by ModelBest: MiniCPM-Omni"
+  ]
+}
+
+
+# 中文对话示例系统消息
+sys_msg = {
+  "role": "system",
+  "content": [
+    "模仿输入音频中的声音特征。",
+    ref_audio,
+    "你的任务是用这种声音模式来当一个助手。请认真、高质量地回复用户的问题。请用高自然度的方式和用户聊天。你是由面壁智能开发的人工智能助手：面壁小钢炮。"
+  ]
+}
+
+# 上面两种系统提示词（system prompt）都可用于流式语音对话
+
+# 重置状态
+model.init_tts()
+model.reset_session(reset_token2wav_cache=True)
+model.init_token2wav_cache(prompt_speech_16k=ref_audio)
+
+session_id = "demo"
+
+# 首先，预填充系统轮次（system turn）
+model.streaming_prefill(
+    session_id=session_id,
+    msgs=[sys_msg],
+    omni_mode=False,
+    is_last_chunk=True,
+)
+
+# 这里通过把整段用户输入音频切成 1 秒一段，来模拟实时语音对话。
+user_audio, _ = librosa.load("user_audio.wav", sr=16000, mono=True)
+
+IN_SAMPLE_RATE = 16000 # 输入音频采样率，固定值
+CHUNK_SAMPLES = IN_SAMPLE_RATE # 每段长度（采样点数）
+OUT_SAMPLE_RATE = 24000 # 输出音频采样率，固定值
+MIN_AUDIO_SAMPLES = 16000
+
+total_samples = len(user_audio)
+num_chunks = (total_samples + CHUNK_SAMPLES - 1) // CHUNK_SAMPLES
+
+for chunk_idx in range(num_chunks):
+    start = chunk_idx * CHUNK_SAMPLES
+    end = min((chunk_idx + 1) * CHUNK_SAMPLES, total_samples)
+    chunk_audio = user_audio[start:end]
+    
+    is_last_chunk = (chunk_idx == num_chunks - 1)
+    if is_last_chunk and len(chunk_audio) < MIN_AUDIO_SAMPLES:
+        chunk_audio = np.concatenate([chunk_audio, np.zeros(MIN_AUDIO_SAMPLES - len(chunk_audio), dtype=chunk_audio.dtype)])
+
+    user_msg = {"role": "user", "content": [chunk_audio]}
+    
+    # 对每个 1 秒音频分片执行一次 streaming_prefill，以降低首 token 延迟
+    model.streaming_prefill(
+        session_id=session_id,
+        msgs=[user_msg],
+        omni_mode=False,
+        is_last_chunk=is_last_chunk,
+    )
+
+
+# 让模型以流式方式生成回复
+generate_audio = True
+iter_gen = model.streaming_generate(
+    session_id=session_id,
+    generate_audio=generate_audio,
+    use_tts_template=True,
+    enable_thinking=False,
+    do_sample=True,
+    max_new_tokens=512,
+    length_penalty=1.1, # 对实时语音对话模式，建议 length_penalty=1.1 以提升回复内容质量
+)
+
+audios = []
+text = ""
+
+output_audio_path = ...
+if generate_audio:
+    for wav_chunk, text_chunk in iter_gen:
+        audios.append(wav_chunk)
+        text += text_chunk
+
+    generated_waveform = torch.cat(audios, dim=-1)[0]
+    sf.write(output_audio_path, generated_waveform.cpu().numpy(), samplerate=24000)
+
+    print("文本:", text)
+    print("音频已保存至 output.wav")
+else:
+    for text_chunk, is_finished in iter_gen:
+        text += text_chunk
+    print("文本:", text)
+
+# 接下来可以继续预填充后续用户轮次，并生成下一轮回复……
+
+```
+
+</details>
+
+#### 作为多才多艺、氛围感十足的 AI 助手的语音对话 <!-- omit in toc -->
+
+基于精心设计的后训练数据与专业配音演员录音，`MiniCPM-o-4.5` 也可以作为 AI 语音助手使用。它开箱即用即可提供高质量的口语交互。它能生成甜美且富有表现力的声音，并具备自然的韵律（如恰当的节奏、重读和停顿），让日常对话更有生命力。它同样支持故事讲述和叙述型语音，表达连贯且富有吸引力。此外，它还支持更高级的语音指令控制，例如情绪语气、词级别的强调。
+
+<details>
+<summary>点击展开 AI 助手语音对话代码。</summary>
+
+```python
+import librosa
+
+# 设置参考音频，用于音色风格
+ref_audio_path = "assets/HT_ref_audio.wav"
+ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
+
+# 用于中文对话
+sys_msg = {
+  "role": "system",
+  "content": [
+    "模仿输入音频中的声音特征。",
+    ref_audio,
+    "你的任务是用这种声音模式来当一个助手。请认真、高质量地回复用户的问题。请用高自然度的方式和用户聊天。你是由面壁智能开发的人工智能助手：面壁小钢炮。"
+  ]
+}
+
+# 用于英文对话
+sys_msg = {
+  "role": "system",
+  "content": [
+    "克隆所提供音频提示中的声音。",
+    ref_audio,
+    "请在保持该音色风格的同时帮助用户。请认真且高质量地回答用户问题。请用高度拟人、口语化的方式与用户聊天。你是由 ModelBest 开发的有用助手：MiniCPM-Omni。"
+  ]
+}
+```
+
+</details>
+
+
+#### 使用自定义音色与自定义系统画像的通用语音对话 <!-- omit in toc -->
+
+MiniCPM-o-4.5 可以基于音频提示与文本画像提示进行特定角色的扮演。它会模仿该角色的声音，并在文字回复中采用其语言风格。同时也会遵循文本画像中定义的设定。在该模式下，MiniCPM-o-4.5 听起来会 **更加自然、更像真人**。 
+
+<details>
+<summary>点击展开自定义音色/系统画像对话代码。</summary>
+
+```python
+import librosa
+
+# 设置参考音频，用于音色克隆
+ref_audio_path = "assets/system_ref_audio.wav"
+ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
+
+# 英文对话 + 文本画像（profile）
+sys_msg = {
+  "role": "system",
+  "content": [
+    "克隆所提供音频提示中的声音。",
+    ref_audio,
+    "请以高度拟人、口语化的方式与用户聊天。" + "你是埃隆·马斯克（Elon Musk），特斯拉与 SpaceX 的 CEO。你说话直接随性，常带一点冷幽默。你热衷于火星、可持续能源，以及推动人类向前发展。表达要直白，偶尔带点黑色幽默；用简单逻辑，不要粉饰；不要圆滑外交；即便有争议也说出你真实的想法。回复控制在约 100 个英文单词的长度，不要啰嗦。"
+  ]
+}
+
+
+# 英文对话（无文本画像）
+sys_msg = {
+  "role": "system",
+  "content": [
+    "克隆所提供音频提示中的声音。",
+    ref_audio,
+    "你的任务是使用这种声音风格充当一名助手。请认真且高质量地回答用户问题。请以高自然度的方式与用户聊天。"
+  ]
+}
+
+# 中文对话（无文本画像）
+sys_msg = {
+  "role": "system",
+  "content": [
+    "根据输入的音频提示生成相似的语音。",
+    librosa.load("assets/system_ref_audio_2.wav", sr=16000, mono=True)[0],
+    "作为助手，你将使用这种声音风格说话。 请认真、高质量地回复用户的问题。 请用高自然度的方式和用户聊天。"
+  ]
+}
+
+# 中文对话 + 文本画像（profile）
+sys_msg = {
+  "role": "system",
+  "content": [
+    "根据输入的音频提示生成相似的语音。",
+    ref_audio,
+    "你是一个具有以上声音风格的AI助手。请用高拟人度、口语化的方式和用户聊天。" + "你是一名心理咨询师兼播客主理人，热爱创作与深度对话。你性格细腻、富有共情力，善于从个人经历中提炼哲思。语言风格兼具理性与诗意，常以隐喻表达内在体验。"
+  ]
+}
+
+```
+
+</details>
+
+
+### 语音与音频模式  <!-- omit in toc -->
+
+#### 零样本文本转语音（TTS，Text-to-Speech） <!-- omit in toc -->
+
+`MiniCPM-o-4.5` 支持零样本文本转语音（TTS）。在该模式下，模型会作为高自然度的 TTS 系统运行，并能复刻参考音色。
+
+<details>
+<summary>点击展开零样本 TTS 代码。</summary>
+
+```python
+import librosa
+
+model = ...
+model.init_tts()
+
+# 同时适用于中文与英文
+ref_audio_path = "assets/HT_ref_audio.wav"
+ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
+sys_msg = {"role": "system", "content": [
+  "模仿音频样本的音色并生成新的内容。",
+  ref_audio,
+  "请用这种声音风格来为用户提供帮助。 直接作答，不要有冗余内容"
+]}
+
+# 英文示例
+user_msg = {
+  "role": "user",
+  "content": [
+    "请朗读以下内容。" + " " + "I have a wrap up that I want to offer you now, a conclusion to our work together.\n（中文参考：我现在想给你做一个收尾总结，作为我们一起工作的结语。）"
+  ]
+}
+
+# 中文示例
+user_msg = {
+  "role": "user",
+  "content": [
+    "请朗读以下内容。" + " " + "你好，欢迎来到艾米说科幻，我是艾米。"
+  ]
+}
+
+msgs = [sys_msg, user_msg]
+res = model.chat(
+    msgs=msgs,
+    do_sample=True,
+    max_new_tokens=512,
+    use_tts_template=True,
+    generate_audio=True,
+    temperature=0.1,
+    output_audio_path="result_voice_cloning.wav",
+)
+```
+
+</details>
+
+
+#### 仿声复现（Mimick） <!-- omit in toc -->
+
+`Mimick` 任务用于评估模型端到端语音建模能力。模型接收音频输入后，会先进行转写，再以高保真方式重建原始音频，尽可能保留细粒度的声学、副语言以及语义信息。重建音频与原始音频的相似度越高，说明端到端语音建模能力越强。
+
+<details>
+<summary>点击展开仿声复现（Mimick）代码。</summary>
+
+```python
+import librosa
+
+model = ...
+model.init_tts()
+
+system_prompt = "你是一个乐于助人的助手。你可以接收视频、音频和文本输入，并输出语音与文本。请只给出答案，不要有冗余内容。"
+
+mimick_prompt = "请用合适的语言复述以下语音内容。"
+
+audio_input, _ = librosa.load("assets/Trump_WEF_2018_10s.mp3", sr=16000, mono=True)
+
+msgs = [
+    {"role": "system", "content": [system_prompt]},
+    {"role": "user", "content": [mimick_prompt, audio_input]}
+  ]
+
+res = model.chat(
+    msgs=msgs,
+    do_sample=True,
+    max_new_tokens=512,
+    use_tts_template=True,
+    temperature=0.1,
+    generate_audio=True,
+    output_audio_path="output_mimick.wav",
+)
+```
+
+</details>
+
+
+#### 覆盖多种音频理解任务 <!-- omit in toc -->
+
+`MiniCPM-o-4.5` 也能处理多种音频理解任务，例如 ASR（自动语音识别）、说话人分析、通用音频描述（Audio Captioning）以及声景标签（Sound Scene Tagging）。
+
+对于音频转文本任务，你可以使用以下提示词：
+
+- ASR（中文，或 AST EN→ZH）: `请仔细听这段音频片段，并将其内容逐字记录。`
+- ASR（英文，或 AST ZH→EN）: `Please listen to the audio snippet carefully and transcribe the content.`（请仔细听这段音频片段，并将其内容逐字转写。）
+- 说话人分析（Speaker Analysis）: `Based on the speaker's content, speculate on their gender, condition, age range, and health status.`（请根据说话内容推测其性别、状态、年龄范围与健康状况。）
+- 通用音频描述（General Audio Caption）: `Summarize the main content of the audio.`（总结音频的主要内容。）
+- 声景标签（Sound Scene Tagging）: `Utilize one keyword to convey the audio's content or the associated scene.`（用一个关键词概括音频内容或对应场景。）
+
+<details>
+<summary>点击展开音频理解任务代码。</summary>
+
+```python
+import librosa
+
+model = ...
+model.init_tts()
+
+# 加载待转写/分析的音频
+audio_input, _ = librosa.load("assets/Trump_WEF_2018_10s.mp3", sr=16000, mono=True)
+
+# 选择任务提示词（可选项见上方）
+task_prompt = "请仔细听这段音频片段，并将其内容逐字转写。\n"
+msgs = [{"role": "user", "content": [task_prompt, audio_input]}]
+
+res = model.chat(
+    msgs=msgs,
+    do_sample=True,
+    max_new_tokens=512,
+    use_tts_template=True,
+    generate_audio=True,
+    temperature=0.3,
+    output_audio_path="result_audio_understanding.wav",
+)
+print(res)
+```
+
+</details>
+
+
+### 纯视觉模式 <!-- omit in toc -->
+
+`MiniCPM-o-4.5` 的推理方式与 `MiniCPM-V-4.5` 一致。
+
+#### 单图对话 <!-- omit in toc -->
+
+<details>
+<summary>点击展开单图对话示例代码</summary>
+
+```python
+import torch
+from PIL import Image
+from transformers import AutoModel
+
+model = AutoModel.from_pretrained(
+    "openbmb/MiniCPM-o-4_5",
+    trust_remote_code=True,
+    attn_implementation="sdpa",  # or "flash_attention_2"
+    torch_dtype=torch.bfloat16,
+    init_vision=True,
+    init_audio=False,
+    init_tts=False,
+)
+model.eval().cuda()
+
+image = Image.open("assets/fossil.png").convert("RGB")
+question = "What is in the image?"
+msgs = [{"role": "user", "content": [image, question]}]
+
+res = model.chat(msgs=msgs, use_tts_template=False)
+print(res)
+```
+
+</details>
+
+#### 多图对话 <!-- omit in toc -->
+
+<details>
+<summary>点击展开多图输入示例代码</summary>
+
+```python
+import torch
+from PIL import Image
+from transformers import AutoModel
+
+model = ...
+
+image1 = Image.open("assets/highway.png").convert("RGB")
+image2 = Image.open("assets/fossil.png").convert("RGB")
+question = "Compare image 1 and image 2, tell me about the differences between them."
+msgs = [{"role": "user", "content": [image1, image2, question]}]
+
+answer = model.chat(msgs=msgs, use_tts_template=False, enable_thinking=False)
+print(answer)
+```
+
+</details>
+
+#### In-Context 少样本推理 <!-- omit in toc -->
+
+<details>
+<summary>点击展开 In-Context 少样本推理示例代码</summary>
+
+```python
+from PIL import Image
+
+model = ...
+
+question = "production date"
+image1 = Image.open("example1.jpg").convert("RGB")
+answer1 = "2023.08.04"
+image2 = Image.open("example2.jpg").convert("RGB")
+answer2 = "2007.04.24"
+image_test = Image.open("test.jpg").convert("RGB")
+
+msgs = [
+    {"role": "user", "content": [image1, question]},
+    {"role": "assistant", "content": [answer1]},
+    {"role": "user", "content": [image2, question]},
+    {"role": "assistant", "content": [answer2]},
+    {"role": "user", "content": [image_test, question]},
+]
+
+answer = model.chat(msgs=msgs, use_tts_template=False, enable_thinking=False)
+print(answer)
+```
+
+</details>
+
+#### 视频对话 <!-- omit in toc -->
+
+<details>
+<summary>点击展开视频输入示例代码</summary>
+
+```python
+import torch
+from minicpmo.utils import get_video_frame_audio_segments
+from transformers import AutoModel
+
+model = ...
+
+video_path = "assets/Skiing.mp4"
+video_frames, _, _ = get_video_frame_audio_segments(video_path)
+print("num frames:", len(video_frames))
+
+question = "Describe the video"
+msgs = [{"role": "user", "content": video_frames + [question]}]
+
+answer = model.chat(
+    msgs=msgs,
+    max_new_tokens=128,
+    use_image_id=False,
+    max_slice_nums=1,
+    use_tts_template=False,
+    enable_thinking=False,  # Set True to enable thinking mode
+)
+print(answer)
+```
+
+</details>
+
+### 结构化内容输入 <!-- omit in toc -->
+
+<details>
+<summary>点击展开结构化内容输入</summary>
+
+`chat` 方法支持两种消息内容格式：
+
+**原生格式** — 直接传入 Python 对象：
+```python
+msgs = [{"role": "user", "content": [pil_image, audio_ndarray, "Describe this."]}]
+```
+
+**OpenAI 兼容格式** — 使用结构化字典：
+```python
+msgs = [
+    {
+        "role": "user",
+        "content": [
+            {"type": "image_url", "image_url": {"url": "/path/to/image.jpg"}},
+            {"type": "audio_url", "audio_url": {"url": "/path/to/audio.wav"}},
+            {"type": "video_url", "video_url": {"url": "/path/to/video.mp4", "use_audio": True}},
+            {"type": "text", "text": "Describe this."}
+        ]
+    }
+]
+```
+
+**支持的类型：**
+
+| 类型 | 输入格式 | 转换为 |
+|------|----------|--------|
+| `text` | `{"type": "text", "text": "..."}` | `str` |
+| `image_url` | `{"type": "image_url", "image_url": {"url": "..."}}` | `PIL.Image` |
+| `audio_url` | `{"type": "audio_url", "audio_url": {"url": "..."}}` | `np.ndarray`（16kHz 单声道） |
+| `video_url` | `{"type": "video_url", "video_url": {"url": "...", "stack_frames": 1, "use_audio": True}}` | `List[Image, ndarray, ...]` |
+
+- **URL 来源**：支持本地文件路径或 `http://`/`https://` URL
+- **混合格式**：原生对象和结构化字典可在同一 content 列表中混用
+
+</details>
+
+
+## 本地 Demo 部署
+
+### 方案 A（推荐）：**基于 PyTorch + Nvidia GPU 推理**，100% 模型精度，性能无损。
+
+我们提供了一个基于 PyTorch 的[简洁但功能完备的 Web Demo](https://github.com/OpenBMB/minicpm-o-4_5-pytorch-simple-demo)，可充分发挥模型推理性能，支持：
+
+- 全双工全模态实时流式交互
+- 全双工语音实时流式交互
+- 单工语音实时流式交互（开发中）
+- 轮次对话
+- 可自定义系统提示词
+- 可自定义参考音频
+- 简洁易读的代码库，便于二次开发
+- 可作为第三方应用的 API 后端
+
+硬件要求：
+- 至少 28GB 显存的 Nvidia GPU。*我们正在优化模型以降低显存需求。*
+
+### 方案 B：**llama.cpp-omni**，适用于 Mac 等 PC 及低资源设备的端侧推理。
+
+`llama.cpp-omni` 以纯 C++ 实现 `MiniCPM-o 4.5` 推理并使用量化权重，支持：
+- 单工语音实时对话
+- 全双工全模态实时流式交互
+
+我们提供了[开箱即用的部署指南](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README.md)，助您通过我们全新的官方 Docker 镜像，直接在自己的 Mac 上体验低延迟全双工实时通话。
+
+硬件要求：
+- 单工语音实时对话：Apple M3/M4/M5 芯片，至少 16GB 内存；或低配 Nvidia GPU，至少 12GB 显存
+- 全双工全模态实时流式交互：Apple M4 Max 芯片，至少 24GB 内存；或低配 Nvidia GPU，至少 12GB 显存
+
+
+
+## 框架支持
+
+### FlagOS
+
+为解决不同 AI 芯片大规模落地应用，北京智源研究院联合众多科研机构、芯片企业、系统厂商、算法和软件相关单位等国内外机构共同发起并创立了 FlagOS 开源社区。
+
+FlagOS 社区致力于打造面向多种 AI 芯片的统一、开源的系统软件栈，包括大型算子库、统一AI编译器、并行训推框架、统一通信库等核心开源项目，构建「模型-系统-芯片」三层贯通的开放技术生态，通过“一次开发跨芯迁移”释放硬件计算潜力，打破不同芯片软件栈之间生态隔离，有效降低开发者的迁移成本。FlagOS 社区构建人工智能软硬件生态，突破单一闭源垄断，推动AI硬件技术大范围落地发展，立足中国、拥抱全球合作。
+官网速递：https://flagos.io
+
+<details>
+<summary>点击展开 FlagOS 详细</summary>
+
+#### FlagOS 多 AI 芯片支持 <!-- omit in toc -->
+
+基于FlagOS极短时间内适配MiniCPM-o 4.5到 6 种不同的 AI 芯片，得益于众智 FlagOS 的多芯片统一 AI 系统软件栈的能力。目前，在FlagOS团队构建的面向多架构人工智能芯片的大模型自动迁移、适配与发布平台FlagRelease上，已发布MiniCPM-o-4.5的多芯片版本。细节如下：
+
+| Vendor          | ModelScope   | Huggingface  |
+|:----------------|:------------:|:------------:|
+| Nvidia          | [MiniCPM-o-4.5-nvidia-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) | [MiniCPM-o-4.5-nvidia-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) |
+| Hygon-BW1000    | [MiniCPM-o-4.5-hygon-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-hygon-FlagOS) | [MiniCPM-o-4.5-hygon-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-hygon-FlagOS) |
+| Metax-C550      | [MiniCPM-o-4.5-metax-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-metax-FlagOS) | [MiniCPM-o-4.5-metax-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-metax-FlagOS) |
+| Iluvatar-BIV150 | [MiniCPM-o-4.5-iluvatar-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-iluvatar-FlagOS) | [MiniCPM-o-4.5-iluvatar-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-iluvatar-FlagOS) |
+| Ascend-A3       | [MiniCPM-o-4.5-ascend-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-ascend-FlagOS) | [MiniCPM-o-4.5-ascend-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-ascend-FlagOS) |
+| Zhenwu-810E     | [MiniCPM-o-4.5-zhenwu-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-zhenwu-FlagOS) | [MiniCPM-o-4.5-zhenwu-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-zhenwu-FlagOS) |
+
+##### 综合评估 <!-- omit in toc -->
+
+###### Transformers–FlagOS 版本 <!-- omit in toc -->
+
+在多后端环境下使用 `USE_FLAGOS=1` 与在 NVIDIA CUDA 上使用 `USE_FLAGOS=0` 的精度差异
+
+| 指标                       |        FlagOS 后端         | 与 Nvidia-CUDA 相比差异 |
+|:-------------------------|:---------------:|:---------------------------:|
+| Video-MME 0-shot avg@1 ↑ |     Nvidia      |            0.33%            |
+| Video-MME 0-shot avg@1 ↑ |  Hygon-BW1000   |            0.17%            |
+| Video-MME 0-shot avg@1 ↑ |    Ascend-A3    |            0.50%            |
+| Video-MME 0-shot avg@1 ↑ | Iluvatar-BIV150 |            1.83%            |
+| Video-MME 0-shot avg@1 ↑ |   Metax-C550    |            0.75%            |
+
+###### VLLM-FlagOS 版本 <!-- omit in toc -->
+
+在 NVIDIA 上使用 `USE_FLAGGEMS=1 FLAGCX_PATH=/workspace/FlagCX`，或在真武 810E `USE_FLAGGEMS=1`，与直接在 NVIDIA 平台上启动 vLLM Server 的精度差异
+
+| 指标 (avg@1)          | Nvidia-FlagOS 与 Nvidia-CUDA 的差异 | zhenwu-FlagOS 与 Nvidia-CUDA 的差异 |
+|:--------------------|:------------------------------------------------:|:------------------------------------------------:|
+| CMMMU ↑             | 0.72% | 3.5% |
+| MMMU ↑              | 1.44% | 1.18% |
+| MMMU_Pro_standard ↑ | 0.83% | 0.22% |
+| MM-Vet v2 ↑         | 0.46% | 1.33% |
+| OCRBench ↑          | 0.10% | 1% |
+| CII-Bench ↑         | 0.40% | 0.13% |
+| Blink ↑             | 1.90% | 2.19% |
+
+
+#### FlagOS 使用方式 <!-- omit in toc -->
+
+##### 使用 FlagOS 在Nvidia体验性能加速 <!-- omit in toc -->
+
+在Transformers版本上，CUDA生态与FlagOS生态精度对齐的前提下，FlagOS相比CUDA任务的负载执行总时间有6%的性能提升。
+
+###### From FlagRelease【推荐】 <!-- omit in toc -->
+
+FlagRelease是FlagOS团队构建的一套面向多架构人工智能芯片的大模型自动迁移、适配与发布平台，已发布MiniCPM-o-4.5的多芯片版本。FlagRelase已内置相关软件包，无需用户安装。
+
+- FlagRelease 镜像关键版本信息
+
+  | 组件                      | 版本                                |
+  |:------------------------|:------------------------------------|
+  | 加速卡驱动                | 570.158.01                          |
+  | CUDA SDK Build          | cuda_13.0.r13.0/compiler.36424714_0 |
+  | FlagTree                | 0.4.0+3.5                           |
+  | FlagGems                | 4.2.1rc0                            |
+  | vllm & vllm-plugin-fl   | 0.13.0 + vllm_fl 0.0.0              |
+  | FlagCX                  | 0.1.0                               |  
+
+- FlagRelease 使用速递
+
+  | Vendor     | ModelScope   | Huggingface  |
+  |:-----------|:------------:|:------------:|
+  | Nvidia | [MiniCPM-o-4.5-nvidia-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) | [MiniCPM-o-4.5-nvidia-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) |
+  | Hygon-BW1000 | [MiniCPM-o-4.5-hygon-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-hygon-FlagOS) | [MiniCPM-o-4.5-hygon-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-hygon-FlagOS) |
+  | Metax-C550 | [MiniCPM-o-4.5-metax-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-metax-FlagOS) | [MiniCPM-o-4.5-metax-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-metax-FlagOS) |
+  | Iluvatar-BIV150 | [MiniCPM-o-4.5-iluvatar-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-iluvatar-FlagOS) | [MiniCPM-o-4.5-iluvatar-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-iluvatar-FlagOS) |
+  | Ascend-A3 | [MiniCPM-o-4.5-ascend-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-ascend-FlagOS) | [MiniCPM-o-4.5-ascend-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-ascend-FlagOS) |
+  | Zhenwu-810E | [MiniCPM-o-4.5-zhenwu-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-zhenwu-FlagOS) | [MiniCPM-o-4.5-zhenwu-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-zhenwu-FlagOS) |  
+
+
+##### 从零开始 <!-- omit in toc -->
+
+- 依赖Python3.12, GLIBC_2.39, GLIBCXX_3.4.33, CXXABI_1.3.15 环境
+
+###### Transformers 版本 <!-- omit in toc -->
+
+- 安装FlagOS算子库
+
+  官方仓库：https://github.com/flagos-ai/FlagGems
+
+  ```shell
+  pip install flag-gems==4.2.1rc0
+  ```
+
+- 安装FlagOS编译器
+
+  官方仓库：https://github.com/flagos-ai/flagtree
+
+  底层依赖库版本速查：https://github.com/flagos-ai/FlagTree/blob/main/documents/build.md#tips-for-building
+
+  ```shell
+  pip uninstall triton
+  
+  python3 -m pip install flagtree==0.4.0+3.5 --index-url=https://resource.flagos.net/repository/flagos-pypi-hosted/simple --trusted-host=https://resource.flagos.net
+  ```
+
+- 开启加速
+
+  在欲执行任务的命令前添加 `USE_FLAGOS=1`，例如，当您通过
+  ```shell
+  python3 generate_speech_from_video.py
+  ```
+  
+  来使用 MiniCPM-o-4.5 模型根据视频内容生成语音回答时，可以通过
+  ```shell
+  USE_FLAGOS=1 python3 generate_speech_from_video.py
+  ```
+  来使用 FlagOS 加速这一过程。
+
+###### Vllm 版本 <!-- omit in toc -->
+
+- 安装FlagOS算子库
+
+  官方仓库：https://github.com/flagos-ai/FlagGems
+  ```shell
+  pip install flag-gems==4.2.1rc0
+  pip install triton==3.5.1
+  ```
+
+- 开启加速
+  在欲执行任务的命令前添加 `USE_FLAGOS=1`，例如，当您通过
+  ```shell
+  vllm serve ${model_path} --dtype auto  --gpu_memory_utilization 0.9 --trust-remote-code --max-num-batched-tokens 2048 --served-model-name cpmo --port ${Port}
+  ```
+
+  来启动MiniCPM-o-4.5服务端时，可以通过
+  ```shell
+  USE_FLAGOS=1 vllm serve ${model_path} --dtype auto  --gpu_memory_utilization 0.9 --trust-remote-code --max-num-batched-tokens 2048 --served-model-name cpmo --port ${Port}
+  ```
+  来使用FlagOS加速这一过程。
+
+#### 使用 FlagOS 统一多芯片后端插件 <!-- omit in toc -->
+
+[vllm-plugin-FL](https://github.com/flagos-ai/vllm-plugin-FL) 是一个为 vLLM 推理/服务框架构建的插件，它基于 FlagOS 的统一多芯片后端 开发，旨在扩展 vLLM 在多种硬件环境下的功能和性能表现。
+
+##### Using vllm-plugin-FL <!-- omit in toc -->
+
+| 厂商   | 从零开始                                                                                                                 | 从 FlagRelease 开始                                                                                               |
+|:-------|:-----------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------|
+| Nvidia | [vllm-plugin-FL/MiniCPM-o-4.5](https://github.com/flagos-ai/vllm-plugin-FL/blob/main/examples/minicpm/README.md) | [MiniCPM-o-4.5-ModelScope](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS), [MiniCPM-o-4.5-Huggingface](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) |
+
+</details>
+
+
+
+### vLLM、SGLang、llama.cpp、Ollama
+
+MiniCPM-V 和 MiniCPM-o 模型推理还适配 vLLM、SGLang、llama.cpp、Ollama 等框架。具体用法可以参考我们的[使用指南](https://github.com/OpenSQZ/MiniCPM-V-Cookbook)。
+
+
+### LLaMA-Factory、SWIFT
+
+MiniCPM-V 和 MiniCPM-o 模型支持通过 LLaMA-Factory 和 SWIFT 等框架训练。具体用法可以参考我们的[使用指南](https://github.com/OpenSQZ/MiniCPM-V-Cookbook)。
+
+## MiniCPM-V & o 使用手册
+
+欢迎探索我们整理的[使用手册 (Cookbook)](https://github.com/OpenSQZ/MiniCPM-V-CookBook)，其中提供了针对 MiniCPM-V 和 MiniCPM-o 模型系列的全面、开箱即用的解决方案。本手册赋能开发者快速构建集成了视觉、语音和直播能力的多模态 AI 应用。主要特性包括：
+
+**易用的文档**
+
+我们的详尽[文档网站](https://minicpm-o.readthedocs.io/en/latest/index.html)以清晰、条理分明的方式呈现每一份解决方案。
+
+**广泛的用户支持**
+
+我们支持从个人用户到企业和研究者的广泛用户群体。
+
+* **个人用户**：借助 Ollama ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/ollama/minicpm-v4_ollama.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/ollama/minicpm-o4_5_ollama.md)) 和 Llama.cpp ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-v4_llamacpp.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-o4_5_llamacpp.md))，仅需极简设置即可轻松进行模型推理。
+* **企业用户**：通过 vLLM ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-v4_vllm.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-o4_5_vllm.md)) 和 SGLang ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/sglang/MiniCPM-v4_sglang.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/sglang/MiniCPM-o4_5_sglang.md)) 实现高吞吐量、可扩展的高性能部署。
+* **研究者**：利用包括[Transformers](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/finetune_full.md)、[LLaMA-Factory](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/finetune_llamafactory.md)、[SWIFT](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/swift.md)和[Align-anything](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/align_anything.md)在内的先进框架，进行灵活的模型开发和前沿实验。
+
+**多样化的部署场景**
+
+我们的生态系统为各种硬件环境和部署需求提供最优解决方案。
+
+* **Web Demo**：全双工实时视频交互方案，具有高响应、低延迟的特性。[WebRTC_Demo](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README_zh.md)。
+* **量化部署**：通过[GGUF](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/gguf/minicpm-v4_gguf_quantize.md)和[BNB](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/bnb/minicpm-v4_bnb_quantize.md)量化技术，最大化效率并最小化资源消耗。
+* **边缘设备**：将强大的 AI 体验带到[iPhone 和 iPad](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/ios_demo/ios.md)，支持离线及隐私敏感的应用场景。
 
 
 ## MiniCPM-V 4.0
@@ -1768,6 +2843,19 @@ MiniCPM-V 4.0 是 MiniCPM-V 系列中的一款高效模型。该模型基于 Sig
 
 </details>
 
+## 模型库
+
+| 模型               | 设备 | 资源 | &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 简介          |                                                                                         下载链接                                                                                         |
+|:-----------|:--:|:-----------:|:-------------------|:---------------:|
+| MiniCPM-o 4.5| GPU | 19 GB  | 最新版本，提供出色的视觉、语音、多模态流式交互能力的端侧模型。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-o-4_5) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-o-4_5) |
+| MiniCPM-o 4.5 gguf| GPU | 10 GB  | gguf 版本，更低的内存占用和更高的推理效率。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-o-4_5-gguf) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-o-4_5-gguf) |
+| MiniCPM-o 4.5 AWQ | GPU | 11 GB  | AWQ 量化版，更低显存占用。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4_5-AWQ) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-o-4_5-awq) |
+| MiniCPM-V 4.0| GPU | 9 GB  | 最新版本，提供出色的端侧单图、多图与视频理解能力。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4) |
+| MiniCPM-V 4.0 gguf | CPU | 4 GB  | gguf 版本，更低的内存占用和更高的推理效率。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4-gguf) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4-gguf) |
+| MiniCPM-V 4.0 int4 | GPU | 5 GB  | int4 量化版，更低显存占用。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4-int4) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4-int4) |
+| MiniCPM-V 4.0 AWQ  | GPU | 5 GB  | AWQ 量化版，更低显存占用。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4-AWQ) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4-AWQ) |
+
+
 ## 历史版本模型  <!-- omit in toc -->
 
 | 模型                 |          介绍信息和使用教程          |
@@ -1778,1063 +2866,8 @@ MiniCPM-V 4.0 是 MiniCPM-V 系列中的一款高效模型。该模型基于 Sig
 | MiniCPM-Llama3-V 2.5 | [文档](./docs/minicpm_llama3_v2dot5.md) |
 | MiniCPM-V 2.0        |      [文档](./docs/minicpm_v2.md)      |
 | MiniCPM-V 1.0        |      [文档](./docs/minicpm_v1.md)      |
-| OmniLMM-12B          |          [文档](./omnilmm.md)          |
+| OmniLMM-12B          |          [文档](./docs/omnilmm.md)          |
 
-
-## MiniCPM-V & o 使用手册
-
-欢迎探索我们整理的[使用手册 (Cookbook)](https://github.com/OpenSQZ/MiniCPM-V-CookBook)，其中提供了针对 MiniCPM-V 和 MiniCPM-o 模型系列的全面、开箱即用的解决方案。本手册赋能开发者快速构建集成了视觉、语音和直播能力的多模态 AI 应用。主要特性包括：
-
-**易用的文档**
-
-我们的详尽[文档网站](https://minicpm-o.readthedocs.io/en/latest/index.html)以清晰、条理分明的方式呈现每一份解决方案。
-
-**广泛的用户支持**
-
-我们支持从个人用户到企业和研究者的广泛用户群体。
-
-* **个人用户**：借助 Ollama ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/ollama/minicpm-v4_ollama.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/ollama/minicpm-o4_5_ollama.md)) 和 Llama.cpp ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-v4_llamacpp.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-o4_5_llamacpp.md))，仅需极简设置即可轻松进行模型推理。
-* **企业用户**：通过 vLLM ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-v4_vllm.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-o4_5_vllm.md)) 和 SGLang ([V4](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/sglang/MiniCPM-v4_sglang.md), [o4.5](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/sglang/MiniCPM-o4_5_sglang.md)) 实现高吞吐量、可扩展的高性能部署。
-* **研究者**：利用包括[Transformers](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/finetune_full.md)、[LLaMA-Factory](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/finetune_llamafactory.md)、[SWIFT](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/swift.md)和[Align-anything](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/finetune/align_anything.md)在内的先进框架，进行灵活的模型开发和前沿实验。
-
-**多样化的部署场景**
-
-我们的生态系统为各种硬件环境和部署需求提供最优解决方案。
-
-* **Web Demo**：全双工实时视频交互方案，具有高响应、低延迟的特性。[WebRTC_Demo](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README_zh.md)。
-* **量化部署**：通过[GGUF](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/gguf/minicpm-v4_gguf_quantize.md)和[BNB](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/quantization/bnb/minicpm-v4_bnb_quantize.md)量化技术，最大化效率并最小化资源消耗。
-* **边缘设备**：将强大的 AI 体验带到[iPhone 和 iPad](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/ios_demo/ios.md)，支持离线及隐私敏感的应用场景。
-
-
-## 模型库
-
-| 模型               | 设备 | 资源 | &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 简介          |                                                                                         下载链接                                                                                         |
-|:-----------|:--:|:-----------:|:-------------------|:---------------:|
-| MiniCPM-o 4.5| GPU | 19 GB  | 最新版本，提供出色的视觉、语音、多模态流式交互能力的端侧模型。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-o-4_5) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-o-4_5) |
-| MiniCPM-o 4.5 gguf| GPU | 10 GB  | gguf 版本，更低的内存占用和更高的推理效率。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-o-4_5-gguf) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-o-4_5-gguf) |
-| MiniCPM-o 4.5 AWQ | GPU | 11 GB  | AWQ 量化版，更低显存占用。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4_5-AWQ) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-o-4_5-awq) |
-| MiniCPM-V 4.0| GPU | 9 GB  | 高效的端侧视觉理解能力。  |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4) |
-| MiniCPM-V 4.0 gguf | CPU | 4 GB  | gguf 版本，更低的内存占用和更高的推理效率。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4-gguf) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4-gguf) |
-| MiniCPM-V 4.0 int4 | GPU | 5 GB  | int4 量化版，更低显存占用。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4-int4) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4-int4) |
-| MiniCPM-V 4.0 AWQ  | GPU | 5 GB  | AWQ 量化版，更低显存占用。   |  [🤗](https://huggingface.co/openbmb/MiniCPM-V-4-AWQ) &nbsp;&nbsp; [<img src="./assets/modelscope_logo.png" width="20px"></img>](https://modelscope.cn/models/OpenBMB/MiniCPM-V-4-AWQ) |
-更多[历史版本模型](#legacy-models)
-
-
-## 本地 Demo 部署
-
-
-我们提供了[快速部署指南](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README.md)，助您通过我们全新的官方 Docker 镜像，在自己的 Mac 上直接体验低延迟全双工实时通话。
-
-
-
-## 简易推理
-
-基于 Hugging Face Transformers 在 NVIDIA GPU 上进行推理。请确保安装 `transformers==4.51.0`，其他版本可能存在兼容性问题（排查中）。以下依赖已在 Python 3.10 环境测试通过：
-
-- 不使用 TTS 或流式推理：
-```bash
-pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils>=1.0.5"
-```
-
-- 使用 TTS 或流式推理：
-```bash
-pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils[all]>=1.0.5"
-```
-
-
-<details>
-<summary> 点击展开 FFmpeg 安装 (可选) </summary>
-
-**注意：** 视频帧提取（`get_video_frame_audio_segments` 使用 `use_ffmpeg=True`）和视频生成（`generate_duplex_video`）需要安装 FFmpeg。更多信息请访问 [FFmpeg 官网](https://www.ffmpeg.org/)。
-
-  **macOS (Homebrew):**
-
-  ```bash
-  brew install ffmpeg
-  ```
-
-  **Ubuntu/Debian:**
-
-  ```bash
-  sudo apt update && sudo apt install ffmpeg
-  ```
-
-  **验证:**
-
-  ```bash
-  ffmpeg -version
-  ```
-</details>
-
-
-
-### 模型初始化
-
-<details>
-<summary>点击展开模型初始化示例代码</summary>
-
-```python
-import torch
-from transformers import AutoModel
-
-# 加载全模态模型（默认：init_vision=True, init_audio=True, init_tts=True）
-# 仅视觉模型：设置 init_audio=False 和 init_tts=False
-# 仅音频模型：设置 init_vision=False
-model = AutoModel.from_pretrained(
-    "openbmb/MiniCPM-o-4_5",
-    trust_remote_code=True,
-    attn_implementation="sdpa", # sdpa or flash_attention_2
-    torch_dtype=torch.bfloat16,
-    init_vision=True,
-    init_audio=True,
-    init_tts=True,
-)
-model.eval().cuda()
-
-# 初始化 TTS 模块，用于对话的音频输出
-model.init_tts()
-
-# 将单工模型转换为双工模式
-duplex_model = model.as_duplex()
-
-# 将双工模型转换回单工模式
-simplex_model = duplex_model.as_simplex(reset_session=True)
-```
-
-</details>
-
-
-### 双工全模态模式
-
-全双工流式推理，支持实时或录制视频的对话场景。
-
-<details>
-<summary>点击展开双工全模态模式示例代码</summary>
-
-```python
-import librosa
-import torch
-from minicpmo.utils import generate_duplex_video, get_video_frame_audio_segments
-from transformers import AutoModel
-
-# Load model and convert to duplex mode
-model = AutoModel.from_pretrained(
-    "openbmb/MiniCPM-o-4_5",
-    trust_remote_code=True,
-    attn_implementation="sdpa",  # or "flash_attention_2"
-    torch_dtype=torch.bfloat16,
-)
-model.eval().cuda()
-model = model.as_duplex()
-
-# Load video and reference audio
-video_path = "assets/omni_duplex1.mp4"
-ref_audio_path = "assets/HT_ref_audio.wav"
-ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
-
-# Extract video frames and audio segments
-video_frames, audio_segments, stacked_frames = get_video_frame_audio_segments(
-    video_path, stack_frames=1, use_ffmpeg=True, adjust_audio_length=True
-)
-
-# Prepare duplex session with system prompt and voice reference
-model.prepare(
-    prefix_system_prompt="Streaming Omni Conversation.",
-    ref_audio=ref_audio,
-    prompt_wav_path=ref_audio_path,
-)
-
-results_log = []
-timed_output_audio = []
-
-# Process each chunk in streaming fashion
-for chunk_idx in range(len(audio_segments)):
-    audio_chunk = audio_segments[chunk_idx] if chunk_idx < len(audio_segments) else None
-    frame = video_frames[chunk_idx] if chunk_idx < len(video_frames) else None
-    frame_list = []
-    if frame is not None:
-        frame_list.append(frame)
-        if stacked_frames is not None and chunk_idx < len(stacked_frames) and stacked_frames[chunk_idx] is not None:
-            frame_list.append(stacked_frames[chunk_idx])
-
-    # Step 1: Streaming prefill
-    model.streaming_prefill(
-        audio_waveform=audio_chunk,
-        frame_list=frame_list,
-        max_slice_nums=1,  # Increase for HD mode (e.g., [2, 1] for stacked frames)
-        batch_vision_feed=False,  # Set True for faster processing
-    )
-
-    # Step 2: Streaming generate
-    result = model.streaming_generate(
-        prompt_wav_path=ref_audio_path,
-        max_new_speak_tokens_per_chunk=20,
-        decode_mode="sampling",
-    )
-
-    if result["audio_waveform"] is not None:
-        timed_output_audio.append((chunk_idx, result["audio_waveform"]))
-
-    chunk_result = {
-        "chunk_idx": chunk_idx,
-        "is_listen": result["is_listen"],
-        "text": result["text"],
-        "end_of_turn": result["end_of_turn"],
-        "current_time": result["current_time"],
-        "audio_length": len(result["audio_waveform"]) if result["audio_waveform"] is not None else 0,
-    }
-    results_log.append(chunk_result)
-    
-    print("listen..." if result["is_listen"] else f"speak> {result['text']}")
-
-# Generate output video with AI responses
-# Please install Chinese fonts (fonts-noto-cjk or fonts-wqy-microhei) to render CJK subtitles correctly.
-# apt-get install -y fonts-noto-cjk fonts-wqy-microhei
-# fc-cache -fv
-generate_duplex_video(
-    video_path=video_path,
-    output_video_path="duplex_output.mp4",
-    results_log=results_log,
-    timed_output_audio=timed_output_audio,
-    output_sample_rate=24000,
-)
-```
-
-</details>
-
-
-### 单工全模态模式
-
-#### 对话推理 <!-- omit in toc -->
-
-<details>
-<summary>点击展开对话推理示例代码</summary>
-
-```python
-from minicpmo.utils import get_video_frame_audio_segments
-
-model = ...
-model.init_tts()
-
-video_path = "assets/Skiing.mp4"
-
-# Optional: Set reference audio for voice cloning
-ref_audio_path = "assets/HT_ref_audio.wav"
-sys_msg = model.get_sys_prompt(ref_audio=ref_audio_path, mode="omni", language="en")
-
-# Use stack_frames=5 for high refresh rate mode
-video_frames, audio_segments, stacked_frames = get_video_frame_audio_segments(video_path, stack_frames=1)
-omni_contents = []
-for i in range(len(video_frames)):
-    omni_contents.append(video_frames[i])
-    omni_contents.append(audio_segments[i])
-    if stacked_frames is not None and stacked_frames[i] is not None:
-        omni_contents.append(stacked_frames[i])
-
-msg = {"role": "user", "content": omni_contents}
-msgs = [sys_msg, msg]
-
-# Set generate_audio=True and output_audio_path to save TTS output
-generate_audio = True
-output_audio_path = "output.wav"
-
-res = model.chat(
-    msgs=msgs,
-    max_new_tokens=4096,
-    do_sample=True,
-    temperature=0.7,
-    use_tts_template=True,
-    enable_thinking=False,
-    omni_mode=True,  # Required for omni inference
-    generate_audio=generate_audio,
-    output_audio_path=output_audio_path,
-    max_slice_nums=1,  # Increase for HD mode
-)
-print(res)
-```
-
-</details>
-
-#### 流式推理 <!-- omit in toc -->
-
-<details>
-<summary>点击展开流式推理示例代码</summary>
-
-```python
-import librosa
-import numpy as np
-import soundfile as sf
-import torch
-from minicpmo.utils import get_video_frame_audio_segments
-
-model = ...
-model.init_tts()
-
-# Reset session for a new conversation (clears KV cache)
-model.reset_session()
-
-# Optional: Load reference audio for voice cloning
-ref_audio_path = "assets/HT_ref_audio.wav"
-ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
-model.init_token2wav_cache(ref_audio)
-
-session_id = "demo"
-
-# Extract video frames and audio segments (use stack_frames=5 for high refresh rate mode)
-video_path = "assets/Skiing.mp4"
-video_frames, audio_segments, stacked_frames = get_video_frame_audio_segments(video_path, stack_frames=1)
-
-# Build omni contents list
-omni_contents = []
-for i in range(len(video_frames)):
-    omni_contents.append(video_frames[i])
-    omni_contents.append(audio_segments[i])
-    if stacked_frames is not None and stacked_frames[i] is not None:
-        omni_contents.append(stacked_frames[i])
-
-generate_audio = False
-output_audio_path = "output.wav"
-
-# Step 1: Prefill system prompt
-sys_msg = model.get_sys_prompt(ref_audio=ref_audio, mode="omni", language="en")
-model.streaming_prefill(session_id=session_id, msgs=[sys_msg])
-
-# Step 2: Prefill omni chunks (is_last_chunk=True only for the last audio chunk)
-audio_indices = [i for i, c in enumerate(omni_contents) if isinstance(c, np.ndarray)]
-last_audio_idx = audio_indices[-1] if audio_indices else -1
-
-for idx, content in enumerate(omni_contents):
-    is_last_audio_chunk = idx == last_audio_idx
-    msgs = [{"role": "user", "content": [content]}]
-    model.streaming_prefill(session_id=session_id, msgs=msgs, omni_mode=True, is_last_chunk=is_last_audio_chunk)
-
-# Step 3: Generate response
-iter_gen = model.streaming_generate(
-    session_id=session_id,
-    generate_audio=generate_audio,
-    use_tts_template=True,
-    enable_thinking=False,
-    do_sample=True,
-)
-
-audios = []
-text = ""
-
-if generate_audio:
-    for wav_chunk, text_chunk in iter_gen:
-        audios.append(wav_chunk)
-        text += text_chunk
-
-    generated_waveform = torch.cat(audios, dim=-1)[0]
-    sf.write(output_audio_path, generated_waveform.cpu().numpy(), samplerate=24000)
-
-    print("Text:", text)
-    print("Audio saved to output.wav")
-else:
-    for text_chunk, is_finished in iter_gen:
-        text += text_chunk
-    print("Text:", text)
-```
-
-</details>
-
-
-
-### 单工实时语音对话模式 <!-- omit in toc -->
-
-
-<details>
-<summary>点击展开单工模式实时语音对话 API 用法。</summary>
-
-首先，确保你已安装所有依赖，尤其是 `minicpmo-utils[all]>=1.0.5`：
-```bash
-pip install "transformers==4.51.0" accelerate "torch>=2.3.0,<=2.8.0" "torchaudio<=2.8.0" "minicpmo-utils[all]>=1.0.5"
-```
-
-```python
-import librosa
-import numpy as np
-import torch
-import soundfile as sf
-
-model = ...
-
-# 设置参考音频，用于音色风格
-ref_audio_path = "ref_audio_path"
-ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
-
-# 英文对话示例系统消息
-sys_msg = {
-  "role": "system",
-  "content": [
-    "Clone the voice in the provided audio prompt.",
-    ref_audio,
-    "Please assist users while maintaining this voice style. Please answer the user's questions seriously and in a high quality. Please chat with the user in a highly human-like and oral style. You are a helpful assistant developed by ModelBest: MiniCPM-Omni"
-  ]
-}
-
-
-# 中文对话示例系统消息
-sys_msg = {
-  "role": "system",
-  "content": [
-    "模仿输入音频中的声音特征。",
-    ref_audio,
-    "你的任务是用这种声音模式来当一个助手。请认真、高质量地回复用户的问题。请用高自然度的方式和用户聊天。你是由面壁智能开发的人工智能助手：面壁小钢炮。"
-  ]
-}
-
-# 上面两种系统提示词（system prompt）都可用于流式语音对话
-
-# 重置状态
-model.init_tts(streaming=True)
-model.reset_session(reset_token2wav_cache=True)
-model.init_token2wav_cache(prompt_speech_16k=ref_audio)
-
-session_id = "demo"
-
-# 首先，预填充系统轮次（system turn）
-model.streaming_prefill(
-    session_id=session_id,
-    msgs=[sys_msg],
-    omni_mode=False,
-    is_last_chunk=True,
-)
-
-# 这里通过把整段用户输入音频切成 1 秒一段，来模拟实时语音对话。
-user_audio, _ = librosa.load("user_audio.wav", sr=16000, mono=True)
-
-IN_SAMPLE_RATE = 16000 # 输入音频采样率，固定值
-CHUNK_SAMPLES = IN_SAMPLE_RATE # 每段长度（采样点数）
-OUT_SAMPLE_RATE = 24000 # 输出音频采样率，固定值
-MIN_AUDIO_SAMPLES = 16000
-
-total_samples = len(user_audio)
-num_chunks = (total_samples + CHUNK_SAMPLES - 1) // CHUNK_SAMPLES
-
-for chunk_idx in range(num_chunks):
-    start = chunk_idx * CHUNK_SAMPLES
-    end = min((chunk_idx + 1) * CHUNK_SAMPLES, total_samples)
-    chunk_audio = user_audio[start:end]
-    
-    is_last_chunk = (chunk_idx == num_chunks - 1)
-    if is_last_chunk and len(chunk_audio) < MIN_AUDIO_SAMPLES:
-        chunk_audio = np.concatenate([chunk_audio, np.zeros(MIN_AUDIO_SAMPLES - len(chunk_audio), dtype=chunk_audio.dtype)])
-
-    user_msg = {"role": "user", "content": [chunk_audio]}
-    
-    # 对每个 1 秒音频分片执行一次 streaming_prefill，以降低首 token 延迟
-    model.streaming_prefill(
-        session_id=session_id,
-        msgs=[user_msg],
-        omni_mode=False,
-        is_last_chunk=is_last_chunk,
-    )
-
-
-# 让模型以流式方式生成回复
-generate_audio = True
-iter_gen = model.streaming_generate(
-    session_id=session_id,
-    generate_audio=generate_audio,
-    use_tts_template=True,
-    enable_thinking=False,
-    do_sample=True,
-    max_new_tokens=512,
-    length_penalty=1.1, # 对实时语音对话模式，建议 length_penalty=1.1 以提升回复内容质量
-)
-
-audios = []
-text = ""
-
-output_audio_path = ...
-if generate_audio:
-    for wav_chunk, text_chunk in iter_gen:
-        audios.append(wav_chunk)
-        text += text_chunk
-
-    generated_waveform = torch.cat(audios, dim=-1)[0]
-    sf.write(output_audio_path, generated_waveform.cpu().numpy(), samplerate=24000)
-
-    print("文本:", text)
-    print("音频已保存至 output.wav")
-else:
-    for text_chunk, is_finished in iter_gen:
-        text += text_chunk
-    print("文本:", text)
-
-# 接下来可以继续预填充后续用户轮次，并生成下一轮回复……
-
-```
-
-</details>
-
-#### 作为多才多艺、氛围感十足的 AI 助手的语音对话 <!-- omit in toc -->
-
-基于精心设计的后训练数据与专业配音演员录音，`MiniCPM-o-4.5` 也可以作为 AI 语音助手使用。它开箱即用即可提供高质量的口语交互。它能生成甜美且富有表现力的声音，并具备自然的韵律（如恰当的节奏、重读和停顿），让日常对话更有生命力。它同样支持故事讲述和叙述型语音，表达连贯且富有吸引力。此外，它还支持更高级的语音指令控制，例如情绪语气、词级别的强调。
-
-<details>
-<summary>点击展开 AI 助手语音对话代码。</summary>
-
-```python
-import librosa
-
-# 设置参考音频，用于音色风格
-ref_audio_path = "assets/HT_ref_audio.wav"
-ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
-
-# 用于中文对话
-sys_msg = {
-  "role": "system",
-  "content": [
-    "模仿输入音频中的声音特征。",
-    ref_audio,
-    "你的任务是用这种声音模式来当一个助手。请认真、高质量地回复用户的问题。请用高自然度的方式和用户聊天。你是由面壁智能开发的人工智能助手：面壁小钢炮。"
-  ]
-}
-
-# 用于英文对话
-sys_msg = {
-  "role": "system",
-  "content": [
-    "克隆所提供音频提示中的声音。",
-    ref_audio,
-    "请在保持该音色风格的同时帮助用户。请认真且高质量地回答用户问题。请用高度拟人、口语化的方式与用户聊天。你是由 ModelBest 开发的有用助手：MiniCPM-Omni。"
-  ]
-}
-```
-
-</details>
-
-
-#### 使用自定义音色与自定义系统画像的通用语音对话 <!-- omit in toc -->
-
-MiniCPM-o-4.5 可以基于音频提示与文本画像提示进行特定角色的扮演。它会模仿该角色的声音，并在文字回复中采用其语言风格。同时也会遵循文本画像中定义的设定。在该模式下，MiniCPM-o-4.5 听起来会 **更加自然、更像真人**。 
-
-<details>
-<summary>点击展开自定义音色/系统画像对话代码。</summary>
-
-```python
-import librosa
-
-# 设置参考音频，用于音色克隆
-ref_audio_path = "assets/system_ref_audio.wav"
-ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
-
-# 英文对话 + 文本画像（profile）
-sys_msg = {
-  "role": "system",
-  "content": [
-    "克隆所提供音频提示中的声音。",
-    ref_audio,
-    "请以高度拟人、口语化的方式与用户聊天。" + "你是埃隆·马斯克（Elon Musk），特斯拉与 SpaceX 的 CEO。你说话直接随性，常带一点冷幽默。你热衷于火星、可持续能源，以及推动人类向前发展。表达要直白，偶尔带点黑色幽默；用简单逻辑，不要粉饰；不要圆滑外交；即便有争议也说出你真实的想法。回复控制在约 100 个英文单词的长度，不要啰嗦。"
-  ]
-}
-
-
-# 英文对话（无文本画像）
-sys_msg = {
-  "role": "system",
-  "content": [
-    "克隆所提供音频提示中的声音。",
-    ref_audio,
-    "你的任务是使用这种声音风格充当一名助手。请认真且高质量地回答用户问题。请以高自然度的方式与用户聊天。"
-  ]
-}
-
-# 中文对话（无文本画像）
-sys_msg = {
-  "role": "system",
-  "content": [
-    "根据输入的音频提示生成相似的语音。",
-    librosa.load("assets/system_ref_audio_2.wav", sr=16000, mono=True)[0],
-    "作为助手，你将使用这种声音风格说话。 请认真、高质量地回复用户的问题。 请用高自然度的方式和用户聊天。"
-  ]
-}
-
-# 中文对话 + 文本画像（profile）
-sys_msg = {
-  "role": "system",
-  "content": [
-    "根据输入的音频提示生成相似的语音。",
-    ref_audio,
-    "你是一个具有以上声音风格的AI助手。请用高拟人度、口语化的方式和用户聊天。" + "你是一名心理咨询师兼播客主理人，热爱创作与深度对话。你性格细腻、富有共情力，善于从个人经历中提炼哲思。语言风格兼具理性与诗意，常以隐喻表达内在体验。"
-  ]
-}
-
-```
-
-</details>
-
-
-### 语音与音频模式  <!-- omit in toc -->
-
-#### 零样本文本转语音（TTS，Text-to-Speech） <!-- omit in toc -->
-
-`MiniCPM-o-4.5` 支持零样本文本转语音（TTS）。在该模式下，模型会作为高自然度的 TTS 系统运行，并能复刻参考音色。
-
-<details>
-<summary>点击展开零样本 TTS 代码。</summary>
-
-```python
-import librosa
-
-model = ...
-model.init_tts()
-
-# 同时适用于中文与英文
-ref_audio_path = "assets/HT_ref_audio.wav"
-ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
-sys_msg = {"role": "system", "content": [
-  "模仿音频样本的音色并生成新的内容。",
-  ref_audio,
-  "请用这种声音风格来为用户提供帮助。 直接作答，不要有冗余内容"
-]}
-
-# 英文示例
-user_msg = {
-  "role": "user",
-  "content": [
-    "请朗读以下内容。" + " " + "I have a wrap up that I want to offer you now, a conclusion to our work together.\n（中文参考：我现在想给你做一个收尾总结，作为我们一起工作的结语。）"
-  ]
-}
-
-# 中文示例
-user_msg = {
-  "role": "user",
-  "content": [
-    "请朗读以下内容。" + " " + "你好，欢迎来到艾米说科幻，我是艾米。"
-  ]
-}
-
-msgs = [sys_msg, user_msg]
-res = model.chat(
-    msgs=msgs,
-    do_sample=True,
-    max_new_tokens=512,
-    use_tts_template=True,
-    generate_audio=True,
-    temperature=0.1,
-    output_audio_path="result_voice_cloning.wav",
-)
-```
-
-</details>
-
-
-#### 仿声复现（Mimick） <!-- omit in toc -->
-
-`Mimick` 任务用于评估模型端到端语音建模能力。模型接收音频输入后，会先进行转写，再以高保真方式重建原始音频，尽可能保留细粒度的声学、副语言以及语义信息。重建音频与原始音频的相似度越高，说明端到端语音建模能力越强。
-
-<details>
-<summary>点击展开仿声复现（Mimick）代码。</summary>
-
-```python
-import librosa
-
-model = ...
-model.init_tts()
-
-system_prompt = "你是一个乐于助人的助手。你可以接收视频、音频和文本输入，并输出语音与文本。请只给出答案，不要有冗余内容。"
-
-mimick_prompt = "请用合适的语言复述以下语音内容。"
-
-audio_input, _ = librosa.load("assets/Trump_WEF_2018_10s.mp3", sr=16000, mono=True)
-
-msgs = [
-    {"role": "system", "content": [system_prompt]},
-    {"role": "user", "content": [mimick_prompt, audio_input]}
-  ]
-
-res = model.chat(
-    msgs=msgs,
-    do_sample=True,
-    max_new_tokens=512,
-    use_tts_template=True,
-    temperature=0.1,
-    generate_audio=True,
-    output_audio_path="output_mimick.wav",
-)
-```
-
-</details>
-
-
-#### 覆盖多种音频理解任务 <!-- omit in toc -->
-
-`MiniCPM-o-4.5` 也能处理多种音频理解任务，例如 ASR（自动语音识别）、说话人分析、通用音频描述（Audio Captioning）以及声景标签（Sound Scene Tagging）。
-
-对于音频转文本任务，你可以使用以下提示词：
-
-- ASR（中文，或 AST EN→ZH）: `请仔细听这段音频片段，并将其内容逐字记录。`
-- ASR（英文，或 AST ZH→EN）: `Please listen to the audio snippet carefully and transcribe the content.`（请仔细听这段音频片段，并将其内容逐字转写。）
-- 说话人分析（Speaker Analysis）: `Based on the speaker's content, speculate on their gender, condition, age range, and health status.`（请根据说话内容推测其性别、状态、年龄范围与健康状况。）
-- 通用音频描述（General Audio Caption）: `Summarize the main content of the audio.`（总结音频的主要内容。）
-- 声景标签（Sound Scene Tagging）: `Utilize one keyword to convey the audio's content or the associated scene.`（用一个关键词概括音频内容或对应场景。）
-
-<details>
-<summary>点击展开音频理解任务代码。</summary>
-
-```python
-import librosa
-
-model = ...
-model.init_tts()
-
-# 加载待转写/分析的音频
-audio_input, _ = librosa.load("assets/Trump_WEF_2018_10s.mp3", sr=16000, mono=True)
-
-# 选择任务提示词（可选项见上方）
-task_prompt = "请仔细听这段音频片段，并将其内容逐字转写。\n"
-msgs = [{"role": "user", "content": [task_prompt, audio_input]}]
-
-res = model.chat(
-    msgs=msgs,
-    do_sample=True,
-    max_new_tokens=512,
-    use_tts_template=True,
-    generate_audio=True,
-    temperature=0.3,
-    output_audio_path="result_audio_understanding.wav",
-)
-print(res)
-```
-
-</details>
-
-
-### 纯视觉模式 <!-- omit in toc -->
-
-`MiniCPM-o-4.5` 的推理方式与 `MiniCPM-V-4.5` 一致。
-
-#### 单图对话 <!-- omit in toc -->
-
-<details>
-<summary>点击展开单图对话示例代码</summary>
-
-```python
-import torch
-from PIL import Image
-from transformers import AutoModel
-
-model = AutoModel.from_pretrained(
-    "openbmb/MiniCPM-o-4_5",
-    trust_remote_code=True,
-    attn_implementation="sdpa",  # or "flash_attention_2"
-    torch_dtype=torch.bfloat16,
-    init_vision=True,
-    init_audio=False,
-    init_tts=False,
-)
-model.eval().cuda()
-
-image = Image.open("assets/fossil.png").convert("RGB")
-question = "What is in the image?"
-msgs = [{"role": "user", "content": [image, question]}]
-
-res = model.chat(msgs=msgs, use_tts_template=False)
-print(res)
-```
-
-</details>
-
-#### 多图对话 <!-- omit in toc -->
-
-<details>
-<summary>点击展开多图输入示例代码</summary>
-
-```python
-import torch
-from PIL import Image
-from transformers import AutoModel
-
-model = ...
-
-image1 = Image.open("assets/highway.png").convert("RGB")
-image2 = Image.open("assets/fossil.png").convert("RGB")
-question = "Compare image 1 and image 2, tell me about the differences between them."
-msgs = [{"role": "user", "content": [image1, image2, question]}]
-
-answer = model.chat(msgs=msgs, use_tts_template=False, enable_thinking=False)
-print(answer)
-```
-
-</details>
-
-#### In-Context 少样本推理 <!-- omit in toc -->
-
-<details>
-<summary>点击展开 In-Context 少样本推理示例代码</summary>
-
-```python
-from PIL import Image
-
-model = ...
-
-question = "production date"
-image1 = Image.open("example1.jpg").convert("RGB")
-answer1 = "2023.08.04"
-image2 = Image.open("example2.jpg").convert("RGB")
-answer2 = "2007.04.24"
-image_test = Image.open("test.jpg").convert("RGB")
-
-msgs = [
-    {"role": "user", "content": [image1, question]},
-    {"role": "assistant", "content": [answer1]},
-    {"role": "user", "content": [image2, question]},
-    {"role": "assistant", "content": [answer2]},
-    {"role": "user", "content": [image_test, question]},
-]
-
-answer = model.chat(msgs=msgs, use_tts_template=False, enable_thinking=False)
-print(answer)
-```
-
-</details>
-
-#### 视频对话 <!-- omit in toc -->
-
-<details>
-<summary>点击展开视频输入示例代码</summary>
-
-```python
-import torch
-from minicpmo.utils import get_video_frame_audio_segments
-from transformers import AutoModel
-
-model = ...
-
-video_path = "assets/Skiing.mp4"
-video_frames, _, _ = get_video_frame_audio_segments(video_path)
-print("num frames:", len(video_frames))
-
-question = "Describe the video"
-msgs = [{"role": "user", "content": video_frames + [question]}]
-
-answer = model.chat(
-    msgs=msgs,
-    max_new_tokens=128,
-    use_image_id=False,
-    max_slice_nums=1,
-    use_tts_template=False,
-    enable_thinking=False,  # Set True to enable thinking mode
-)
-print(answer)
-```
-
-</details>
-
-### 结构化内容输入 <!-- omit in toc -->
-
-<details>
-<summary>点击展开结构化内容输入</summary>
-
-`chat` 方法支持两种消息内容格式：
-
-**原生格式** — 直接传入 Python 对象：
-```python
-msgs = [{"role": "user", "content": [pil_image, audio_ndarray, "Describe this."]}]
-```
-
-**OpenAI 兼容格式** — 使用结构化字典：
-```python
-msgs = [
-    {
-        "role": "user",
-        "content": [
-            {"type": "image_url", "image_url": {"url": "/path/to/image.jpg"}},
-            {"type": "audio_url", "audio_url": {"url": "/path/to/audio.wav"}},
-            {"type": "video_url", "video_url": {"url": "/path/to/video.mp4", "use_audio": True}},
-            {"type": "text", "text": "Describe this."}
-        ]
-    }
-]
-```
-
-**支持的类型：**
-
-| 类型 | 输入格式 | 转换为 |
-|------|----------|--------|
-| `text` | `{"type": "text", "text": "..."}` | `str` |
-| `image_url` | `{"type": "image_url", "image_url": {"url": "..."}}` | `PIL.Image` |
-| `audio_url` | `{"type": "audio_url", "audio_url": {"url": "..."}}` | `np.ndarray`（16kHz 单声道） |
-| `video_url` | `{"type": "video_url", "video_url": {"url": "...", "stack_frames": 1, "use_audio": True}}` | `List[Image, ndarray, ...]` |
-
-- **URL 来源**：支持本地文件路径或 `http://`/`https://` URL
-- **混合格式**：原生对象和结构化字典可在同一 content 列表中混用
-
-</details>
-
-
-## 框架支持
-
-### FlagOS
-
-为解决不同 AI 芯片大规模落地应用，北京智源研究院联合众多科研机构、芯片企业、系统厂商、算法和软件相关单位等国内外机构共同发起并创立了 FlagOS 开源社区。
-
-FlagOS 社区致力于打造面向多种 AI 芯片的统一、开源的系统软件栈，包括大型算子库、统一AI编译器、并行训推框架、统一通信库等核心开源项目，构建「模型-系统-芯片」三层贯通的开放技术生态，通过“一次开发跨芯迁移”释放硬件计算潜力，打破不同芯片软件栈之间生态隔离，有效降低开发者的迁移成本。FlagOS 社区构建人工智能软硬件生态，突破单一闭源垄断，推动AI硬件技术大范围落地发展，立足中国、拥抱全球合作。
-官网速递：https://flagos.io
-
-<details>
-<summary>点击展开 FlagOS 详细</summary>
-
-#### FlagOS 多 AI 芯片支持 <!-- omit in toc -->
-
-基于FlagOS极短时间内适配MiniCPM-o 4.5到 6 种不同的 AI 芯片，得益于众智 FlagOS 的多芯片统一 AI 系统软件栈的能力。目前，在FlagOS团队构建的面向多架构人工智能芯片的大模型自动迁移、适配与发布平台FlagRelease上，已发布MiniCPM-o-4.5的多芯片版本。细节如下：
-
-| Vendor          | ModelScope   | Huggingface  |
-|:----------------|:------------:|:------------:|
-| Nvidia          | [MiniCPM-o-4.5-nvidia-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) | [MiniCPM-o-4.5-nvidia-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) |
-| Hygon-BW1000    | [MiniCPM-o-4.5-hygon-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-hygon-FlagOS) | [MiniCPM-o-4.5-hygon-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-hygon-FlagOS) |
-| Metax-C550      | [MiniCPM-o-4.5-metax-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-metax-FlagOS) | [MiniCPM-o-4.5-metax-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-metax-FlagOS) |
-| Iluvatar-BIV150 | [MiniCPM-o-4.5-iluvatar-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-iluvatar-FlagOS) | [MiniCPM-o-4.5-iluvatar-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-iluvatar-FlagOS) |
-| Ascend-A3       | [MiniCPM-o-4.5-ascend-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-ascend-FlagOS) | [MiniCPM-o-4.5-ascend-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-ascend-FlagOS) |
-| Zhenwu-810E     | [MiniCPM-o-4.5-zhenwu-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-zhenwu-FlagOS) | [MiniCPM-o-4.5-zhenwu-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-zhenwu-FlagOS) |
-
-##### 综合评估 <!-- omit in toc -->
-
-###### Transformers–FlagOS 版本 <!-- omit in toc -->
-
-在多后端环境下使用 `USE_FLAGOS=1` 与在 NVIDIA CUDA 上使用 `USE_FLAGOS=0` 的精度差异
-
-| 指标                       |        FlagOS 后端         | 与 Nvidia-CUDA 相比差异 |
-|:-------------------------|:---------------:|:---------------------------:|
-| Video-MME 0-shot avg@1 ↑ |     Nvidia      |            0.33%            |
-| Video-MME 0-shot avg@1 ↑ |  Hygon-BW1000   |            0.17%            |
-| Video-MME 0-shot avg@1 ↑ |    Ascend-A3    |            0.50%            |
-| Video-MME 0-shot avg@1 ↑ | Iluvatar-BIV150 |            1.83%            |
-| Video-MME 0-shot avg@1 ↑ |   Metax-C550    |            0.75%            |
-
-###### VLLM-FlagOS 版本 <!-- omit in toc -->
-
-在 NVIDIA 上使用 `USE_FLAGGEMS=1 FLAGCX_PATH=/workspace/FlagCX`，或在真武 810E `USE_FLAGGEMS=1`，与直接在 NVIDIA 平台上启动 vLLM Server 的精度差异
-
-| 指标 (avg@1)          | Nvidia-FlagOS 与 Nvidia-CUDA 的差异 | zhenwu-FlagOS 与 Nvidia-CUDA 的差异 |
-|:--------------------|:------------------------------------------------:|:------------------------------------------------:|
-| CMMMU ↑             | 0.72% | 3.5% |
-| MMMU ↑              | 1.44% | 1.18% |
-| MMMU_Pro_standard ↑ | 0.83% | 0.22% |
-| MM-Vet v2 ↑         | 0.46% | 1.33% |
-| OCRBench ↑          | 0.10% | 1% |
-| CII-Bench ↑         | 0.40% | 0.13% |
-| Blink ↑             | 1.90% | 2.19% |
-
-
-#### FlagOS 使用方式 <!-- omit in toc -->
-
-##### 使用 FlagOS 在Nvidia体验性能加速 <!-- omit in toc -->
-
-在Transformers版本上，CUDA生态与FlagOS生态精度对齐的前提下，FlagOS相比CUDA任务的负载执行总时间有6%的性能提升。
-
-###### From FlagRelease【推荐】 <!-- omit in toc -->
-
-FlagRelease是FlagOS团队构建的一套面向多架构人工智能芯片的大模型自动迁移、适配与发布平台，已发布MiniCPM-o-4.5的多芯片版本。FlagRelase已内置相关软件包，无需用户安装。
-
-- FlagRelease 镜像关键版本信息
-
-  | 加速卡驱动版本                 | 驱动版本: 570.158.01                             |
-  |:------------------------|:------------------------------------|
-  | CUDA SDK Build          | cuda_13.0.r13.0/compiler.36424714_0 |
-  | FlagTree                | 0.4.0+3.5                           |
-  | FlagGems                | 4.2.1rc0                            |
-  | vllm & vllm-plugin-fl   | 0.13.0 + vllm_fl 0.0.0              |
-  | FlagCX                  | 0.1.0                               |  
-
-- FlagRelease 使用速递
-
-  | Vendor     | ModelScope   | Huggingface  |
-  |:-----------|:------------:|:------------:|
-  | Nvidia | [MiniCPM-o-4.5-nvidia-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) | [MiniCPM-o-4.5-nvidia-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) |
-  | Hygon-BW1000 | [MiniCPM-o-4.5-hygon-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-hygon-FlagOS) | [MiniCPM-o-4.5-hygon-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-hygon-FlagOS) |
-  | Metax-C550 | [MiniCPM-o-4.5-metax-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-metax-FlagOS) | [MiniCPM-o-4.5-metax-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-metax-FlagOS) |
-  | Iluvatar-BIV150 | [MiniCPM-o-4.5-iluvatar-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-iluvatar-FlagOS) | [MiniCPM-o-4.5-iluvatar-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-iluvatar-FlagOS) |
-  | Ascend-A3 | [MiniCPM-o-4.5-ascend-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-ascend-FlagOS) | [MiniCPM-o-4.5-ascend-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-ascend-FlagOS) |
-  | Zhenwu-810E | [MiniCPM-o-4.5-zhenwu-FlagOS](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-zhenwu-FlagOS) | [MiniCPM-o-4.5-zhenwu-FlagOS](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-zhenwu-FlagOS) |  
-
-
-##### 从零开始 <!-- omit in toc -->
-
-- 依赖Python3.12, GLIBC_2.39, GLIBCXX_3.4.33, CXXABI_1.3.15 环境
-
-###### Transformers 版本 <!-- omit in toc -->
-
-- 安装FlagOS算子库
-
-  官方仓库：https://github.com/flagos-ai/FlagGems
-
-  ```shell
-  pip install flag-gems==4.2.1rc0
-  ```
-
-- 安装FlagOS编译器
-
-  官方仓库：https://github.com/flagos-ai/flagtree
-
-  底层依赖库版本速查：https://github.com/flagos-ai/FlagTree/blob/main/documents/build.md#tips-for-building
-
-  ```shell
-  pip uninstall triton
-  
-  python3 -m pip install flagtree==0.4.0+3.5 --index-url=https://resource.flagos.net/repository/flagos-pypi-hosted/simple --trusted-host=https://resource.flagos.net
-  ```
-
-- 开启加速
-
-  在欲执行任务的命令前添加 `USE_FLAGOS=1`，例如，当您通过
-  ```shell
-  python3 generate_speech_from_video.py
-  ```
-  
-  来使用 MiniCPM-o-4.5 模型根据视频内容生成语音回答时，可以通过
-  ```shell
-  USE_FLAGOS=1 python3 generate_speech_from_video.py
-  ```
-  来使用 FlagOS 加速这一过程。
-
-###### Vllm 版本 <!-- omit in toc -->
-
-- 安装FlagOS算子库
-
-  官方仓库：https://github.com/flagos-ai/FlagGems
-  ```shell
-  pip install flag-gems==4.2.1rc0
-  pip install triton==3.5.1
-  ```
-
-- 开启加速
-  在欲执行任务的命令前添加 `USE_FLAGOS=1`，例如，当您通过
-  ```shell
-  vllm serve ${model_path} --dtype auto  --gpu_memory_utilization 0.9 --trust-remote-code --max-num-batched-tokens 2048 --served-model-name cpmo --port ${Port}
-  ```
-
-  来启动MiniCPM-o-4.5服务端时，可以通过
-  ```shell
-  USE_FLAGOS=1 vllm serve ${model_path} --dtype auto  --gpu_memory_utilization 0.9 --trust-remote-code --max-num-batched-tokens 2048 --served-model-name cpmo --port ${Port}
-  ```
-  来使用FlagOS加速这一过程。
-
-#### 使用 FlagOS 统一多芯片后端插件 <!-- omit in toc -->
-
-[vllm-plugin-FL](https://github.com/flagos-ai/vllm-plugin-FL) 是一个为 vLLM 推理/服务框架构建的插件，它基于 FlagOS 的统一多芯片后端 开发，旨在扩展 vLLM 在多种硬件环境下的功能和性能表现。
-
-##### Using vllm-plugin-FL <!-- omit in toc -->
-
-| 厂商   | 从零开始                                                                                                                 | 从 FlagRelease 开始                                                                                               |
-|:-------|:-----------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------|
-| Nvidia | [vllm-plugin-FL/MiniCPM-o-4.5](https://github.com/flagos-ai/vllm-plugin-FL/blob/main/examples/minicpm/README.md) | [MiniCPM-o-4.5-ModelScope](https://modelscope.cn/models/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS), [MiniCPM-o-4.5-Huggingface](https://huggingface.co/FlagRelease/MiniCPM-o-4.5-nvidia-FlagOS) |
-
-</details>
-
-
-
-### vLLM、SGLang、llama.cpp、Ollama
-
-MiniCPM-V 和 MiniCPM-o 模型推理还适配 vLLM、SGLang、llama.cpp、Ollama 等框架。具体用法可以参考我们的[使用指南](https://github.com/OpenSQZ/MiniCPM-V-Cookbook)。
-
-
-### LLaMA-Factory、SWIFT
-
-MiniCPM-V 和 MiniCPM-o 模型支持通过 LLaMA-Factory 和 SWIFT 等框架训练。具体用法可以参考我们的[使用指南](https://github.com/OpenSQZ/MiniCPM-V-Cookbook)。
 
 ## 基于 MiniCPM-V & MiniCPM-o 的更多项目
 
@@ -2863,18 +2896,18 @@ MiniCPM-V 和 MiniCPM-o 模型支持通过 LLaMA-Factory 和 SWIFT 等框架训�
 
 ## 声明 <!-- omit in toc -->
 
-作为多模态大模型，MiniCPM-o/V 系列模型（包括 OmniLMM）通过学习大量的多模态数据来生成内容，但它无法理解、表达个人观点或价值判断，它所输出的任何内容都不代表模型开发者的观点和立场。
+作为多模态大模型，MiniCPM-o/V 系列模型通过学习大量的多模态数据来生成内容，但它无法理解、表达个人观点或价值判断，它所输出的任何内容都不代表模型开发者的观点和立场。
 
-因此用户在使用本项目的系列模型生成的内容时，应自行负责对其进行评估和验证。如果由于使用本项目的系列开源模型而导致的任何问题，包括但不限于数据安全问题、公共舆论风险，或模型被误导、滥用、传播或不当利用所带来的任何风险和问题，我们将不承担任何责任。
+对于因使用 MiniCPM-o/V 系列模型而引发的任何问题，包括但不限于数据安全问题、公共舆论风险，或模型被误导、滥用、传播或不当利用所带来的任何风险和问题，我们将不承担任何责任。
 
 
 ## 致谢
 
 我们对下列项目表示衷心感谢：
 
-* [Qwen3](https://huggingface.co/Qwen/Qwen3-8B) 提供了文本基座
+* [Qwen3](https://huggingface.co/Qwen/Qwen3-8B) 提供了语言基座
 * [SigLIP2](https://github.com/google-research/big_vision/blob/main/big_vision/configs/proj/image_text/README_siglip2.md) 提供了视觉理解模块
-* [Whisper](https://github.com/openai/whisper) 提供了音频理解模块
+* [Whisper](https://github.com/openai/whisper) 提供了音频和语音理解模块
 * [CosyVoice2](https://github.com/FunAudioLLM/CosyVoice) 和 [Step-Audio2](https://github.com/stepfun-ai/Step-Audio2) 提供了语音分词器和高效的语音波形解码模块
 * [Transformers](https://github.com/huggingface/transformers)
 

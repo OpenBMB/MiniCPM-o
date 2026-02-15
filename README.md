@@ -2124,7 +2124,7 @@ With a fully C++ implementation of `MiniCPM-o 4.5` and quantized weights, `llama
 - half-duplex speech realtime conversation
 - full-duplex omnimodal live streaming
 
-We provide [ready-to-run guidance]([https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README.md]) to access the low-latency full-duplex communication directly on your own Mac using our new official Docker image.
+We provide [ready-to-run guidance](https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README.md) to access the low-latency full-duplex communication directly on your own Mac using our new official Docker image.
 
 Requirements: 
 - For half-duplex speech realtime conversation: Apple M3/M4/M5 chip with at least 16GB RAM or low-resource Nvidia GPU with at least 12GB GPU memory
