@@ -2116,9 +2116,13 @@ We provide a PyTorch-based [simplified yet full-functional web demo](https://git
 - serve as API backend for third-party applications
 
 Requirements:
-- Nvidia GPU with at least 28GB GPU memory.
+- Nvidia GPU with at least 28GB GPU memory. *We are working on optimizing the model for lower GPU memory usage.*
 
-### Option B: **llama.cpp-omni & Docker Image** for end-side inference with PCs like Mac and low-resource devices.
+### Option B: **llama.cpp-omni** for end-side inference with PCs like Mac and low-resource devices.
+
+With a fully C++ implementation of `MiniCPM-o 4.5` and quantized weights, `llama.cpp-omni` supports:
+- half-duplex speech realtime conversation
+- full-duplex omnimodal live streaming
 
 We provide [ready-to-run guidance]([https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README.md]) to access the low-latency full-duplex communication directly on your own Mac using our new official Docker image.
 
