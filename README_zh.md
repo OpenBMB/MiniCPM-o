@@ -87,12 +87,11 @@
 ## 目录 <!-- omit in toc -->
 
 - [MiniCPM-o 4.5](#minicpm-o-45)
-- [简易推理](#简易推理)
+- [基于 Transformers 的离线推理示例](#基于-transformers-的离线推理示例)
   - [模型初始化](#模型初始化)
   - [双工全模态模式](#双工全模态模式)
   - [单工全模态模式](#单工全模态模式)
   - [单工实时语音对话模式](#单工实时语音对话模式)
-  - [语音与音频模式](#语音与音频模式)
   - [纯视觉模式](#纯视觉模式)
   - [结构化内容输入](#结构化内容输入)
 - [本地 Demo 部署](#本地-demo-部署)
@@ -1221,7 +1220,7 @@ MiniCPM-o 4.5 是 MiniCPM-o 系列中最新且性能最强的模型。该模型�
 </details>
 
 
-## 简易推理
+## 基于 Transformers 的离线推理示例
 
 基于 Hugging Face Transformers 在 NVIDIA GPU 上进行推理。请确保安装 `transformers==4.51.0`，其他版本可能存在兼容性问题（排查中）。以下依赖已在 Python 3.10 环境测试通过：
 
@@ -1534,7 +1533,7 @@ else:
 
 
 
-### 单工实时语音对话模式 <!-- omit in toc -->
+### 单工实时语音对话模式
 
 
 <details>
@@ -1665,19 +1664,21 @@ else:
 
 #### 作为多才多艺、氛围感十足的 AI 助手的语音对话 <!-- omit in toc -->
 
-基于精心设计的后训练数据与专业配音演员录音，`MiniCPM-o-4.5` 也可以作为 AI 语音助手使用。它开箱即用即可提供高质量的口语交互。它能生成甜美且富有表现力的声音，并具备自然的韵律（如恰当的节奏、重读和停顿），让日常对话更有生命力。它同样支持故事讲述和叙述型语音，表达连贯且富有吸引力。此外，它还支持更高级的语音指令控制，例如情绪语气、词级别的强调。
 
 <details>
 <summary>点击展开 AI 助手语音对话代码。</summary>
 
+基于精心设计的后训练数据与专业配音演员录音，`MiniCPM-o-4.5` 也可以作为 AI 语音助手使用。它开箱即用即可提供高质量的口语交互。它能生成甜美且富有表现力的声音，并具备自然的韵律（如恰当的节奏、重读和停顿），让日常对话更有生命力。它同样支持故事讲述和叙述型语音，表达连贯且富有吸引力。此外，它还支持更高级的语音指令控制，例如情绪语气、词级别的强调。
+
+
 ```python
 import librosa
 
-# 设置参考音频，用于音色风格
+# Set reference audio for voice style
 ref_audio_path = "assets/HT_ref_audio.wav"
 ref_audio, _ = librosa.load(ref_audio_path, sr=16000, mono=True)
 
-# 用于中文对话
+# For Chinese Conversation
 sys_msg = {
   "role": "system",
   "content": [
@@ -1687,13 +1688,13 @@ sys_msg = {
   ]
 }
 
-# 用于英文对话
+# For English Conversation
 sys_msg = {
   "role": "system",
   "content": [
-    "克隆所提供音频提示中的声音。",
+    "Clone the voice in the provided audio prompt.",
     ref_audio,
-    "请在保持该音色风格的同时帮助用户。请认真且高质量地回答用户问题。请用高度拟人、口语化的方式与用户聊天。你是由 ModelBest 开发的有用助手：MiniCPM-Omni。"
+    "Please assist users while maintaining this voice style. Please answer the user's questions seriously and in a high quality. Please chat with the user in a highly human-like and oral style. You are a helpful assistant developed by ModelBest: MiniCPM-Omni."
   ]
 }
 ```
@@ -1703,10 +1704,10 @@ sys_msg = {
 
 #### 使用自定义音色与自定义系统画像的通用语音对话 <!-- omit in toc -->
 
-MiniCPM-o-4.5 可以基于音频提示与文本画像提示进行特定角色的扮演。它会模仿该角色的声音，并在文字回复中采用其语言风格。同时也会遵循文本画像中定义的设定。在该模式下，MiniCPM-o-4.5 听起来会 **更加自然、更像真人**。 
-
 <details>
 <summary>点击展开自定义音色/系统画像对话代码。</summary>
+
+MiniCPM-o-4.5 可以基于音频提示与文本画像提示进行特定角色的扮演。它会模仿该角色的声音，并在文字回复中采用其语言风格。同时也会遵循文本画像中定义的设定。在该模式下，MiniCPM-o-4.5 听起来会 **更加自然、更像真人**。
 
 ```python
 import librosa
@@ -1761,14 +1762,15 @@ sys_msg = {
 </details>
 
 
-### 语音与音频模式  <!-- omit in toc -->
+### 语音与音频模式
 
 #### 零样本文本转语音（TTS，Text-to-Speech） <!-- omit in toc -->
 
-`MiniCPM-o-4.5` 支持零样本文本转语音（TTS）。在该模式下，模型会作为高自然度的 TTS 系统运行，并能复刻参考音色。
 
 <details>
 <summary>点击展开零样本 TTS 代码。</summary>
+
+`MiniCPM-o-4.5` 支持零样本文本转语音（TTS）。在该模式下，模型会作为高自然度的 TTS 系统运行，并能复刻参考音色。
 
 ```python
 import librosa
@@ -1789,7 +1791,7 @@ sys_msg = {"role": "system", "content": [
 user_msg = {
   "role": "user",
   "content": [
-    "请朗读以下内容。" + " " + "I have a wrap up that I want to offer you now, a conclusion to our work together.\n（中文参考：我现在想给你做一个收尾总结，作为我们一起工作的结语。）"
+    "请朗读以下内容。" + " " + "I have a wrap up that I want to offer you now, a conclusion to our work together."
   ]
 }
 
@@ -1818,10 +1820,11 @@ res = model.chat(
 
 #### 仿声复现（Mimick） <!-- omit in toc -->
 
-`Mimick` 任务用于评估模型端到端语音建模能力。模型接收音频输入后，会先进行转写，再以高保真方式重建原始音频，尽可能保留细粒度的声学、副语言以及语义信息。重建音频与原始音频的相似度越高，说明端到端语音建模能力越强。
-
 <details>
 <summary>点击展开仿声复现（Mimick）代码。</summary>
+
+`Mimick` 任务用于评估模型端到端语音建模能力。模型接收音频输入后，会先进行转写，再以高保真方式重建原始音频，尽可能保留细粒度的声学、副语言以及语义信息。重建音频与原始音频的相似度越高，说明端到端语音建模能力越强。
+
 
 ```python
 import librosa
@@ -1829,9 +1832,9 @@ import librosa
 model = ...
 model.init_tts()
 
-system_prompt = "你是一个乐于助人的助手。你可以接收视频、音频和文本输入，并输出语音与文本。请只给出答案，不要有冗余内容。"
+system_prompt = "You are a helpful assistant. You can accept video, audio, and text input and output voice and text. Respond with just the answer, no redundancy."
 
-mimick_prompt = "请用合适的语言复述以下语音内容。"
+mimick_prompt = "Please repeat the following speech in the appropriate language."
 
 audio_input, _ = librosa.load("assets/Trump_WEF_2018_10s.mp3", sr=16000, mono=True)
 
@@ -1856,18 +1859,19 @@ res = model.chat(
 
 #### 覆盖多种音频理解任务 <!-- omit in toc -->
 
+
+<details>
+<summary>点击展开音频理解任务代码。</summary>
+
 `MiniCPM-o-4.5` 也能处理多种音频理解任务，例如 ASR（自动语音识别）、说话人分析、通用音频描述（Audio Captioning）以及声景标签（Sound Scene Tagging）。
 
 对于音频转文本任务，你可以使用以下提示词：
 
 - ASR（中文，或 AST EN→ZH）: `请仔细听这段音频片段，并将其内容逐字记录。`
-- ASR（英文，或 AST ZH→EN）: `Please listen to the audio snippet carefully and transcribe the content.`（请仔细听这段音频片段，并将其内容逐字转写。）
-- 说话人分析（Speaker Analysis）: `Based on the speaker's content, speculate on their gender, condition, age range, and health status.`（请根据说话内容推测其性别、状态、年龄范围与健康状况。）
-- 通用音频描述（General Audio Caption）: `Summarize the main content of the audio.`（总结音频的主要内容。）
-- 声景标签（Sound Scene Tagging）: `Utilize one keyword to convey the audio's content or the associated scene.`（用一个关键词概括音频内容或对应场景。）
-
-<details>
-<summary>点击展开音频理解任务代码。</summary>
+- ASR（英文，或 AST ZH→EN）: `Please listen to the audio snippet carefully and transcribe the content.`
+- 说话人分析（Speaker Analysis）: `Based on the speaker's content, speculate on their gender, condition, age range, and health status.`
+- 通用音频描述（General Audio Caption）: `Summarize the main content of the audio.`
+- 声景标签（Sound Scene Tagging）: `Utilize one keyword to convey the audio's content or the associated scene.`
 
 ```python
 import librosa
@@ -1875,11 +1879,11 @@ import librosa
 model = ...
 model.init_tts()
 
-# 加载待转写/分析的音频
+# Load the audio to be transcribed/analyzed
 audio_input, _ = librosa.load("assets/Trump_WEF_2018_10s.mp3", sr=16000, mono=True)
 
-# 选择任务提示词（可选项见上方）
-task_prompt = "请仔细听这段音频片段，并将其内容逐字转写。\n"
+# Choose a task prompt (see above for options)
+task_prompt = "Please listen to the audio snippet carefully and transcribe the content.\n"
 msgs = [{"role": "user", "content": [task_prompt, audio_input]}]
 
 res = model.chat(
@@ -1897,7 +1901,7 @@ print(res)
 </details>
 
 
-### 纯视觉模式 <!-- omit in toc -->
+### 纯视觉模式
 
 `MiniCPM-o-4.5` 的推理方式与 `MiniCPM-V-4.5` 一致。
 
@@ -2018,7 +2022,7 @@ print(answer)
 
 </details>
 
-### 结构化内容输入 <!-- omit in toc -->
+### 结构化内容输入
 
 <details>
 <summary>点击展开结构化内容输入</summary>
