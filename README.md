@@ -114,8 +114,8 @@
 - [Offline Inference Examples with Transformers](#offline-inference-examples-with-transformers)
   - [Model Initialization](#model-initialization)
   - [Duplex Omni Mode](#duplex-omni-mode)
-  - [Simplex Omni Mode](#simplex-omni-mode)
-  - [Simplex Realtime Speech Conversation Mode](#simplex-realtime-speech-conversation-mode)
+  - [Half-Duplex Omni Mode](#half-duplex-omni-mode)
+  - [Half-Duplex Realtime Speech Conversation Mode](#half-duplex-realtime-speech-conversation-mode)
   - [Visual Understanding](#visual-understanding)
   - [Structured Content Input](#structured-content-input)
 - [Deploy a Realtime Web Demo on Your Own Device](#deploy-a-realtime-web-demo-on-your-own-device)
@@ -815,9 +815,9 @@ Advancing popular visual capabilities from MiniCPM-V series, MiniCPM-o 4.5 can p
 </details>
 
 <details>
-<summary>Click to view omni simplex results.</summary>
+<summary>Click to view omni half-duplex results.</summary>
 
-**Omni Simplex**
+**Omni Half-Duplex**
   <div align="center">
   <table style="margin: 0px auto;">
 <tr>
@@ -1318,11 +1318,11 @@ model.eval().cuda()
 # Initialize TTS for audio output
 model.init_tts()
 
-# Convert simplex model to duplex mode
+# Convert half-duplex model to duplex mode
 duplex_model = model.as_duplex()
 
-# Convert duplex model back to simplex mode
-simplex_model = duplex_model.as_simplex(reset_session=True)
+# Convert duplex model back to half-duplex mode
+model = duplex_model.as_simplex(reset_session=True)
 ```
 
 </details>
@@ -1426,7 +1426,7 @@ generate_duplex_video(
 </details>
 
 
-### Simplex Omni Mode
+### Half-Duplex Omni Mode
 We provide two inference modes: chat and streaming.
 
 #### Chat Inference <!-- omit in toc -->
@@ -1566,11 +1566,11 @@ else:
 
 </details>
 
-### Simplex Realtime Speech Conversation Mode
+### Half-Duplex Realtime Speech Conversation Mode
 
 
 <details>
-<summary>Click to show simplex mode realtime speech conversation API usage.</summary>
+<summary>Click to show half-duplex mode realtime speech conversation API usage.</summary>
 
 First, make sure you have all dependencies, especially `"minicpmo-utils[all]>=1.0.5"`:
 ```bash
@@ -2108,11 +2108,12 @@ We provide a PyTorch-based [simplified yet full-functional web demo](https://git
 
 - full-duplex omnimodal live streaming
 - full-duplex speech live streaming
-- simplex speech realtime conversation
+- half-duplex speech live streaming (under development)
 - turn-based chat conversation
 - customizable system prompts
 - customizable reference audio
 - simple and readable codebase for continual development
+- serve as API backend for third-party applications
 
 Requirements:
 - Nvidia GPU with at least 28GB GPU memory.
@@ -2122,7 +2123,7 @@ Requirements:
 We provide [ready-to-run guidance]([https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/demo/web_demo/WebRTC_Demo/README.md]) to access the low-latency full-duplex communication directly on your own Mac using our new official Docker image.
 
 Requirements: 
-- For simplex speech realtime conversation: Apple M3/M4/M5 chip with at least 16GB RAM or low-resource Nvidia GPU with at least 12GB GPU memory
+- For half-duplex speech realtime conversation: Apple M3/M4/M5 chip with at least 16GB RAM or low-resource Nvidia GPU with at least 12GB GPU memory
 - For full-duplex omnimodal live streaming: Apple M4 Max chip with at least 24GB RAM or low-resource Nvidia GPU with at least 12GB GPU memory
 
 ## Supported Frameworks
