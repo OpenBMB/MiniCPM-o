@@ -1,0 +1,71 @@
+# ============================================
+# MiniCPM-o 4.5 后端推理服务 Dockerfile
+# 基础镜像: NVIDIA CUDA 12.8 + Ubuntu 22.04
+# ============================================
+FROM nvidia/cuda:12.8.1-devel-ubuntu22.04
+
+# 避免交互式提示
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+
+# ---- 系统依赖 ----
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3.10-dev \
+    python3-pip \
+    ffmpeg \
+    libsndfile1 \
+    libsndfile1-dev \
+    git \
+    wget \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# 设置 python3.10 为默认
+RUN ln -sf /usr/bin/python3.10 /usr/bin/python3 && \
+    ln -sf /usr/bin/python3 /usr/bin/python && \
+    python3 -m pip install --upgrade pip setuptools wheel
+
+# ---- PyTorch (CUDA 12.4) ----
+RUN pip install --no-cache-dir \
+    "torch>=2.3.0,<=2.8.0" \
+    "torchaudio<=2.8.0" \
+    --index-url https://download.pytorch.org/whl/cu124
+
+# ---- MiniCPM-o 核心依赖 ----
+RUN pip install --no-cache-dir \
+    "transformers==4.51.0" \
+    accelerate \
+    "minicpmo-utils[all]>=1.0.5" \
+    librosa \
+    soundfile \
+    onnxruntime \
+    sentencepiece \
+    Pillow \
+    numpy
+
+# ---- Web 服务依赖 ----
+RUN pip install --no-cache-dir \
+    fastapi \
+    uvicorn \
+    aiofiles \
+    pydantic
+
+# ---- 工作目录 ----
+WORKDIR /app
+
+# ---- 复制后端代码 ----
+COPY web_demos/minicpm-o_2.6/model_server.py /app/
+COPY web_demos/minicpm-o_2.6/vad_utils.py /app/
+COPY web_demos/minicpm-o_2.6/silero_vad.onnx /app/
+
+# ---- 复制 TTS 参考音频 ----
+COPY assets/ref_audios/ /app/assets/ref_audios/
+
+# ---- 暴露端口 ----
+EXPOSE 32550
+
+# ---- 启动命令 ----
+# 模型路径通过 volume 挂载到 /models/MiniCPM-o-4_5
+ENV BACKEND_PORT=32550
+CMD ["sh", "-lc", "python3 model_server.py --model /models/MiniCPM-o-4_5 --port ${BACKEND_PORT}"]

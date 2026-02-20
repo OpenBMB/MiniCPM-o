@@ -1,0 +1,29 @@
+# ============================================
+# MiniCPM-o 4.5 后端 Python 依赖清单
+# 用于离线环境 pip download / pip install
+# ============================================
+
+# == PyTorch (CUDA 12.4) ==
+# 注意: PyTorch 需单独从 https://download.pytorch.org/whl/cu124 下载
+# torch>=2.3.0,<=2.8.0
+# torchaudio<=2.8.0
+
+# == 核心模型依赖 ==
+transformers==4.51.0
+accelerate
+minicpmo-utils[all]>=1.0.5
+sentencepiece
+
+# == 音视频处理 ==
+librosa
+soundfile
+onnxruntime
+Pillow
+numpy
+
+# == Web 服务 ==
+fastapi
+uvicorn[standard]
+aiofiles
+pydantic
+httpx

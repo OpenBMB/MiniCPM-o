@@ -1,0 +1,36 @@
+# ============================================
+# MiniCPM-o 4.5 前端 Web 服务 Dockerfile
+# 多阶段构建: Node.js 构建 + Nginx 部署
+# ============================================
+
+# ---- 第一阶段：构建 Vue 项目 ----
+FROM node:20-alpine AS build-stage
+
+WORKDIR /build
+COPY web_demos/minicpm-o_2.6/web_server/ /build/
+
+# 安装 pnpm 并构建
+# 生成占位证书文件（vite.config.js 的 server.https 在 build 时也会被解析）
+RUN npm install -g pnpm && \
+    touch key.pem cert.pem && \
+    pnpm install && \
+    pnpm run build
+
+# ---- 第二阶段：Nginx 静态服务 ----
+FROM nginx:alpine AS production-stage
+
+# envsubst 用于在容器启动时渲染 nginx 配置模板
+RUN apk add --no-cache gettext
+
+# 复制构建产物
+COPY --from=build-stage /build/dist /usr/share/nginx/html
+
+# 复制自定义 nginx 配置模板（Docker 网络版本）
+COPY deploy/nginx.docker.conf /etc/nginx/nginx.conf.template
+
+# 启动时按 BACKEND_PORT 渲染 nginx 配置
+ENV BACKEND_PORT=32550
+
+EXPOSE 3000 3443
+
+CMD ["sh", "-lc", "envsubst '$$BACKEND_PORT' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"]
