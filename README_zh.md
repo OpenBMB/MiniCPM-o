@@ -20,7 +20,7 @@
 
 <!-- <br> -->
 <p align="center">
-   MiniCPM-o 4.5 <a href="https://huggingface.co/openbmb/MiniCPM-o-4_5">🤗</a> <a href="https://minicpm-omni.openbmb.cn/">📞</a> <a href="http://211.93.21.133:18121/">🤖</a> | MiniCPM-V 4.0 <a href="https://huggingface.co/openbmb/MiniCPM-V-4">🤗</a>  | <a href="https://github.com/OpenSQZ/MiniCPM-V-Cookbook">🍳 使用指南</a> | <a href="https://openbmb.github.io/minicpm-o-4_5/">语音样例</a> | <a href="https://openbmb.github.io/minicpm-o-4_5-omni/">全模态全双工样例</a>
+   MiniCPM-o 4.5 <a href="https://huggingface.co/openbmb/MiniCPM-o-4_5">🤗</a> <a href="https://35.226.63.1:8008/">📞</a> <a href="http://211.93.21.133:18121/">🤖</a> | MiniCPM-V 4.0 <a href="https://huggingface.co/openbmb/MiniCPM-V-4">🤗</a>  | <a href="https://github.com/OpenSQZ/MiniCPM-V-Cookbook">🍳 使用指南</a> | <a href="https://openbmb.github.io/minicpm-o-4_5/">语音样例</a> | <a href="https://openbmb.github.io/minicpm-o-4_5-omni/">全模态全双工样例</a>
 </p>
 
 </div>
