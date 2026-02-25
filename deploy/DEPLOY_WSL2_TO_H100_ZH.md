@@ -489,13 +489,88 @@ export MODEL_PATH=/data/models/MiniCPM-o-4_5
 export CERTS_PATH=./certs
 export BACKEND_PORT=32550
 
-docker compose -f docker-compose.yml up -d
+# 兼容两种 Compose 命令：docker compose / docker-compose
+if docker compose version >/dev/null 2>&1; then
+  COMPOSE_CMD="docker compose"
+elif command -v docker-compose >/dev/null 2>&1; then
+  COMPOSE_CMD="docker-compose"
+else
+  echo "未找到 Compose，请先安装 docker-compose 或 docker compose 插件" && exit 1
+fi
+
+$COMPOSE_CMD -f docker-compose.yml up -d
+```
+
+如果两种 Compose 都不可用（`docker compose` / `docker-compose` 都不存在），可直接用 `docker run` 启动：
+
+```bash
+docker network create minicpmo-net || true
+docker rm -f minicpmo-backend minicpmo-frontend 2>/dev/null || true
+
+docker run -d \
+  --name minicpmo-backend \
+  --restart unless-stopped \
+  --gpus all \
+  -e BACKEND_PORT=${BACKEND_PORT:-32550} \
+  -p ${BACKEND_PORT:-32550}:${BACKEND_PORT:-32550} \
+  -v ${MODEL_PATH}:/models/MiniCPM-o-4_5:ro \
+  --network minicpmo-net \
+  minicpmo-backend:latest
+
+docker run -d \
+  --name minicpmo-frontend \
+  --restart unless-stopped \
+  -e BACKEND_PORT=${BACKEND_PORT:-32550} \
+  -p 3000:3000 \
+  -p 3443:3443 \
+  -v ${CERTS_PATH}:/etc/nginx/certs:ro \
+  --network minicpmo-net \
+  minicpmo-frontend:latest
+```
+
+如果出现 `Failed to Setup IP tables` 或 `No chain/target/match by that name`，可先绕过 bridge 网络，改用 `host` 网络启动：
+
+```bash
+docker rm -f minicpmo-backend minicpmo-frontend 2>/dev/null || true
+
+docker run -d \
+  --name minicpmo-backend \
+  --restart unless-stopped \
+  --gpus all \
+  --network host \
+  -e BACKEND_PORT=${BACKEND_PORT:-32550} \
+  -v ${MODEL_PATH}:/models/MiniCPM-o-4_5:ro \
+  minicpmo-backend:latest
+
+docker run -d \
+  --name minicpmo-frontend \
+  --restart unless-stopped \
+  --network host \
+  --add-host model-backend:127.0.0.1 \
+  -e BACKEND_PORT=${BACKEND_PORT:-32550} \
+  -v ${CERTS_PATH}:/etc/nginx/certs:ro \
+  minicpmo-frontend:latest
 ```
 
 查看状态：
 
 ```bash
-docker compose -f docker-compose.yml ps
+if [ -z "$COMPOSE_CMD" ]; then
+  if docker compose version >/dev/null 2>&1; then
+    COMPOSE_CMD="docker compose"
+  else
+    COMPOSE_CMD="docker-compose"
+  fi
+fi
+
+$COMPOSE_CMD -f docker-compose.yml ps
+docker logs -f minicpmo-backend
+```
+
+若使用 `docker run` 方案，查看状态命令：
+
+```bash
+docker ps --filter name=minicpmo
 docker logs -f minicpmo-backend
 ```
 
@@ -673,7 +748,15 @@ cd /data/minicpmo/runtime
 export MODEL_PATH=/data/models/MiniCPM-o-4_5
 export CERTS_PATH=./certs
 export BACKEND_PORT=32550
-docker compose -f docker-compose.yml up -d
+if docker compose version >/dev/null 2>&1; then
+  COMPOSE_CMD="docker compose"
+elif command -v docker-compose >/dev/null 2>&1; then
+  COMPOSE_CMD="docker-compose"
+else
+  echo "未找到 Compose，请先安装 docker-compose 或 docker compose 插件" && exit 1
+fi
+
+$COMPOSE_CMD -f docker-compose.yml up -d
 ```
 
 ### 本地电脑（开隧道）

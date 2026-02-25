@@ -24,7 +24,7 @@ services:
               capabilities: [gpu]
     volumes:
       # 挂载模型权重目录（宿主机路径 → 容器路径）
-      - ${MODEL_PATH:-/data/models/MiniCPM-o-4_5}:/models/MiniCPM-o-4_5:ro
+      - ${MODEL_PATH:-/jtkl-hdd1-storage-1/60b9066159fc4bb783278ce0d226ceb2/data/jinlujia/codes/MiniCPM-o/models/MiniCPM-o-4_5}:/models/MiniCPM-o-4_5:ro
     environment:
       - BACKEND_PORT=${BACKEND_PORT:-32550}
     ports:
@@ -50,7 +50,7 @@ services:
       - "3443:3443"   # HTTPS（手机端访问）
     volumes:
       # 挂载 SSL 证书目录
-      - ${CERTS_PATH:-./certs}:/etc/nginx/certs:ro
+      - ${CERTS_PATH:-/jtkl-hdd1-storage-1/60b9066159fc4bb783278ce0d226ceb2/data/jinlujia/codes/MiniCPM-o/runtime/certs}:/etc/nginx/certs:ro
     environment:
       - BACKEND_PORT=${BACKEND_PORT:-32550}
     depends_on:
