@@ -1,6 +1,6 @@
 # MiniCPM-o 4.5 离线部署实战指南（WSL2 构建镜像 → 上传内网 H100 服务器 → 本地 + 手机访问）
 
-> 目标：你在本地 Win10 + WSL2 构建 Docker 镜像，把镜像和模型传到无公网的公司 H100 服务器，启动服务后在本地浏览器和手机上测试全双工视频通话。
+> 目标：你在本地 Windows系统PC + WSL2 构建 Docker 镜像，把镜像和模型传到无公网的公司 H100 服务器，启动服务后在本地浏览器和Android系统手机上测试全双工视频通话。
 
 **你的环境速查：**
 
@@ -14,24 +14,24 @@
 **每次执行前先设置 SSH 变量（只改这里即可）：**
 
 ```bash
-export SSH_HOST=127.0.0.1
-export SSH_PORT=54062
-export SSH_USER=your_user
+export SSH_HOST=<YOUR_HOST>
+export SSH_PORT=<YOUR_PORT>
+export SSH_USER=<YOUR_USER>
 ```
 
 PowerShell 等价写法（Windows 终端直接用）：
 
 ```powershell
-$env:SSH_HOST = "127.0.0.1"
-$env:SSH_PORT = "54062"
-$env:SSH_USER = "your_user"
+$env:SSH_HOST = "<YOUR_HOST>"
+$env:SSH_PORT = "<YOUR_PORT>"
+$env:SSH_USER = "<YOUR_USER>"
 ```
 
 ## PowerShell 日常三命令速查（推荐）
 
 ```powershell
 # 1) 端口变化时先更新 SSH 参数
-Set-MiniCPMSSH -Port "54062" -User "your_user"
+Set-MiniCPMSSH -Port "<YOUR_PORT>" -User "<YOUR_USER>"
 
 # 2) 启动手机模式（开隧道 + 打印可访问 URL）
 Start-MiniCPMMobile
@@ -43,7 +43,7 @@ Stop-MiniCPMMobile
 端口变化后的快速恢复：
 
 ```powershell
-Set-MiniCPMSSH -Port "新端口" -User "your_user"
+Set-MiniCPMSSH -Port "<YOUR_PORT>" -User "<YOUR_USER>"
 Restart-MiniCPMMobile
 ```
 
@@ -51,7 +51,7 @@ PowerShell 中引用变量时，`ssh/scp` 建议写成：
 
 ```powershell
 ssh -p $env:SSH_PORT "$env:SSH_USER@$env:SSH_HOST"
-scp -P $env:SSH_PORT .\file.tar.gz "$env:SSH_USER@$env:SSH_HOST:/data/minicpmo/deploy_pkg/"
+scp -P $env:SSH_PORT .\file.tar.gz "$env:SSH_USER@$env:SSH_HOST:<YOUR_PATH>/deploy_pkg/"
 ```
 
 可选：定义一个一键函数（以后只改端口即可）
@@ -61,8 +61,8 @@ function Set-MiniCPMSSH {
   param(
     [Parameter(Mandatory = $true)]
     [string]$Port,
-    [string]$Host = "127.0.0.1",
-    [string]$User = "your_user"
+    [string]$Host = "<YOUR_HOST>",
+    [string]$User = "<YOUR_USER>"
   )
 
   $env:SSH_HOST = $Host
@@ -76,7 +76,7 @@ function Set-MiniCPMSSH {
 使用示例：
 
 ```powershell
-Set-MiniCPMSSH -Port "54062" -User "your_user"
+Set-MiniCPMSSH -Port "<YOUR_PORT>" -User "<YOUR_USER>"
 ssh -p $env:SSH_PORT "$env:SSH_USER@$env:SSH_HOST"
 ```
 
@@ -275,7 +275,7 @@ Stop-MiniCPMMobile
 在 WSL2 Ubuntu 执行：
 
 ```bash
-cd /mnt/d/九天/codes/MiniCPM-o
+cd <YOUR_PATH>/MiniCPM-o
 
 # 1) 检查 Docker
 sudo docker --version
@@ -303,12 +303,12 @@ python3 -m pip install -U huggingface_hub
 ### 2.2 下载 MiniCPM-o 4.5
 
 ```bash
-mkdir -p /mnt/d/九天/codes/MiniCPM-o/models
+mkdir -p <YOUR_PATH>/MiniCPM-o/models
 python3 - << 'PY'
 from huggingface_hub import snapshot_download
 snapshot_download(
     repo_id='openbmb/MiniCPM-o-4_5',
-    local_dir='/mnt/d/九天/codes/MiniCPM-o/models/MiniCPM-o-4_5',
+    local_dir='<YOUR_PATH>/MiniCPM-o/models/MiniCPM-o-4_5',
     local_dir_use_symlinks=False,
     resume_download=True
 )
@@ -318,8 +318,8 @@ PY
 下载后检查体积和关键文件：
 
 ```bash
-du -sh /mnt/d/九天/codes/MiniCPM-o/models/MiniCPM-o-4_5
-ls -lh /mnt/d/九天/codes/MiniCPM-o/models/MiniCPM-o-4_5 | head
+du -sh <YOUR_PATH>/MiniCPM-o/models/MiniCPM-o-4_5
+ls -lh <YOUR_PATH>/MiniCPM-o/models/MiniCPM-o-4_5 | head
 ```
 
 ---
@@ -329,7 +329,7 @@ ls -lh /mnt/d/九天/codes/MiniCPM-o/models/MiniCPM-o-4_5 | head
 在仓库根目录执行：
 
 ```bash
-cd /mnt/d/九天/codes/MiniCPM-o
+cd <YOUR_PATH>/MiniCPM-o
 
 # 后端镜像
 docker build -f deploy/Dockerfile.backend -t minicpmo-backend:latest .
@@ -351,20 +351,20 @@ docker images | grep minicpmo
 ### 4.1 导出镜像为 tar
 
 ```bash
-mkdir -p /mnt/d/九天/deploy_pkg
+mkdir -p <YOUR_PATH>/deploy_pkg
 
-docker save -o /mnt/d/九天/deploy_pkg/minicpmo-backend_latest.tar minicpmo-backend:latest
-docker save -o /mnt/d/九天/deploy_pkg/minicpmo-frontend_latest.tar minicpmo-frontend:latest
+docker save -o <YOUR_PATH>/deploy_pkg/minicpmo-backend_latest.tar minicpmo-backend:latest
+docker save -o <YOUR_PATH>/deploy_pkg/minicpmo-frontend_latest.tar minicpmo-frontend:latest
 
 # 打包 compose 与 nginx 配置
-cp deploy/docker-compose.yml /mnt/d/九天/deploy_pkg/
-cp deploy/nginx.docker.conf /mnt/d/九天/deploy_pkg/
+cp deploy/docker-compose.yml <YOUR_PATH>/deploy_pkg/
+cp deploy/nginx.docker.conf <YOUR_PATH>/deploy_pkg/
 ```
 
 可选：压缩减少传输体积
 
 ```bash
-cd /mnt/d/九天/deploy_pkg
+cd <YOUR_PATH>/deploy_pkg
 gzip -1 minicpmo-backend_latest.tar
 gzip -1 minicpmo-frontend_latest.tar
 ```
@@ -372,11 +372,11 @@ gzip -1 minicpmo-frontend_latest.tar
 ### 4.2 生成自签名 SSL 证书（手机端 HTTPS 必需）
 
 ```bash
-cd /mnt/d/九天/codes/MiniCPM-o
-bash deploy/gen_ssl_cert.sh /mnt/d/九天/deploy_pkg/certs
+cd <YOUR_PATH>/MiniCPM-o
+bash deploy/gen_ssl_cert.sh <YOUR_PATH>/deploy_pkg/certs
 ```
 
-这会在 `/mnt/d/九天/deploy_pkg/certs/` 下生成 `server.crt` 和 `server.key`。
+这会在 `<YOUR_PATH>/deploy_pkg/certs/` 下生成 `server.crt` 和 `server.key`。
 
 ---
 
@@ -388,32 +388,32 @@ bash deploy/gen_ssl_cert.sh /mnt/d/九天/deploy_pkg/certs
 
 ```bash
 # 先在服务器上创建目标目录
-ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "mkdir -p /data/minicpmo/deploy_pkg"
+ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "mkdir -p <YOUR_PATH>/deploy_pkg"
 
 # 上传镜像 tar 包
 scp -P $SSH_PORT -o ServerAliveInterval=60 \
-    /mnt/d/九天/deploy_pkg/minicpmo-backend_latest.tar.gz \
-    /mnt/d/九天/deploy_pkg/minicpmo-frontend_latest.tar.gz \
-    /mnt/d/九天/deploy_pkg/docker-compose.yml \
-    /mnt/d/九天/deploy_pkg/nginx.docker.conf \
-  $SSH_USER@$SSH_HOST:/data/minicpmo/deploy_pkg/
+    <YOUR_PATH>/deploy_pkg/minicpmo-backend_latest.tar.gz \
+    <YOUR_PATH>/deploy_pkg/minicpmo-frontend_latest.tar.gz \
+    <YOUR_PATH>/deploy_pkg/docker-compose.yml \
+    <YOUR_PATH>/deploy_pkg/nginx.docker.conf \
+  $SSH_USER@$SSH_HOST:<YOUR_PATH>/deploy_pkg/
 ```
 
 ### 5.2 上传模型权重
 
 ```bash
-ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "mkdir -p /data/models"
+ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "mkdir -p <YOUR_PATH>/models"
 
 scp -P $SSH_PORT -r -o ServerAliveInterval=60 \
-    /mnt/d/九天/codes/MiniCPM-o/models/MiniCPM-o-4_5 \
-  $SSH_USER@$SSH_HOST:/data/models/
+    <YOUR_PATH>/MiniCPM-o/models/MiniCPM-o-4_5 \
+  $SSH_USER@$SSH_HOST:<YOUR_PATH>/models/
 ```
 
 ### 5.3 上传 SSL 证书（手机端访问需要）
 
 ```bash
-scp -P $SSH_PORT -r /mnt/d/九天/deploy_pkg/certs \
-  $SSH_USER@$SSH_HOST:/data/minicpmo/deploy_pkg/
+scp -P $SSH_PORT -r <YOUR_PATH>/deploy_pkg/certs \
+  $SSH_USER@$SSH_HOST:<YOUR_PATH>/deploy_pkg/
 ```
 
 > 如果端口变更，只需要修改 `SSH_PORT` 变量并重试命令。
@@ -485,7 +485,7 @@ cd /data/minicpmo/runtime
 `docker-compose.yml` 里用了 `MODEL_PATH` 环境变量。你可以直接导出：
 
 ```bash
-export MODEL_PATH=/data/models/MiniCPM-o-4_5
+export MODEL_PATH=<YOUR_PATH>/models/MiniCPM-o-4_5
 export CERTS_PATH=./certs
 export BACKEND_PORT=32550
 
@@ -735,17 +735,17 @@ docker logs -f minicpmo-backend
 ### H100 侧（假设文件已上传）
 
 ```bash
-cd /data/minicpmo/deploy_pkg
+cd <YOUR_PATH>/deploy_pkg
 
 docker load -i minicpmo-backend_latest.tar
 docker load -i minicpmo-frontend_latest.tar
 
-mkdir -p /data/minicpmo/runtime/certs
-cp docker-compose.yml /data/minicpmo/runtime/
-cp certs/server.* /data/minicpmo/runtime/certs/
+mkdir -p <YOUR_PATH>/runtime/certs
+cp docker-compose.yml <YOUR_PATH>/runtime/
+cp certs/server.* <YOUR_PATH>/runtime/certs/
 
-cd /data/minicpmo/runtime
-export MODEL_PATH=/data/models/MiniCPM-o-4_5
+cd <YOUR_PATH>/runtime
+export MODEL_PATH=<YOUR_PATH>/models/MiniCPM-o-4_5
 export CERTS_PATH=./certs
 export BACKEND_PORT=32550
 if docker compose version >/dev/null 2>&1; then
@@ -780,4 +780,4 @@ ssh -N -p $env:SSH_PORT -L 3000:127.0.0.1:3000 -L 3443:127.0.0.1:3443 -L 32550:1
 ssh -N -p $SSH_PORT -L 0.0.0.0:3443:127.0.0.1:3443 $SSH_USER@$SSH_HOST
 ```
 
-手机浏览器打开：`https://笔记本局域IP:3443`
+手机浏览器打开：`https://<YOUR_LAPTOP_LAN_IP>:3443`

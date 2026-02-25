@@ -1,16 +1,16 @@
 # ============================================
-# MiniCPM-o 4.5 Docker Compose 部署配置
+# MiniCPM-o 4.5 Docker Compose Deployment Configuration
 # ============================================
-# 使用方式:
+# Usage:
 #   docker compose -f deploy/docker-compose.yml up -d
 #
-# 前提条件:
-#   1. 服务器已安装 NVIDIA Container Toolkit
-#   2. 模型权重已放置在 ${MODEL_PATH} 目录下
+# Prerequisites:
+#   1. NVIDIA Container Toolkit is installed on the server
+#   2. Model weights are placed in the ${MODEL_PATH} directory
 # ============================================
 
 services:
-  # ---- 后端推理服务（GPU）----
+  # ---- Backend Inference Service (GPU) ----
   model-backend:
     image: minicpmo-backend:latest
     container_name: minicpmo-backend
@@ -23,34 +23,34 @@ services:
               count: 1
               capabilities: [gpu]
     volumes:
-      # 挂载模型权重目录（宿主机路径 → 容器路径）
-      - ${MODEL_PATH:-/jtkl-hdd1-storage-1/60b9066159fc4bb783278ce0d226ceb2/data/jinlujia/codes/MiniCPM-o/models/MiniCPM-o-4_5}:/models/MiniCPM-o-4_5:ro
+      # Mount model weights directory (host path → container path)
+      - ${MODEL_PATH:-<YOUR_MODEL_PATH>}:/models/MiniCPM-o-4_5:ro
     environment:
       - BACKEND_PORT=${BACKEND_PORT:-32550}
     ports:
       - "${BACKEND_PORT:-32550}:${BACKEND_PORT:-32550}"
-    # 注意：BACKEND_PORT 为应用监听端口（默认 32550），
-    # 与外部 SSH 临时隧道端口不同。
+    # Note: BACKEND_PORT is the application listening port (default 32550),
+    # which is different from the external SSH temporary tunnel port.
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:${BACKEND_PORT:-32550}/api/v1/health || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 120s  # 模型加载需要较长时间
+      start_period: 120s  # Model loading may take a long time
     networks:
       - minicpmo-net
 
-  # ---- 前端 Web 服务（Nginx）----
+  # ---- Frontend Web Service (Nginx) ----
   web-frontend:
     image: minicpmo-frontend:latest
     container_name: minicpmo-frontend
     restart: unless-stopped
     ports:
       - "3000:3000"
-      - "3443:3443"   # HTTPS（手机端访问）
+      - "3443:3443"   # HTTPS (for mobile access)
     volumes:
-      # 挂载 SSL 证书目录
-      - ${CERTS_PATH:-/jtkl-hdd1-storage-1/60b9066159fc4bb783278ce0d226ceb2/data/jinlujia/codes/MiniCPM-o/runtime/certs}:/etc/nginx/certs:ro
+      # Mount SSL certificate directory
+      - ${CERTS_PATH:-<YOUR_CERTS_PATH>}:/etc/nginx/certs:ro
     environment:
       - BACKEND_PORT=${BACKEND_PORT:-32550}
     depends_on:
