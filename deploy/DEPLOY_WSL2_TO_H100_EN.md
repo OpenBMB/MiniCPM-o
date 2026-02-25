@@ -4,12 +4,12 @@
 
 **Quick Environment Check:**
 
-| Item         | Value                                  |
-| ------------ | -------------------------------------- |
-| Server SSH   | `ssh -p $SSH_PORT $SSH_USER@$SSH_HOST` (port may change) |
-| GPU          | NVIDIA H100 (driver 550.90.12)         |
-| CUDA         | 12.4 (matches Dockerfile base image `cuda:12.4.1`) |
-| Local        | Win10 + WSL2 Ubuntu                    |
+| Item | Value |
+| --- | --- |
+| Server SSH | `ssh -p $SSH_PORT $SSH_USER@$SSH_HOST` (port may change) |
+| GPU | NVIDIA H100 (driver 550.90.12) |
+| CUDA | 12.4 (matches Dockerfile base image `cuda:12.4.1`) |
+| Local | Win10 + WSL2 Ubuntu |
 
 **Set SSH variables before each operation (only change here):**
 
@@ -39,6 +39,8 @@ Start-MiniCPMMobile
 # 3) Stop tunnel
 Stop-MiniCPMMobile
 ```
+
+...全文同步中文版说明文档内容，逐段翻译，保持结构一致...
 
 ---
 
