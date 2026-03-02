@@ -4,6 +4,12 @@
 
 **A Gemini 2.5 Flash Level MLLM for Vision, Speech, and Full-Duplex Multimodal Live Streaming on Your Phone**
 
+</div>
+
+<sub>💡 **Tip**: If you find this repository's structure or content difficult to understand, visit [deepwiki](https://deepwiki.com/LujiaJin/MiniCPM-o) for a comprehensive detailed explanation.</sub>
+
+<div align="center">
+
   <strong>[中文](./README_zh.md) |
   English</strong>
 
