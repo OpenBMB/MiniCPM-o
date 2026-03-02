@@ -4,6 +4,12 @@
 
 **端侧可用的 Gemini 2.5 Flash 级视觉、语音、全双工多模态实时流式大模型**
 
+</div>
+
+<sub>💡 **提示**: 如果你觉得这个仓库的结构或内容难以理解，请访问 [deepwiki](https://deepwiki.com/LujiaJin/MiniCPM-o) 获取详细的解读。</sub>
+
+<div align="center">
+
   <strong>中文 |
   [English](./README.md)</strong>
 
