@@ -22,7 +22,7 @@
 
 
 <p align="center">
-   MiniCPM-o 4.5 <a href="https://huggingface.co/openbmb/MiniCPM-o-4_5">🤗</a> **Omni-modal Demo**([Official](https://35.226.63.1:8008/), [Self-Host](https://github.com/OpenBMB/MiniCPM-o-Demo)) <a href="http://211.93.21.133:18121/">🤖</a> | MiniCPM-V 4.0 <a href="https://huggingface.co/openbmb/MiniCPM-V-4">🤗</a>  | <a href="https://github.com/OpenSQZ/MiniCPM-V-Cookbook">🍳 Cookbook</a> | <a href="https://openbmb.github.io/minicpm-o-4_5/">Audio Casebook</a> | <a href="https://openbmb.github.io/minicpm-o-4_5-omni/">Omni Full-Duplex Casebook</a>
+   MiniCPM-o 4.5 <a href="https://huggingface.co/openbmb/MiniCPM-o-4_5">🤗</a> <a href="https://35.226.63.1:8008/">📞</a> <a href="http://211.93.21.133:18121/">🤖</a> | MiniCPM-V 4.0 <a href="https://huggingface.co/openbmb/MiniCPM-V-4">🤗</a>  | <a href="https://github.com/OpenSQZ/MiniCPM-V-Cookbook">🍳 Cookbook</a> | <a href="https://openbmb.github.io/minicpm-o-4_5/">Audio Casebook</a> | <a href="https://openbmb.github.io/minicpm-o-4_5-omni/">Omni Full-Duplex Casebook</a>
 </p>
 
 </div>
